@@ -1,0 +1,9 @@
+# Local-only. Snapshots and anything carrying FAIS party names never get committed.
+# (R3: index, never mirror. D1: complainant names are a restricted field, never surfaced.)
+/pdf/
+/html/
+/text/
+/local/
+/sources.jsonl
+*.part
+__pycache__/
