@@ -500,8 +500,15 @@ def write_report(rows, missing, fails, meta):
       "5. **For D1:** the office's own \"Redacted\" files still name individuals in the body (§6). "
       "Nothing FAIS-derived can lean on the office's redaction.\n")
 
-    with open(os.path.join(ROOT, "report.md"), "w") as f:
-        f.write("\n".join(L).rstrip() + "\n")
+    # Later stages append their own sections (from "# Stage 2" on); a Stage 1 rebuild keeps them.
+    path = os.path.join(ROOT, "report.md")
+    tail = ""
+    if os.path.exists(path):
+        old = open(path, encoding="utf-8").read()
+        i = old.find("\n# Stage 2")
+        tail = old[i:] if i >= 0 else ""
+    with open(path, "w") as f:
+        f.write("\n".join(L).rstrip() + "\n" + tail)
 
 
 # ------------------------------------------------------------------ privacy gate

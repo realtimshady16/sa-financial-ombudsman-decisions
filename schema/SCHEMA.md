@@ -83,6 +83,33 @@ Extras recorded in Stage 1 (stable names; later stages may add, not rename):
 | `newsletter` | FAIS newsletter, any language | no — editorial |
 | `digest` | case studies, bulletins, Briefcase, Ombuzz, guides: the office's own retelling | no — editorial; any outcome field derived from one is flagged `editorial` |
 
+### `text` — one row per document (Stage 2, `text_manifest.jsonl`, committed)
+
+There is one row for each `document` row, in the same order. It describes `text/final/<doc_id>.txt`,
+which is local only, like every derived text: FAIS bodies name people. The row has no names and
+no restricted fields.
+
+| field | type | notes |
+|---|---|---|
+| `doc_id` | string | → `document` |
+| `text_source` | enum | `native` · `ocr` · `repaired` · `converted` · `none` (see below) |
+| `pages` | int\|null | PDF pages. For the converted `.ppt` it is the slide count; `null` for `.doc` and HTML |
+| `words` | int\|null | letter runs in `text/final`, the same `pdfcheck.text_metrics` count as `document.words` |
+| `common_word_rate` | float\|null | Stage 1's metric on `text/final`. English-only, so non-English newsletters score low by design |
+| `ocr_mean_confidence` | float\|null | mean Tesseract word confidence (0–100). Set whenever OCR ran, even if the output was not promoted |
+| `repair_fonts` | list\|null | `repaired` only: `[{font, obj, map: {shown_as: repaired_to}}]`, one entry per PDF font object whose ToUnicode map was patched |
+| `notes` | string\|null | how the text was made, normalisation counts, and any known gap (watermark-only text layer, embedded image pages) |
+
+**`text_source` vocabulary**
+
+| value | meaning |
+|---|---|
+| `native` | the PDF's own text layer: Stage 1's `pdftotext -layout` output plus `scripts/normalize.py` (expands U+FB00–FB06, drops U+00AD; deliberately *not* NFKC, see that file) |
+| `ocr` | Tesseract output from an image-only PDF, promoted after the gate (`notes/ocr-sample.md`) |
+| `repaired` | re-extracted from a copy of the PDF whose fonts' ToUnicode maps were patched per font object (`scripts/repair.py`) |
+| `converted` | legacy MS Office file converted with LibreOffice |
+| `none` | no text in `text/final` yet. `notes` says why: OCR gated, PDF truncated at the source, or HTML-only page not extracted |
+
 ### `decision` — one per ruling (Stage 3, `decisions.jsonl`)
 
 | field | type | notes |

@@ -580,3 +580,109 @@ PASS  text/raw/<doc_id>.txt exists for every PDF — 928 PDFs
 3. **Normalise all text** (NFKC, strip U+00AD, rejoin hyphenation) and decide how to extract two-column layouts (annual reports).
 4. **Convert the 8 legacy `.doc`/`.ppt` NFO files** to text, and record the 2 unreadable FAIS PDFs and the 23 FAIS 404s as permanent gaps, or look for them on the per-determination post pages.
 5. **For D1:** the office's own "Redacted" files still name individuals in the body (§6). Nothing FAIS-derived can lean on the office's redaction.
+
+# Stage 2 report — text (OCR gated)
+
+Written by hand on 2026-11-22 from `text_manifest.jsonl`, `text/repair/*.json` and `text/ocr/*.json`.
+A Stage 1 rebuild (`build.py`) keeps this section. Detail lives in `notes/ocr-sample.md` (the gate)
+and `notes/text-quality.md` (the residual defects). Every derived text stays local, in `text/`.
+
+## S2.1 Outcome
+
+**The OCR gate failed, so bulk OCR was not run.** The OCR-independent steps (native text, repair,
+conversion) are done. The OCR method is now a decision for the plan owner.
+
+| `text_source` | documents | what |
+|---|---|---|
+| `native` | 738 | Stage 1's `text/raw` + `scripts/normalize.py` (ligature chars expanded in 26 files, 1,176 chars; soft hyphens dropped in 3 files, 1,158 chars) |
+| `repaired` | 3 | NFO cases 56, 57, 58, re-extracted from a font-patched copy |
+| `converted` | 8 | 7 `.doc` via `libreoffice --convert-to txt`; 1 `.ppt` via LibreOffice → PDF → `pdftotext -layout` (Impress has no txt filter) |
+| `ocr` | 0 | gated: 5 sample documents OCR'd into `text/ocr/`, not promoted |
+| `none` | 255 | 185 image-only (gated), 2 truncated at source, 68 HTML-only (not in the Stage 2 brief) |
+
+```
+$ ls text/final | wc -l   -> 749   = 738 native + 3 repaired + 8 converted
+$ ls text/raw | wc -l     -> 928   = every PDF (738 native + 3 damaged + 185 image-only + 2 truncated)
+$ wc -l sources.jsonl     -> 1004  = 928 PDFs + 8 legacy Office + 68 HTML-only
+```
+
+So 1004 − 749 = 255: 185 image-only + 2 truncated + 68 HTML-only.
+
+## S2.2 OCR gate
+
+There were 5 documents, 126 pages: FAIS determinations from 2005, 2010 and 2018, NFO Final
+Determination case 18 (2014), and the FAIS Annual Report 2012/13. The engine was tesseract 5.5.3
+`eng` on 300 dpi greyscale.
+
+- mean `common_word_rate` **0.4735**, threshold ≥ 0.20: **pass**. Each document falls inside the
+  native-text range for its own type. The brief's 28–36% reference does not match Stage 1's metric,
+  on which clean text has a median of 0.42–0.51.
+- amounts and dates on two pages, chosen by a rule fixed beforehand: the determination page **5/5**,
+  the annual-report page **9/12**. Three rand amounts on the annual-report page are wrong
+  (`R3 000.00`→`k3 000,00`, `R20 000.00`→`R20 D00.00`, `R67 494.53`→`R67 494,53`): **FAIL**.
+- word count against a manual count: **278 vs 279 (−0.4%)**: **pass**.
+
+The failure belongs to the document class. Across the four determination-type documents, 21 of 22
+currency tokens are right. The one miss is a footnote superscript fused onto an amount. The annual
+report's 100 ppi light-grey layout defeats Tesseract, and five preprocessing variants did not fix it
+on a held-out page. The OCR set is also **189, not 185**: Stage 1's "< 20 words" rule missed one
+determination whose text layer is only a watermark, and three NFO files whose pages are mostly
+images of text. Six 2025 FAIS determinations each hide one page of text in an embedded image.
+
+## S2.3 Repair of cases 56–58
+
+The repair fixes the font, not the text. For every font object, each code that has a width but no
+ToUnicode entry gets an entry added in a *copy* of the PDF, and the copy is re-extracted with the
+same `pdftotext -layout` call. Codes that were already mapped cannot change, so a real digit is
+never touched.
+
+Pass 1 maps each hole to its own private-use character. That output, with each private character
+put back as its WinAnsi fallback, equals `text/raw` byte for byte in all three files, which proves
+the patch changed only the holes. Each hole's meaning is then chosen by a wordlist vote over the
+words it occurs in. The wordlist is the corpus's own clean text plus `cracklib-small`.
+
+| file | font object → stand-in → ligature (glyphs) | `ti` raw→final | `tion` | damaged word forms raw→final | digit runs raw→final |
+|---|---|---|---|---|---|
+| `nfo-5862` (case 56) | Calibri-Italic#9 `+`→ft (1); Calibri#13 `=`→ft (3), `B`→tt (3), `M`→ti (6); Calibri-Italic#15 `@`→ti (5) | 0→11 | 0→5 | 18→0 | 19→19 |
+| `nfo-5863` (case 57) | Calibri-Italic#9 `;`→ti (1); Calibri-Bold#11 `6`→ti (1); Calibri#13 `>`→ti (57), `T`→tt (4), `Z`→ft (2), `\`→tti (2) | 0→61 | 0→26 | 63→0 | 15→14 (the `6` was a stand-in) |
+| `nfo-6787` (case 58) | Calibri-Bold#7 `A`→ti (1); Calibri-Italic#9 `(`→ti (2); Calibri#11 `8`→ti (73), `J`→tt (8), `k`→ft (1) | 0→76 | 0→34 | 78→0 | 169→96 (73 stand-in `8`s) |
+
+The same character stands for different ligatures in different font objects, and the same
+ligature uses different characters (`ti` is `M`, `@`, `>`, `;`, `6`, `A`, `(` and `8`, depending
+on the font). A global character map was never possible. Every repaired word is a real word: the
+only three the vote could not score were split by a hyphen or a ligature character
+(`pre-existing`, `satisfied`, `reflecting`), and they read correctly. The surviving digit runs
+match pass 1 in order, and the amounts (`R40 000`, `R 40,000`) are identical before and after.
+The brief's grep for `condi8on|par8cipant|Interpreta(on|aJached|underwriJen` was already 0 for
+cases 56 and 57, because their stand-ins are different characters. That is why
+`scripts/check_text.py` derives each file's own damaged word forms from pass 1.
+
+## S2.4 Verification
+
+```
+$ python3 -I scripts/check_text.py
+PASS  text_manifest.jsonl parses — 1004 rows
+PASS  one manifest row per census row, same order
+PASS  every row has a valid text_source
+PASS  text/final/<id>.txt exists exactly for rows with text — 749 files; missing []; extra []
+PASS  manifest carries no restricted field names
+PASS  text/raw untouched (every raw file older than every final file) — 928 raw files
+PASS  nfo-5862 repaired: brief's stand-in grep 0, its own 14 damaged word forms 18->0, 'ti' 0->11
+PASS  nfo-5863 repaired: brief's stand-in grep 0, its own 38 damaged word forms 63->0, 'ti' 0->61
+PASS  nfo-6787 repaired: brief's stand-in grep 0, its own 49 damaged word forms 78->0, 'ti' 0->76
+PASS  privacy: no FAIS party name or filename in any committable file — 1912 restricted strings
+```
+
+## S2.5 What Stage 3 should start with
+
+1. **Settle the OCR method** (`notes/ocr-sample.md`, decision section). The recommendation is to
+   bulk-run Tesseract on the 170 typed determination scans (159 FAIS determinations, 3 FAIS
+   recommendations, 7 NFO determinations and the watermark-only one) and on the six single image
+   pages. That takes about 2.3 hours, sequential and resumable (`scripts/ocr.py`). Promote the
+   output with `text/ocr/PROMOTED`, rerun `text_final.py`, and route the 19 designed documents
+   elsewhere.
+2. Stage 3 can already start on the **NFO determinations** (50 native rows incl. yearly compilations + 3 repaired; 7 wait for OCR)
+   and on the **FAIS determinations with a native text layer**. The six 2025 determinations with an
+   image page must not have their amounts read until that page is OCR'd.
+3. When reading OCR'd determinations, treat `1%`/`1*`/`2*!` as the ordinals "1st"/"2nd", and
+   treat a trailing digit fused onto a complete amount group (`R800 0004`) as a footnote marker.

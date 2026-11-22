@@ -1,0 +1,1004 @@
+{"doc_id": "fais-ar-2008-09", "text_source": "native", "pages": 81, "words": 29578, "common_word_rate": 0.4372, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2009-10", "text_source": "native", "pages": 68, "words": 24988, "common_word_rate": 0.4243, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2010-11", "text_source": "native", "pages": 64, "words": 19855, "common_word_rate": 0.4224, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2011-12", "text_source": "native", "pages": 64, "words": 21117, "common_word_rate": 0.4198, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2012-13", "text_source": "none", "pages": 64, "words": null, "common_word_rate": null, "ocr_mean_confidence": 84.28, "repair_fonts": null, "notes": "image-only; OCR'd in the gate sample (text/ocr/), not promoted: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-ar-2013-14", "text_source": "native", "pages": 64, "words": 21926, "common_word_rate": 0.4085, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 160"}
+{"doc_id": "fais-ar-2014-15", "text_source": "native", "pages": 74, "words": 24887, "common_word_rate": 0.4134, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 5"}
+{"doc_id": "fais-ar-2015-16", "text_source": "native", "pages": 86, "words": 27456, "common_word_rate": 0.4286, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2016-17", "text_source": "native", "pages": 108, "words": 33153, "common_word_rate": 0.381, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2017-18", "text_source": "native", "pages": 88, "words": 24142, "common_word_rate": 0.4128, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2018-19", "text_source": "none", "pages": 84, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-ar-2019-20", "text_source": "native", "pages": 88, "words": 31105, "common_word_rate": 0.4344, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2020-21", "text_source": "native", "pages": 117, "words": 44170, "common_word_rate": 0.4412, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2021-22", "text_source": "native", "pages": 124, "words": 51793, "common_word_rate": 0.4324, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2022-23", "text_source": "native", "pages": 120, "words": 31924, "common_word_rate": 0.3819, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2023-24", "text_source": "native", "pages": 112, "words": 41109, "common_word_rate": 0.3589, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2024-25", "text_source": "native", "pages": 128, "words": 36827, "common_word_rate": 0.3764, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-ar-2025-26", "text_source": "native", "pages": 143, "words": 46711, "common_word_rate": 0.3696, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 7"}
+{"doc_id": "fais-cs-appropriate-advice-guaranteed-investment-plan", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-appropriate-advice-voluntary-annuity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-due-skill-care-and-diligence-medical-aid", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-duty-of-care-motor-vehicle-tracking-device", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-failure-to-act-with-due-skill-care-and-diligence-motor-vehicle-retail-value", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-failure-to-disclose-living-annuity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-failure-to-disclose-material-information-underinsurance", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-financial-service-rendered-life-annuity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-inappropriate-advice-and-disclosure-all-risk-insurance", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-inappropriate-advice-life-annuity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-inappropriate-advice-misaligned-investment-recommendation", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-accessibility-of-life-annuity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-accessibility-of-life-annuity-2", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-and-duty-of-care-motor-vehicle-tracking-device", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-and-duty-of-care-motor-vehicle-tracking-device-2", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-underinsurance", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-disclosure-underinsurance-and-principle-of-average", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-material-dispute-of-fact-investment-surrender", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-no-reasonable-prospects-of-success-commercial-short-term-insurance", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-suitability-of-advice-motor-vehicle-retail-value", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-unfair-treatment-cancellation-of-funeral-policy", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-unfair-treatment-failure-to-honour-funeral-claim", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-unfair-treatment-failure-to-honour-funeral-claim-2", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-cs-unfair-treatment-failure-to-honour-funeral-claim-3", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "fais-det-00d811d651dd", "text_source": "native", "pages": 11, "words": 2714, "common_word_rate": 0.4746, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0108a796e2f3", "text_source": "native", "pages": 25, "words": 5559, "common_word_rate": 0.4546, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-02365d317a1a", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-043ddc006846", "text_source": "native", "pages": 6, "words": 1056, "common_word_rate": 0.4366, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-04fb25d9a4a4", "text_source": "native", "pages": 7, "words": 1934, "common_word_rate": 0.5238, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0544154576c7", "text_source": "native", "pages": 24, "words": 6318, "common_word_rate": 0.4818, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-068936ffa92d", "text_source": "native", "pages": 15, "words": 2897, "common_word_rate": 0.4577, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-06fe8fa10d32", "text_source": "native", "pages": 15, "words": 2946, "common_word_rate": 0.4392, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0787110f99f5", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": 90.47, "repair_fonts": null, "notes": "image-only; OCR'd in the gate sample (text/ocr/), not promoted: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-07b3cce05a56", "text_source": "native", "pages": 8, "words": 1559, "common_word_rate": 0.433, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-085c85ae033c", "text_source": "native", "pages": 10, "words": 2228, "common_word_rate": 0.4829, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0946569ff4f3", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-095b255bba83", "text_source": "native", "pages": 7, "words": 1277, "common_word_rate": 0.4511, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-09d13ab61347", "text_source": "native", "pages": 7, "words": 1293, "common_word_rate": 0.4733, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0a7aaad163dd", "text_source": "native", "pages": 13, "words": 3627, "common_word_rate": 0.4712, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0a8aae587d42", "text_source": "native", "pages": 14, "words": 3144, "common_word_rate": 0.4625, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0b0d77474d6e", "text_source": "native", "pages": 11, "words": 2708, "common_word_rate": 0.4753, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0b1dfca0cfcc", "text_source": "native", "pages": 20, "words": 4487, "common_word_rate": 0.4607, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0b57feb5bc19", "text_source": "native", "pages": 6, "words": 1029, "common_word_rate": 0.4014, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-0ba986aa4c36", "text_source": "native", "pages": 8, "words": 1777, "common_word_rate": 0.4665, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0d6afa9008dc", "text_source": "native", "pages": 20, "words": 4102, "common_word_rate": 0.4761, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0e9017837019", "text_source": "native", "pages": 15, "words": 2974, "common_word_rate": 0.4805, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-0fc4a77f8770", "text_source": "native", "pages": 14, "words": 3024, "common_word_rate": 0.4435, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-111920ec7e72", "text_source": "native", "pages": 19, "words": 4234, "common_word_rate": 0.474, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-112925c9befb", "text_source": "native", "pages": 16, "words": 4175, "common_word_rate": 0.463, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-112e85f1ea1f", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-119368516726", "text_source": "native", "pages": 12, "words": 2488, "common_word_rate": 0.5113, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-12edeecbdc46", "text_source": "native", "pages": 11, "words": 3036, "common_word_rate": 0.4914, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-12f11ce07fd7", "text_source": "native", "pages": 25, "words": 5536, "common_word_rate": 0.4639, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1408b6417511", "text_source": "native", "pages": 9, "words": 2219, "common_word_rate": 0.4642, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-14b553d223c3", "text_source": "none", "pages": 17, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-151ed9c1b850", "text_source": "native", "pages": 9, "words": 1679, "common_word_rate": 0.4866, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-15c2696c4e68", "text_source": "native", "pages": 13, "words": 130, "common_word_rate": 0.0, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "text layer is only a PDF-XChange trial watermark on each page; the ruling is a scan: needs OCR"}
+{"doc_id": "fais-det-15c95c0a9b3a", "text_source": "native", "pages": 9, "words": 1939, "common_word_rate": 0.46, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-15df907b20d9", "text_source": "native", "pages": 14, "words": 3000, "common_word_rate": 0.5077, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-15f68733f992", "text_source": "native", "pages": 7, "words": 1380, "common_word_rate": 0.4551, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-166ae8cbb5c0", "text_source": "none", "pages": 21, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-16a3d68711f3", "text_source": "native", "pages": 22, "words": 4653, "common_word_rate": 0.455, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-16c01d3453bd", "text_source": "native", "pages": 26, "words": 5012, "common_word_rate": 0.4529, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-170de4935c92", "text_source": "native", "pages": 8, "words": 1366, "common_word_rate": 0.4151, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-17cebbe35f4c", "text_source": "native", "pages": 19, "words": 3504, "common_word_rate": 0.4646, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-17d31a0eb83c", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-183f65a028ba", "text_source": "native", "pages": 15, "words": 2327, "common_word_rate": 0.462, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-18919d205933", "text_source": "none", "pages": 36, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-18a9cc346a48", "text_source": "native", "pages": 3, "words": 689, "common_word_rate": 0.4688, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-18e53ebcb52d", "text_source": "native", "pages": 16, "words": 3468, "common_word_rate": 0.4418, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-18f1a82cc0ac", "text_source": "none", "pages": 6, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-194b31edce97", "text_source": "none", "pages": 36, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-1b8b21c6c1fd", "text_source": "native", "pages": 13, "words": 2340, "common_word_rate": 0.4363, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1ba6b02d1226", "text_source": "native", "pages": 8, "words": 1197, "common_word_rate": 0.452, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1bbcbfbca013", "text_source": "native", "pages": 5, "words": 907, "common_word_rate": 0.419, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1c44baae1543", "text_source": "native", "pages": 7, "words": 1233, "common_word_rate": 0.4688, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1c8371b45e96", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-1d80512af407", "text_source": "native", "pages": 8, "words": 1636, "common_word_rate": 0.4688, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1d890a7466be", "text_source": "native", "pages": 42, "words": 9633, "common_word_rate": 0.4806, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1e105ece5a13", "text_source": "native", "pages": 27, "words": 6913, "common_word_rate": 0.4899, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1e68442f98df", "text_source": "native", "pages": 6, "words": 1007, "common_word_rate": 0.4211, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1ebc771c8892", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-1ee408806f3a", "text_source": "native", "pages": 11, "words": 2031, "common_word_rate": 0.451, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1f5e0958ef72", "text_source": "native", "pages": 10, "words": 2163, "common_word_rate": 0.4679, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-1fb813a1c72e", "text_source": "native", "pages": 21, "words": 3708, "common_word_rate": 0.4334, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-218fa60d4211", "text_source": "native", "pages": 7, "words": 1356, "common_word_rate": 0.483, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-219c47de7aa0", "text_source": "native", "pages": 11, "words": 2255, "common_word_rate": 0.4541, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-22e2fe48889e", "text_source": "native", "pages": 8, "words": 1464, "common_word_rate": 0.4023, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-22e8c433fb66", "text_source": "native", "pages": 21, "words": 4359, "common_word_rate": 0.4593, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2372e15d9dd8", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-240a9ad3de2b", "text_source": "native", "pages": 10, "words": 2186, "common_word_rate": 0.4575, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-245d7432054b", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-25fcc8188899", "text_source": "native", "pages": 13, "words": 2654, "common_word_rate": 0.4883, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-25fd1d5006bc", "text_source": "none", "pages": 11, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-26a9359e961b", "text_source": "native", "pages": 9, "words": 1841, "common_word_rate": 0.4378, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-272c975d2379", "text_source": "native", "pages": 8, "words": 1501, "common_word_rate": 0.4064, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-287c6e14b86d", "text_source": "native", "pages": 12, "words": 3770, "common_word_rate": 0.4554, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-28f1f99fdc38", "text_source": "native", "pages": 16, "words": 4400, "common_word_rate": 0.4807, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-290643a8a628", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2994947fd3b9", "text_source": "native", "pages": 14, "words": 2793, "common_word_rate": 0.4723, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-299b7f40b5ba", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-29b4c5d50107", "text_source": "native", "pages": 24, "words": 5029, "common_word_rate": 0.4669, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-29d20bd5c590", "text_source": "native", "pages": 44, "words": 9427, "common_word_rate": 0.4785, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2a4b2c56c1bb", "text_source": "none", "pages": 70, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2bc1a054c329", "text_source": "native", "pages": 1, "words": 282, "common_word_rate": 0.0922, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one-page group-structure chart linked as the 'Determination'; the ruling text is not in this file"}
+{"doc_id": "fais-det-2be3a328a9c2", "text_source": "native", "pages": 16, "words": 4768, "common_word_rate": 0.4736, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2c086f008c2c", "text_source": "native", "pages": 17, "words": 4460, "common_word_rate": 0.4827, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2c26793cd3fa", "text_source": "none", "pages": 11, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2c5612db01dd", "text_source": "native", "pages": 16, "words": 3262, "common_word_rate": 0.4905, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2c8d6503b3a7", "text_source": "none", "pages": 37, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2cc77d2a0e22", "text_source": "native", "pages": 21, "words": 4480, "common_word_rate": 0.4391, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-2dcfaa0af874", "text_source": "none", "pages": 6, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2de7a9ce9a47", "text_source": "none", "pages": 26, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2f2862620653", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2fb9f21284f5", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-2fbb6500c855", "text_source": "none", "pages": 11, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3271f8ba65ba", "text_source": "native", "pages": 8, "words": 1336, "common_word_rate": 0.4551, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3294945dac96", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3306cfc5e2a5", "text_source": "native", "pages": 89, "words": 17448, "common_word_rate": 0.4788, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-33400698d640", "text_source": "none", "pages": 30, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-33e53f928305", "text_source": "native", "pages": 6, "words": 1028, "common_word_rate": 0.4922, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-33ef405aaa41", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3414ae537641", "text_source": "native", "pages": 26, "words": 5717, "common_word_rate": 0.4621, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-349d48c8e67b", "text_source": "native", "pages": 24, "words": 5655, "common_word_rate": 0.4628, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-34af2a8ac890", "text_source": "native", "pages": 11, "words": 2292, "common_word_rate": 0.4555, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-355692436fe2", "text_source": "native", "pages": 6, "words": 985, "common_word_rate": 0.4284, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-35e1e2f44c01", "text_source": "native", "pages": 14, "words": 2849, "common_word_rate": 0.4503, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-35e648cf4d69", "text_source": "native", "pages": 6, "words": 1492, "common_word_rate": 0.5107, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-361440423f7b", "text_source": "native", "pages": 8, "words": 1519, "common_word_rate": 0.4398, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-39d16c1757d4", "text_source": "native", "pages": 25, "words": 4726, "common_word_rate": 0.4822, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3b15d12210dc", "text_source": "none", "pages": 2, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3c4a0ccadd66", "text_source": "native", "pages": 13, "words": 3404, "common_word_rate": 0.4671, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3d02e8a7b15f", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3d4119428571", "text_source": "native", "pages": 14, "words": 3128, "common_word_rate": 0.4559, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3df30eb67748", "text_source": "native", "pages": 11, "words": 2362, "common_word_rate": 0.4475, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3f00b8477486", "text_source": "none", "pages": 22, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3fbed70a86e8", "text_source": "none", "pages": 38, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-3fe9232597a6", "text_source": "native", "pages": 18, "words": 5107, "common_word_rate": 0.5095, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-3ffdaf94f258", "text_source": "native", "pages": 11, "words": 2183, "common_word_rate": 0.4947, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-400867f3c9a3", "text_source": "native", "pages": 8, "words": 1351, "common_word_rate": 0.4722, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-405f008f99a4", "text_source": "native", "pages": 31, "words": 7259, "common_word_rate": 0.4575, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4089dae072f4", "text_source": "native", "pages": 9, "words": 1811, "common_word_rate": 0.4489, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-40a9429302db", "text_source": "native", "pages": 5, "words": 740, "common_word_rate": 0.4541, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-411e2b09f9d0", "text_source": "native", "pages": 7, "words": 1287, "common_word_rate": 0.4693, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-414f21bcacee", "text_source": "native", "pages": 20, "words": 4039, "common_word_rate": 0.4793, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4166b6dcb161", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-429735c4192a", "text_source": "none", "pages": 15, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-42ab26c4b42d", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-42e5198ddf73", "text_source": "native", "pages": 7, "words": 1431, "common_word_rate": 0.4102, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4319f2f92b44", "text_source": "native", "pages": 21, "words": 4519, "common_word_rate": 0.5125, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-434a0a0f6c2e", "text_source": "native", "pages": 18, "words": 3706, "common_word_rate": 0.4528, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-441fcec62a75", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-44745de3f911", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-454805c7ab70", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-454a6bf41c4d", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-46311f3d54a0", "text_source": "native", "pages": 5, "words": 764, "common_word_rate": 0.4385, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-47b18242970c", "text_source": "native", "pages": 3, "words": 447, "common_word_rate": 0.4183, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-47bcb4e5ec20", "text_source": "native", "pages": 7, "words": 1253, "common_word_rate": 0.399, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-47d973978186", "text_source": "native", "pages": 13, "words": 3898, "common_word_rate": 0.469, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4808f22a81af", "text_source": "native", "pages": 34, "words": 6716, "common_word_rate": 0.4629, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4856a20a71a1", "text_source": "native", "pages": 17, "words": 4564, "common_word_rate": 0.4779, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-49487d5ae2b3", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "PDF truncated at the source (no trailer, no catalog); qpdf recovery fails; permanent gap unless re-served"}
+{"doc_id": "fais-det-4a472ad6c120", "text_source": "none", "pages": 20, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-4a7bc2fdb893", "text_source": "native", "pages": 8, "words": 1824, "common_word_rate": 0.4731, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4c06b8501e32", "text_source": "native", "pages": 12, "words": 2167, "common_word_rate": 0.4573, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4c2a64c26235", "text_source": "native", "pages": 27, "words": 6275, "common_word_rate": 0.4553, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4c619d36cc30", "text_source": "none", "pages": 2, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-4d6d67f4f353", "text_source": "native", "pages": 23, "words": 4998, "common_word_rate": 0.4566, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4d87f42b2ad9", "text_source": "native", "pages": 6, "words": 1153, "common_word_rate": 0.4614, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4e41af55fcf3", "text_source": "native", "pages": 16, "words": 3775, "common_word_rate": 0.4895, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4e4c2bc12b57", "text_source": "native", "pages": 7, "words": 1209, "common_word_rate": 0.4706, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4eafaa64f37f", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-4f430c30945d", "text_source": "native", "pages": 23, "words": 5011, "common_word_rate": 0.4542, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4f73dfd68d93", "text_source": "native", "pages": 5, "words": 804, "common_word_rate": 0.4801, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-4fb1083d477f", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-500c2b2c855f", "text_source": "native", "pages": 2, "words": 107, "common_word_rate": 0.4486, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5099421d3c5c", "text_source": "native", "pages": 7, "words": 1764, "common_word_rate": 0.5011, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-50f92162b5d5", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-514c4ef9e6b4", "text_source": "native", "pages": 7, "words": 1185, "common_word_rate": 0.4675, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5180e4a2c1bb", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-51b819b90703", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-51d9eef145f1", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-52b0aeb36d43", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5342cb0f382b", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-534ff78d2f18", "text_source": "none", "pages": 30, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-53acf71ad032", "text_source": "native", "pages": 7, "words": 1400, "common_word_rate": 0.45, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-53dc63f5936c", "text_source": "native", "pages": 16, "words": 3291, "common_word_rate": 0.4698, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-546252c05578", "text_source": "native", "pages": 7, "words": 1508, "common_word_rate": 0.4702, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5476982d13ca", "text_source": "native", "pages": 19, "words": 3851, "common_word_rate": 0.4845, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-54e24082790c", "text_source": "native", "pages": 12, "words": 3419, "common_word_rate": 0.4273, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5558447b7498", "text_source": "native", "pages": 10, "words": 2150, "common_word_rate": 0.4647, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-55e0a7df8103", "text_source": "native", "pages": 11, "words": 2817, "common_word_rate": 0.459, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-55e452b731c0", "text_source": "none", "pages": 13, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5690daa1004b", "text_source": "native", "pages": 11, "words": 3281, "common_word_rate": 0.452, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-56c06d438831", "text_source": "native", "pages": 11, "words": 2114, "common_word_rate": 0.482, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5813cee4516f", "text_source": "native", "pages": 14, "words": 3005, "common_word_rate": 0.4596, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5850694daebc", "text_source": "none", "pages": 8, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-585c77ccc446", "text_source": "native", "pages": 7, "words": 1216, "common_word_rate": 0.4663, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-588ea45bf3ab", "text_source": "native", "pages": 7, "words": 1221, "common_word_rate": 0.4562, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-58b7f452139d", "text_source": "none", "pages": 59, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-58d7fc2657f9", "text_source": "native", "pages": 11, "words": 2789, "common_word_rate": 0.4901, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5a0ff8a645e4", "text_source": "native", "pages": 26, "words": 5268, "common_word_rate": 0.4634, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5a634a092619", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5ac736604b32", "text_source": "native", "pages": 20, "words": 4149, "common_word_rate": 0.4919, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5b096f09e48b", "text_source": "native", "pages": 10, "words": 1967, "common_word_rate": 0.4718, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5b742d8d425f", "text_source": "native", "pages": 16, "words": 2985, "common_word_rate": 0.4379, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5bf1bc4fe8e2", "text_source": "native", "pages": 6, "words": 1130, "common_word_rate": 0.4407, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5d14cf2c7ec1", "text_source": "none", "pages": 38, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5d22149888f0", "text_source": "native", "pages": 6, "words": 1067, "common_word_rate": 0.4705, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5d3d60cbbd66", "text_source": "native", "pages": 15, "words": 3126, "common_word_rate": 0.4507, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5ee82962b2a1", "text_source": "native", "pages": 11, "words": 2605, "common_word_rate": 0.4626, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5eeb100c4b28", "text_source": "native", "pages": 26, "words": 5234, "common_word_rate": 0.4734, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5f4006cf1415", "text_source": "none", "pages": 9, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5f5b20819ead", "text_source": "native", "pages": 17, "words": 3804, "common_word_rate": 0.4635, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5f86fb399ede", "text_source": "none", "pages": 2, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-5fc335c3fc80", "text_source": "native", "pages": 14, "words": 2929, "common_word_rate": 0.421, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-5fced554b462", "text_source": "native", "pages": 7, "words": 829, "common_word_rate": 0.4499, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-603d1c640f1f", "text_source": "native", "pages": 39, "words": 8749, "common_word_rate": 0.4795, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-60bdc974c98f", "text_source": "native", "pages": 25, "words": 5326, "common_word_rate": 0.4686, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-61029cbda568", "text_source": "none", "pages": 27, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-614f20675cff", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-61c7e52577c2", "text_source": "none", "pages": 28, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-62168936ad6e", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-621bcc084829", "text_source": "native", "pages": 14, "words": 2486, "common_word_rate": 0.4791, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-627faaa26527", "text_source": "native", "pages": 8, "words": 1267, "common_word_rate": 0.468, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-62813e3d9f6f", "text_source": "none", "pages": 24, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-631e35fd48b6", "text_source": "native", "pages": 12, "words": 2798, "common_word_rate": 0.4371, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-63899f43b5d4", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-63e16c23d1a4", "text_source": "native", "pages": 22, "words": 4561, "common_word_rate": 0.4569, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-642a1cbc900f", "text_source": "native", "pages": 7, "words": 1243, "common_word_rate": 0.469, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6450bae01c0d", "text_source": "native", "pages": 7, "words": 1222, "common_word_rate": 0.4746, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6461501e403d", "text_source": "none", "pages": 46, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-64d5c6b07a19", "text_source": "native", "pages": 5, "words": 838, "common_word_rate": 0.3974, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6501e31bd509", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-65edd0cd6074", "text_source": "native", "pages": 8, "words": 2097, "common_word_rate": 0.4588, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-67374ef083dc", "text_source": "native", "pages": 6, "words": 1486, "common_word_rate": 0.4758, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-67d433a8896f", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-68450705c48b", "text_source": "none", "pages": 4, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-686849443d2d", "text_source": "native", "pages": 10, "words": 1819, "common_word_rate": 0.4464, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-68c02945abba", "text_source": "none", "pages": 20, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6a5ebdb07f67", "text_source": "native", "pages": 13, "words": 4253, "common_word_rate": 0.4681, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6ab1c86976c0", "text_source": "native", "pages": 22, "words": 4236, "common_word_rate": 0.475, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6b2b24aa304f", "text_source": "native", "pages": 6, "words": 1109, "common_word_rate": 0.4554, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6b4779a49053", "text_source": "none", "pages": 22, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6ba1720e24fa", "text_source": "native", "pages": 7, "words": 1232, "common_word_rate": 0.4407, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6bbc02d8a3b3", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6c20a0443355", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6c985fcb5692", "text_source": "native", "pages": 6, "words": 1040, "common_word_rate": 0.449, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6ca9bbab32a3", "text_source": "none", "pages": 44, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6cd1802935f9", "text_source": "none", "pages": 3, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6d767bb0e704", "text_source": "native", "pages": 6, "words": 1053, "common_word_rate": 0.4397, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6d9db91e40c7", "text_source": "native", "pages": 76, "words": 13856, "common_word_rate": 0.462, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6df722ea2170", "text_source": "native", "pages": 17, "words": 3588, "common_word_rate": 0.4423, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-6ed57f0921d2", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-6ff750cf845b", "text_source": "native", "pages": 15, "words": 2758, "common_word_rate": 0.4558, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-70d8f16b219d", "text_source": "native", "pages": 18, "words": 3603, "common_word_rate": 0.4438, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-718072953150", "text_source": "native", "pages": 21, "words": 4318, "common_word_rate": 0.5037, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-71d0392d02d6", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-729688138b83", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-72b34cac6fed", "text_source": "native", "pages": 7, "words": 1380, "common_word_rate": 0.4377, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-72cb5beb0432", "text_source": "native", "pages": 8, "words": 1777, "common_word_rate": 0.4665, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-72d41ac102b8", "text_source": "native", "pages": 16, "words": 3299, "common_word_rate": 0.4541, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-72e699e6093c", "text_source": "native", "pages": 4, "words": 571, "common_word_rate": 0.4361, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7332b00fdb87", "text_source": "native", "pages": 11, "words": 2661, "common_word_rate": 0.4761, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7422ee85b503", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-74aeffb70bec", "text_source": "native", "pages": 26, "words": 5892, "common_word_rate": 0.456, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-74e974545b1c", "text_source": "none", "pages": 19, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7537424dd0a1", "text_source": "native", "pages": 7, "words": 1306, "common_word_rate": 0.4755, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-75d8e99037ca", "text_source": "native", "pages": 26, "words": 6181, "common_word_rate": 0.465, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-760b304b813c", "text_source": "native", "pages": 33, "words": 7308, "common_word_rate": 0.4531, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-760b6bd1ed55", "text_source": "native", "pages": 36, "words": 6825, "common_word_rate": 0.4501, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-76cb93856e5f", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-76d273d04f7c", "text_source": "native", "pages": 42, "words": 11172, "common_word_rate": 0.4797, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-77b1cdc87395", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-77ed78de6a7c", "text_source": "native", "pages": 16, "words": 3070, "common_word_rate": 0.4779, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-78679ba31aee", "text_source": "native", "pages": 30, "words": 6832, "common_word_rate": 0.4608, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-78681b5d2b2b", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-78abea9da08d", "text_source": "none", "pages": 21, "words": null, "common_word_rate": null, "ocr_mean_confidence": 90.92, "repair_fonts": null, "notes": "image-only; OCR'd in the gate sample (text/ocr/), not promoted: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7941b5e49dcd", "text_source": "native", "pages": 22, "words": 5719, "common_word_rate": 0.4753, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-798c14d93c0c", "text_source": "none", "pages": 5, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7a1d3f83c5ef", "text_source": "native", "pages": 12, "words": 3419, "common_word_rate": 0.4273, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7a3dda6767c7", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7b92a2d9a8a0", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7b96911d3d89", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7c01f7d0dc7e", "text_source": "native", "pages": 7, "words": 1456, "common_word_rate": 0.4093, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7ce1479f0f7a", "text_source": "native", "pages": 25, "words": 5065, "common_word_rate": 0.4719, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7d1b61f568dd", "text_source": "native", "pages": 30, "words": 6772, "common_word_rate": 0.4907, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7da0d95dcc0b", "text_source": "native", "pages": 14, "words": 2880, "common_word_rate": 0.4451, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-7f82061df71b", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-7ff656ef0b03", "text_source": "native", "pages": 9, "words": 1548, "common_word_rate": 0.4193, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-806bc34b15b5", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "PDF truncated at the source (no trailer, no catalog); qpdf recovery fails; permanent gap unless re-served"}
+{"doc_id": "fais-det-80aecb0dffc2", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-80d456d75400", "text_source": "native", "pages": 21, "words": 3952, "common_word_rate": 0.4861, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-81325111ae64", "text_source": "native", "pages": 16, "words": 2830, "common_word_rate": 0.4562, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-817d669dfeb9", "text_source": "native", "pages": 74, "words": 17675, "common_word_rate": 0.4774, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-81f029894936", "text_source": "none", "pages": 39, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-823a5b3fd775", "text_source": "native", "pages": 4, "words": 420, "common_word_rate": 0.469, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-825f037920cc", "text_source": "native", "pages": 7, "words": 1237, "common_word_rate": 0.4697, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-82794a5383e8", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-829754e976a3", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8338bb20f16b", "text_source": "native", "pages": 4, "words": 441, "common_word_rate": 0.4082, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-834f05542af1", "text_source": "none", "pages": 4, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8350e3e42803", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-840a98d1ed5b", "text_source": "native", "pages": 14, "words": 2772, "common_word_rate": 0.4484, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-843d029cb2dd", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-85004cbc5ac8", "text_source": "native", "pages": 10, "words": 2862, "common_word_rate": 0.4563, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-85566c1228a8", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8584043671ed", "text_source": "native", "pages": 20, "words": 4181, "common_word_rate": 0.4671, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8585c0f98031", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-85cca7d532f6", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-86a824640422", "text_source": "none", "pages": 38, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-86dd6f0b5699", "text_source": "native", "pages": 13, "words": 2633, "common_word_rate": 0.4387, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8791ed516e88", "text_source": "native", "pages": 7, "words": 1357, "common_word_rate": 0.4436, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-87f5fd44f65f", "text_source": "native", "pages": 8, "words": 2043, "common_word_rate": 0.4655, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-88f215a4b388", "text_source": "native", "pages": 13, "words": 2272, "common_word_rate": 0.4617, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-895cdb015126", "text_source": "none", "pages": 15, "words": null, "common_word_rate": null, "ocr_mean_confidence": 90.29, "repair_fonts": null, "notes": "image-only; OCR'd in the gate sample (text/ocr/), not promoted: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8afcda27e904", "text_source": "native", "pages": 19, "words": 5838, "common_word_rate": 0.4724, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8afe834df450", "text_source": "native", "pages": 43, "words": 7753, "common_word_rate": 0.4726, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8b9c03c2f9da", "text_source": "native", "pages": 20, "words": 4055, "common_word_rate": 0.4244, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8c4db69709c9", "text_source": "native", "pages": 19, "words": 4263, "common_word_rate": 0.4701, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8c843aec7b04", "text_source": "native", "pages": 8, "words": 1349, "common_word_rate": 0.4744, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8d5d7092e527", "text_source": "native", "pages": 22, "words": 6608, "common_word_rate": 0.5051, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8dd3ebe5652a", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8debb4bc56e7", "text_source": "native", "pages": 22, "words": 4839, "common_word_rate": 0.4579, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8df058972273", "text_source": "native", "pages": 7, "words": 1198, "common_word_rate": 0.4716, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8e471ac49db2", "text_source": "none", "pages": 24, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-8e914072ccf5", "text_source": "native", "pages": 20, "words": 4384, "common_word_rate": 0.49, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8f39134c1f12", "text_source": "native", "pages": 8, "words": 1483, "common_word_rate": 0.4889, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8f4a13ac30a4", "text_source": "native", "pages": 8, "words": 1852, "common_word_rate": 0.4633, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-8f7e6d00e590", "text_source": "native", "pages": 22, "words": 4411, "common_word_rate": 0.4949, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9088f9b9a712", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9094f1c08d79", "text_source": "native", "pages": 2, "words": 352, "common_word_rate": 0.3352, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-90e248e1d5b3", "text_source": "native", "pages": 9, "words": 1938, "common_word_rate": 0.4623, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-915fc5a77687", "text_source": "native", "pages": 7, "words": 1101, "common_word_rate": 0.4578, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-91b2bf3703a1", "text_source": "native", "pages": 9, "words": 1812, "common_word_rate": 0.4779, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-91ea52c922a6", "text_source": "native", "pages": 20, "words": 4264, "common_word_rate": 0.4583, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9299c80b3284", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9318123b1f21", "text_source": "none", "pages": 28, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-93f1d197b023", "text_source": "native", "pages": 14, "words": 2969, "common_word_rate": 0.4692, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-942936a93047", "text_source": "native", "pages": 20, "words": 4232, "common_word_rate": 0.4336, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-94cf54135be6", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-95015cb36130", "text_source": "native", "pages": 17, "words": 5156, "common_word_rate": 0.4628, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-951b259f338e", "text_source": "native", "pages": 12, "words": 3344, "common_word_rate": 0.4886, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-95bc366cd1e6", "text_source": "native", "pages": 7, "words": 1214, "common_word_rate": 0.4629, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-96a36aca286a", "text_source": "native", "pages": 8, "words": 1524, "common_word_rate": 0.4416, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-97044431ee4f", "text_source": "none", "pages": 42, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-978faaafe118", "text_source": "native", "pages": 11, "words": 2066, "common_word_rate": 0.4158, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9838ccf9e908", "text_source": "native", "pages": 17, "words": 3008, "common_word_rate": 0.4601, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-986dac28de5d", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-98c86ade08b8", "text_source": "native", "pages": 20, "words": 4567, "common_word_rate": 0.4684, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9965d37610a5", "text_source": "native", "pages": 17, "words": 4946, "common_word_rate": 0.4757, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9a16be00bd75", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9a74e28e5f71", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9b53390390a6", "text_source": "native", "pages": 6, "words": 1416, "common_word_rate": 0.4823, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9ba51205b2f4", "text_source": "native", "pages": 20, "words": 5116, "common_word_rate": 0.4877, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9bb1956a0db1", "text_source": "none", "pages": 20, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9c96ce7b5946", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9e8896923537", "text_source": "none", "pages": 32, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9eba1d3fdd8b", "text_source": "native", "pages": 21, "words": 3753, "common_word_rate": 0.4754, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9efc09735bd2", "text_source": "none", "pages": 30, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-9f41b42cf05b", "text_source": "native", "pages": 18, "words": 3524, "common_word_rate": 0.4583, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-9f51e9049c2b", "text_source": "native", "pages": 17, "words": 4801, "common_word_rate": 0.4628, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a09b6426976b", "text_source": "native", "pages": 6, "words": 983, "common_word_rate": 0.4303, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a0cb10a98072", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a1953d1f3096", "text_source": "native", "pages": 9, "words": 1704, "common_word_rate": 0.4736, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a1e8e4a5cad8", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a2844879649f", "text_source": "native", "pages": 13, "words": 2567, "common_word_rate": 0.4375, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a2905060570f", "text_source": "none", "pages": 22, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a294a19146f9", "text_source": "native", "pages": 10, "words": 1980, "common_word_rate": 0.4556, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a3e7d6195b5e", "text_source": "native", "pages": 12, "words": 2254, "common_word_rate": 0.4667, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a4380bfbe60a", "text_source": "none", "pages": 32, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a43c6cb0e6d8", "text_source": "native", "pages": 13, "words": 4101, "common_word_rate": 0.4631, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a4a4effcf584", "text_source": "none", "pages": 4, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a550aa11e144", "text_source": "native", "pages": 8, "words": 1210, "common_word_rate": 0.4554, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a55bac229021", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a5b7095a24a1", "text_source": "native", "pages": 18, "words": 4364, "common_word_rate": 0.4594, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a5ef962233f4", "text_source": "none", "pages": 8, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-a6eebcad25c8", "text_source": "native", "pages": 6, "words": 1368, "common_word_rate": 0.4766, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a768ffc7aff6", "text_source": "native", "pages": 7, "words": 1301, "common_word_rate": 0.4743, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a7a6c0056598", "text_source": "native", "pages": 8, "words": 1397, "common_word_rate": 0.4424, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a82fa43e29d7", "text_source": "native", "pages": 17, "words": 3140, "common_word_rate": 0.4876, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-a87a4663e06e", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-aa20a2a3635b", "text_source": "native", "pages": 15, "words": 4075, "common_word_rate": 0.5117, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-aa8e38b25fa6", "text_source": "native", "pages": 12, "words": 1974, "common_word_rate": 0.4443, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-aaa6a0362227", "text_source": "native", "pages": 18, "words": 3557, "common_word_rate": 0.4639, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-aabc601f3e36", "text_source": "native", "pages": 14, "words": 2836, "common_word_rate": 0.4739, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ab3db2a64b74", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-ab523b386647", "text_source": "none", "pages": 5, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-ab8b6dac65e9", "text_source": "native", "pages": 19, "words": 3942, "common_word_rate": 0.4731, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-aba99afad918", "text_source": "native", "pages": 11, "words": 2239, "common_word_rate": 0.439, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ac20e5669280", "text_source": "native", "pages": 23, "words": 5189, "common_word_rate": 0.4637, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-aca9bd9715ea", "text_source": "native", "pages": 18, "words": 4437, "common_word_rate": 0.4895, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ad478953a108", "text_source": "native", "pages": 25, "words": 5797, "common_word_rate": 0.4577, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ad8a816b73d7", "text_source": "native", "pages": 6, "words": 1304, "common_word_rate": 0.4279, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ae4a881e63ab", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-aea0dc1c4f0f", "text_source": "native", "pages": 13, "words": 2415, "common_word_rate": 0.4754, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-af01c031a25a", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-b033072304a7", "text_source": "native", "pages": 16, "words": 4208, "common_word_rate": 0.4622, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b04550367b84", "text_source": "native", "pages": 6, "words": 1222, "common_word_rate": 0.4444, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b048404a2dea", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-b2b8743fbfcb", "text_source": "native", "pages": 4, "words": 510, "common_word_rate": 0.3961, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b2dd62c8a0d9", "text_source": "native", "pages": 19, "words": 5406, "common_word_rate": 0.4756, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b524bf64799f", "text_source": "native", "pages": 7, "words": 1252, "common_word_rate": 0.4609, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b53e73a49c92", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-b57e6fc57f49", "text_source": "native", "pages": 9, "words": 1681, "common_word_rate": 0.4634, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b5b81656a5ab", "text_source": "native", "pages": 31, "words": 7408, "common_word_rate": 0.4858, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b5d7054949e9", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-b603bb7b0635", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-b649b7dba91b", "text_source": "native", "pages": 28, "words": 6002, "common_word_rate": 0.4698, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b817aa758091", "text_source": "native", "pages": 11, "words": 2173, "common_word_rate": 0.4754, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-b956931a9599", "text_source": "native", "pages": 28, "words": 6433, "common_word_rate": 0.4701, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ba5dec1733c2", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-bab03d430019", "text_source": "native", "pages": 24, "words": 4570, "common_word_rate": 0.421, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-bac47c7d6f12", "text_source": "none", "pages": 11, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-bad4f58d6325", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-bc530657c949", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-bd7da931161d", "text_source": "native", "pages": 14, "words": 2795, "common_word_rate": 0.4522, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-bda990da3810", "text_source": "native", "pages": 16, "words": 3327, "common_word_rate": 0.4803, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-be0dd6ea9ad4", "text_source": "none", "pages": 10, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-be2c81f644c7", "text_source": "native", "pages": 19, "words": 5338, "common_word_rate": 0.4436, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-be97eec85753", "text_source": "native", "pages": 27, "words": 6978, "common_word_rate": 0.4848, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-bf0cf8b59045", "text_source": "native", "pages": 14, "words": 2702, "common_word_rate": 0.487, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-bf0ff721abde", "text_source": "native", "pages": 6, "words": 1135, "common_word_rate": 0.4396, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-bf26294bfe85", "text_source": "none", "pages": 30, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-bf52782aaa13", "text_source": "native", "pages": 17, "words": 4933, "common_word_rate": 0.523, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c112aec2050a", "text_source": "native", "pages": 8, "words": 1426, "common_word_rate": 0.4614, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c1912199fccb", "text_source": "native", "pages": 21, "words": 4716, "common_word_rate": 0.4616, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c199f6d6d86b", "text_source": "none", "pages": 15, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c1fc1340709a", "text_source": "native", "pages": 2, "words": 239, "common_word_rate": 0.4226, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c21597666d38", "text_source": "native", "pages": 11, "words": 2141, "common_word_rate": 0.496, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c3d58e234c8f", "text_source": "native", "pages": 9, "words": 1503, "common_word_rate": 0.4824, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c4b2944d03a1", "text_source": "none", "pages": 30, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c4e0c608a06b", "text_source": "native", "pages": 22, "words": 5120, "common_word_rate": 0.4896, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c502641f699b", "text_source": "native", "pages": 11, "words": 1858, "common_word_rate": 0.4839, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c56b47097e96", "text_source": "native", "pages": 16, "words": 3681, "common_word_rate": 0.4871, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c5753ab6509f", "text_source": "native", "pages": 12, "words": 2464, "common_word_rate": 0.4562, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c5ff8c9a86e0", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c6379df3793d", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c66be188f2ab", "text_source": "native", "pages": 11, "words": 2073, "common_word_rate": 0.4602, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c683ee5ba04b", "text_source": "none", "pages": 13, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c79d4b6b9465", "text_source": "native", "pages": 7, "words": 1162, "common_word_rate": 0.4587, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c8a5f83ded18", "text_source": "native", "pages": 11, "words": 2172, "common_word_rate": 0.436, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-c9934bd93f67", "text_source": "none", "pages": 24, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-c9caac106fc1", "text_source": "native", "pages": 22, "words": 5088, "common_word_rate": 0.4538, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ca09f3de7917", "text_source": "native", "pages": 16, "words": 3190, "common_word_rate": 0.4574, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-caa2be817a35", "text_source": "none", "pages": 9, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-cb2713279864", "text_source": "native", "pages": 17, "words": 3486, "common_word_rate": 0.4466, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cb51b7008d94", "text_source": "native", "pages": 9, "words": 1711, "common_word_rate": 0.4465, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cb9a2972a62b", "text_source": "native", "pages": 7, "words": 1299, "common_word_rate": 0.4765, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cbdb4006c6fc", "text_source": "native", "pages": 6, "words": 1165, "common_word_rate": 0.479, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cc26c655a55e", "text_source": "native", "pages": 13, "words": 2624, "common_word_rate": 0.4543, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cd17dccdf269", "text_source": "native", "pages": 7, "words": 1453, "common_word_rate": 0.4708, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cd27fdb72cb3", "text_source": "native", "pages": 16, "words": 4898, "common_word_rate": 0.461, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cdc1cfa99fc1", "text_source": "native", "pages": 7, "words": 1301, "common_word_rate": 0.4958, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ce734a93a67e", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-ce7a9761c2b3", "text_source": "native", "pages": 7, "words": 1203, "common_word_rate": 0.4705, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ceb885d8294c", "text_source": "none", "pages": 15, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-cecf8171dae6", "text_source": "native", "pages": 8, "words": 1255, "common_word_rate": 0.49, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cf20dfbd3e57", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-cf38baa871ee", "text_source": "native", "pages": 12, "words": 2507, "common_word_rate": 0.4603, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-cf6db343bfa5", "text_source": "native", "pages": 7, "words": 964, "common_word_rate": 0.3766, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-cfe7629e0ebd", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-d0c73909845c", "text_source": "native", "pages": 12, "words": 2341, "common_word_rate": 0.4925, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d1aa1b609d8e", "text_source": "native", "pages": 17, "words": 4743, "common_word_rate": 0.4988, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d1dbb81003e0", "text_source": "native", "pages": 9, "words": 1785, "common_word_rate": 0.4958, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d1eb920e0394", "text_source": "native", "pages": 9, "words": 1674, "common_word_rate": 0.4409, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d1efea10863c", "text_source": "native", "pages": 7, "words": 1222, "common_word_rate": 0.4607, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d2838f35d5c3", "text_source": "native", "pages": 7, "words": 1216, "common_word_rate": 0.4679, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d4671b9f0f81", "text_source": "native", "pages": 20, "words": 3570, "common_word_rate": 0.5157, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d58a03877e4f", "text_source": "native", "pages": 27, "words": 5341, "common_word_rate": 0.4722, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d595a7421388", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-d5bf1bc06a50", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-d5e6c20d7d70", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-d64cdb4b23f1", "text_source": "native", "pages": 4, "words": 542, "common_word_rate": 0.4244, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d6cedb9411c6", "text_source": "native", "pages": 5, "words": 846, "common_word_rate": 0.4823, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d772745ce952", "text_source": "native", "pages": 22, "words": 5181, "common_word_rate": 0.4692, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d889fb4a0360", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-d8e55728a2d2", "text_source": "native", "pages": 13, "words": 3081, "common_word_rate": 0.4817, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d8f54f31c416", "text_source": "native", "pages": 6, "words": 848, "common_word_rate": 0.4882, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-d957e26bf8d9", "text_source": "native", "pages": 12, "words": 1908, "common_word_rate": 0.4287, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-d9ad36491fd6", "text_source": "native", "pages": 10, "words": 2747, "common_word_rate": 0.4747, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-da0a301a3f01", "text_source": "native", "pages": 7, "words": 1214, "common_word_rate": 0.4613, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-da84925509e8", "text_source": "native", "pages": 30, "words": 8136, "common_word_rate": 0.4791, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-dad0d1e3e9b9", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-db4206d0f399", "text_source": "native", "pages": 12, "words": 2503, "common_word_rate": 0.4914, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-db4284b56339", "text_source": "native", "pages": 8, "words": 1197, "common_word_rate": 0.3993, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-dc54bb7699a6", "text_source": "none", "pages": 22, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-dcd0f5a75aaa", "text_source": "native", "pages": 30, "words": 5344, "common_word_rate": 0.4751, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-dd230c25bee9", "text_source": "native", "pages": 13, "words": 4038, "common_word_rate": 0.4757, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ddd1ec1272c9", "text_source": "native", "pages": 29, "words": 5962, "common_word_rate": 0.4995, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-df08d4efe364", "text_source": "native", "pages": 6, "words": 1014, "common_word_rate": 0.4014, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "one page is an embedded image holding ~140-270 words and ~30-40 numbers: needs page-level OCR before amounts are read"}
+{"doc_id": "fais-det-df9f7405dafd", "text_source": "native", "pages": 9, "words": 1728, "common_word_rate": 0.467, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-dfbcf47d005f", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-e158d32abced", "text_source": "none", "pages": 20, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-e1f1558033d9", "text_source": "native", "pages": 24, "words": 4873, "common_word_rate": 0.473, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e20138437716", "text_source": "native", "pages": 8, "words": 1759, "common_word_rate": 0.4639, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e3ba22ce7a89", "text_source": "native", "pages": 22, "words": 4483, "common_word_rate": 0.4731, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e4d7d83f3ed7", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-e5827138e004", "text_source": "native", "pages": 11, "words": 2510, "common_word_rate": 0.4697, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e632868f15f5", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-e63e88dc66a4", "text_source": "native", "pages": 44, "words": 9594, "common_word_rate": 0.4718, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e64c2f82c249", "text_source": "native", "pages": 16, "words": 2711, "common_word_rate": 0.5083, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e7378068acc9", "text_source": "native", "pages": 9, "words": 1176, "common_word_rate": 0.4651, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-e7a8dd067838", "text_source": "none", "pages": 11, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-e98d0cbca06e", "text_source": "native", "pages": 19, "words": 5823, "common_word_rate": 0.4599, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ea9f6a14e5af", "text_source": "native", "pages": 19, "words": 4172, "common_word_rate": 0.4593, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-eb07a67d8b45", "text_source": "native", "pages": 2, "words": 275, "common_word_rate": 0.4255, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ebd18f3611b6", "text_source": "native", "pages": 12, "words": 2528, "common_word_rate": 0.4873, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-ec3405d35790", "text_source": "none", "pages": 22, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-ece14def011e", "text_source": "native", "pages": 7, "words": 1222, "common_word_rate": 0.4673, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-eec37b4c6f3b", "text_source": "native", "pages": 24, "words": 5626, "common_word_rate": 0.4591, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-efd0ba333e57", "text_source": "native", "pages": 24, "words": 6001, "common_word_rate": 0.4736, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-efe003a7b92b", "text_source": "native", "pages": 16, "words": 3099, "common_word_rate": 0.4556, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f022d8dbf73b", "text_source": "native", "pages": 23, "words": 7176, "common_word_rate": 0.4678, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f03ef2ae18ef", "text_source": "native", "pages": 11, "words": 2714, "common_word_rate": 0.4746, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f135a6f0ec0d", "text_source": "none", "pages": 26, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-f14fda07bec4", "text_source": "native", "pages": 10, "words": 1972, "common_word_rate": 0.4589, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f15aa6101c5f", "text_source": "none", "pages": 12, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-f18715f4a4f8", "text_source": "native", "pages": 8, "words": 1534, "common_word_rate": 0.4439, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f22ad5c81247", "text_source": "native", "pages": 13, "words": 2693, "common_word_rate": 0.4631, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f2794d132345", "text_source": "native", "pages": 7, "words": 1268, "common_word_rate": 0.4661, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f2c5c54de527", "text_source": "native", "pages": 18, "words": 3512, "common_word_rate": 0.4226, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f2d9c7a6140f", "text_source": "native", "pages": 19, "words": 5338, "common_word_rate": 0.4436, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f337cc1d4241", "text_source": "native", "pages": 13, "words": 2847, "common_word_rate": 0.4443, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f3615db726e4", "text_source": "native", "pages": 23, "words": 5023, "common_word_rate": 0.4844, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f3717073f9c9", "text_source": "native", "pages": 25, "words": 4727, "common_word_rate": 0.4988, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f4406b2f10d0", "text_source": "native", "pages": 22, "words": 4962, "common_word_rate": 0.4873, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f48600e8a3cc", "text_source": "native", "pages": 14, "words": 2452, "common_word_rate": 0.4376, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f507db46d649", "text_source": "native", "pages": 15, "words": 2587, "common_word_rate": 0.4492, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f60b90fbc0aa", "text_source": "native", "pages": 8, "words": 1720, "common_word_rate": 0.4634, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f77731dbeddd", "text_source": "native", "pages": 21, "words": 6172, "common_word_rate": 0.4687, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f785b507ea02", "text_source": "native", "pages": 8, "words": 1750, "common_word_rate": 0.4691, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f928bcae2568", "text_source": "native", "pages": 31, "words": 8001, "common_word_rate": 0.4837, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-f92d73cd1af5", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-fa91deb4ff5b", "text_source": "native", "pages": 21, "words": 4728, "common_word_rate": 0.4657, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-fb03e07e8d8f", "text_source": "native", "pages": 8, "words": 1636, "common_word_rate": 0.4584, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-fbceb0641486", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "fais-det-fbec56e2b1a2", "text_source": "native", "pages": 14, "words": 3724, "common_word_rate": 0.4973, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-fc4a82e11f88", "text_source": "native", "pages": 9, "words": 1560, "common_word_rate": 0.4692, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-det-fe7193dd109d", "text_source": "native", "pages": 16, "words": 3271, "common_word_rate": 0.4907, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-16-isindebele", "text_source": "native", "pages": 8, "words": 2420, "common_word_rate": 0.0124, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-16-sepedi", "text_source": "native", "pages": 8, "words": 4323, "common_word_rate": 0.0428, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-16-siswati", "text_source": "native", "pages": 8, "words": 2354, "common_word_rate": 0.0132, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-december-2025-issue-3", "text_source": "native", "pages": 15, "words": 4606, "common_word_rate": 0.3995, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-fais-quarter-3-2018", "text_source": "native", "pages": 18, "words": 8495, "common_word_rate": 0.4563, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-fais-quarter-4-2019", "text_source": "native", "pages": 15, "words": 7130, "common_word_rate": 0.4857, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-10-english", "text_source": "native", "pages": 6, "words": 4039, "common_word_rate": 0.5175, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-10-isixhosa", "text_source": "native", "pages": 6, "words": 2661, "common_word_rate": 0.0218, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-10-sepedi", "text_source": "native", "pages": 6, "words": 4634, "common_word_rate": 0.0378, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-10-sesotho", "text_source": "native", "pages": 6, "words": 4828, "common_word_rate": 0.0348, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-11-english", "text_source": "native", "pages": 6, "words": 4411, "common_word_rate": 0.5332, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-11-isindevele", "text_source": "native", "pages": 6, "words": 3117, "common_word_rate": 0.0132, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-11-siswati", "text_source": "native", "pages": 6, "words": 3327, "common_word_rate": 0.0102, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-12-english", "text_source": "native", "pages": 6, "words": 3855, "common_word_rate": 0.5256, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-12-isixhosa", "text_source": "native", "pages": 6, "words": 3032, "common_word_rate": 0.0148, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-12-sesotho", "text_source": "native", "pages": 6, "words": 4480, "common_word_rate": 0.0475, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-12-zulu", "text_source": "native", "pages": 6, "words": 2664, "common_word_rate": 0.0101, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-13-afrikaans", "text_source": "native", "pages": 6, "words": 3716, "common_word_rate": 0.0745, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-13-english", "text_source": "native", "pages": 6, "words": 3754, "common_word_rate": 0.5059, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-13-setswana", "text_source": "native", "pages": 6, "words": 4312, "common_word_rate": 0.0628, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-13-venda", "text_source": "native", "pages": 6, "words": 4227, "common_word_rate": 0.0438, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-14", "text_source": "native", "pages": 8, "words": 4095, "common_word_rate": 0.4835, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-14-isixhosa", "text_source": "native", "pages": 8, "words": 3135, "common_word_rate": 0.0137, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-14-isizulu", "text_source": "native", "pages": 8, "words": 2944, "common_word_rate": 0.0136, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-14-xitsonga", "text_source": "native", "pages": 8, "words": 4635, "common_word_rate": 0.0365, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-15", "text_source": "native", "pages": 8, "words": 3383, "common_word_rate": 0.4839, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-15-isizulu", "text_source": "native", "pages": 8, "words": 2660, "common_word_rate": 0.0094, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-15-setswana", "text_source": "native", "pages": 8, "words": 4855, "common_word_rate": 0.0525, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-15-tshivenda", "text_source": "native", "pages": 8, "words": 4566, "common_word_rate": 0.0357, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-16", "text_source": "native", "pages": 8, "words": 3626, "common_word_rate": 0.487, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-17", "text_source": "native", "pages": 8, "words": 3675, "common_word_rate": 0.498, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-17-afrikaans", "text_source": "native", "pages": 8, "words": 3640, "common_word_rate": 0.0701, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-17-sesotho", "text_source": "native", "pages": 8, "words": 4674, "common_word_rate": 0.0332, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-17-xitsonga", "text_source": "native", "pages": 8, "words": 4494, "common_word_rate": 0.036, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-18", "text_source": "native", "pages": 13, "words": 6391, "common_word_rate": 0.4644, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-2-2024", "text_source": "native", "pages": 10, "words": 2754, "common_word_rate": 0.4125, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-20", "text_source": "native", "pages": 8, "words": 3253, "common_word_rate": 0.4974, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-21", "text_source": "native", "pages": 7, "words": 2238, "common_word_rate": 0.4933, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-3", "text_source": "native", "pages": 4, "words": 3310, "common_word_rate": 0.5148, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-3-2023", "text_source": "native", "pages": 15, "words": 3839, "common_word_rate": 0.46, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-4", "text_source": "native", "pages": 4, "words": 2543, "common_word_rate": 0.4915, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-4-2024", "text_source": "native", "pages": 13, "words": 3724, "common_word_rate": 0.4707, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-5", "text_source": "native", "pages": 4, "words": 2351, "common_word_rate": 0.4815, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-6", "text_source": "native", "pages": 3, "words": 1492, "common_word_rate": 0.4819, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-7", "text_source": "native", "pages": 4, "words": 2216, "common_word_rate": 0.4856, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-8", "text_source": "native", "pages": 4, "words": 3026, "common_word_rate": 0.5254, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 76"}
+{"doc_id": "fais-nl-issue-9-english", "text_source": "native", "pages": 6, "words": 3851, "common_word_rate": 0.5214, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-9-isizulu", "text_source": "native", "pages": 6, "words": 2655, "common_word_rate": 0.0218, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-9-setswana", "text_source": "native", "pages": 6, "words": 4732, "common_word_rate": 0.0626, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-issue-9-tshivenda", "text_source": "native", "pages": 6, "words": 5236, "common_word_rate": 0.0483, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-june-2026-issue-2", "text_source": "native", "pages": 12, "words": 3803, "common_word_rate": 0.3947, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-march-2026-issue-4", "text_source": "native", "pages": 16, "words": 4507, "common_word_rate": 0.4116, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-q1-2024", "text_source": "native", "pages": 14, "words": 3364, "common_word_rate": 0.4215, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-q1-2025", "text_source": "native", "pages": 13, "words": 3161, "common_word_rate": 0.398, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-q2-2023", "text_source": "native", "pages": 9, "words": 2087, "common_word_rate": 0.403, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-september-2025-issue-2", "text_source": "native", "pages": 12, "words": 3416, "common_word_rate": 0.3987, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-september-2026-issue-2", "text_source": "native", "pages": 14, "words": 5015, "common_word_rate": 0.4377, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-2023-issue-1", "text_source": "native", "pages": 10, "words": 3015, "common_word_rate": 0.4378, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-2024-issue-3", "text_source": "native", "pages": 21, "words": 3592, "common_word_rate": 0.3769, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-issue-22", "text_source": "native", "pages": 13, "words": 3570, "common_word_rate": 0.4728, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-issue-23", "text_source": "native", "pages": 11, "words": 3333, "common_word_rate": 0.4803, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-issue-24", "text_source": "native", "pages": 16, "words": 4722, "common_word_rate": 0.4869, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "fais-nl-under-the-baobab-tree-mar-2025-issue-4", "text_source": "native", "pages": 13, "words": 3129, "common_word_rate": 0.4148, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-11297", "text_source": "native", "pages": 128, "words": 42559, "common_word_rate": 0.3685, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-11308", "text_source": "native", "pages": 75, "words": 1095, "common_word_rate": 0.442, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "70 of 75 pages are images of text with no text layer: needs OCR"}
+{"doc_id": "nfo-12607", "text_source": "native", "pages": 50, "words": 4270, "common_word_rate": 0.2511, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1604", "text_source": "native", "pages": 9, "words": 4186, "common_word_rate": 0.4075, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1609", "text_source": "native", "pages": 20, "words": 5318, "common_word_rate": 0.3829, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1611", "text_source": "native", "pages": 24, "words": 5872, "common_word_rate": 0.4125, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 121"}
+{"doc_id": "nfo-1614", "text_source": "native", "pages": 24, "words": 6439, "common_word_rate": 0.4094, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1623", "text_source": "native", "pages": 28, "words": 5999, "common_word_rate": 0.3922, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1626", "text_source": "native", "pages": 28, "words": 5340, "common_word_rate": 0.368, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1629", "text_source": "native", "pages": 32, "words": 8758, "common_word_rate": 0.4136, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1632", "text_source": "native", "pages": 32, "words": 7207, "common_word_rate": 0.4176, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1635-1", "text_source": "native", "pages": 28, "words": 5351, "common_word_rate": 0.3941, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1635-2", "text_source": "native", "pages": 32, "words": 7207, "common_word_rate": 0.4176, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1638", "text_source": "native", "pages": 32, "words": 7085, "common_word_rate": 0.4064, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1641", "text_source": "native", "pages": 19, "words": 6216, "common_word_rate": 0.3879, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1644", "text_source": "native", "pages": 32, "words": 7081, "common_word_rate": 0.2815, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1647", "text_source": "native", "pages": 28, "words": 5117, "common_word_rate": 0.3287, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1650", "text_source": "native", "pages": 23, "words": 10384, "common_word_rate": 0.3466, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1653", "text_source": "native", "pages": 50, "words": 10420, "common_word_rate": 0.3832, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-1656", "text_source": "native", "pages": 26, "words": 10537, "common_word_rate": 0.3879, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2413", "text_source": "native", "pages": 3, "words": 641, "common_word_rate": 0.4197, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2416", "text_source": "native", "pages": 2, "words": 706, "common_word_rate": 0.4306, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2419", "text_source": "native", "pages": 10, "words": 4640, "common_word_rate": 0.4983, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2422-1", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-2422-2", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-2422-3", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-2428", "text_source": "native", "pages": 100, "words": 34470, "common_word_rate": 0.4356, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2464", "text_source": "native", "pages": 2, "words": 349, "common_word_rate": 0.3782, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2465", "text_source": "native", "pages": 2, "words": 341, "common_word_rate": 0.3431, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2466", "text_source": "native", "pages": 6, "words": 1700, "common_word_rate": 0.4994, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2467", "text_source": "native", "pages": 5, "words": 1358, "common_word_rate": 0.4661, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2468", "text_source": "native", "pages": 7, "words": 2127, "common_word_rate": 0.4636, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2469", "text_source": "native", "pages": 3, "words": 627, "common_word_rate": 0.4402, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2471", "text_source": "native", "pages": 15, "words": 6087, "common_word_rate": 0.4699, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2472", "text_source": "native", "pages": 14, "words": 5178, "common_word_rate": 0.5012, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2473", "text_source": "native", "pages": 5, "words": 1420, "common_word_rate": 0.4577, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2474", "text_source": "native", "pages": 11, "words": 3275, "common_word_rate": 0.4385, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2475", "text_source": "native", "pages": 15, "words": 5604, "common_word_rate": 0.4916, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2515", "text_source": "native", "pages": 5, "words": 1659, "common_word_rate": 0.478, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2516", "text_source": "native", "pages": 6, "words": 1967, "common_word_rate": 0.4759, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2517", "text_source": "native", "pages": 16, "words": 6052, "common_word_rate": 0.4962, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2519", "text_source": "native", "pages": 6, "words": 1516, "common_word_rate": 0.403, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2520", "text_source": "native", "pages": 5, "words": 1460, "common_word_rate": 0.4822, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2521", "text_source": "native", "pages": 3, "words": 571, "common_word_rate": 0.4151, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2522", "text_source": "native", "pages": 12, "words": 3987, "common_word_rate": 0.4387, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2524", "text_source": "native", "pages": 3, "words": 540, "common_word_rate": 0.4185, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2525", "text_source": "native", "pages": 6, "words": 1769, "common_word_rate": 0.485, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2526", "text_source": "native", "pages": 6, "words": 1505, "common_word_rate": 0.4784, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2528", "text_source": "native", "pages": 7, "words": 1668, "common_word_rate": 0.4215, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2545", "text_source": "native", "pages": 44, "words": 10703, "common_word_rate": 0.4007, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2549", "text_source": "native", "pages": 44, "words": 11885, "common_word_rate": 0.4061, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2550", "text_source": "native", "pages": 44, "words": 11273, "common_word_rate": 0.4164, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2551", "text_source": "native", "pages": 25, "words": 12348, "common_word_rate": 0.4218, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2552", "text_source": "native", "pages": 27, "words": 12490, "common_word_rate": 0.4232, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "soft hyphens removed: 146"}
+{"doc_id": "nfo-2553", "text_source": "native", "pages": 60, "words": 14475, "common_word_rate": 0.4158, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "soft hyphens removed: 412"}
+{"doc_id": "nfo-2554", "text_source": "native", "pages": 60, "words": 14864, "common_word_rate": 0.4142, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "soft hyphens removed: 600"}
+{"doc_id": "nfo-2555", "text_source": "native", "pages": 56, "words": 13754, "common_word_rate": 0.4184, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2556", "text_source": "native", "pages": 27, "words": 13604, "common_word_rate": 0.408, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2557", "text_source": "native", "pages": 31, "words": 16923, "common_word_rate": 0.4256, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2558", "text_source": "native", "pages": 41, "words": 18374, "common_word_rate": 0.398, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2559", "text_source": "native", "pages": 43, "words": 22001, "common_word_rate": 0.3682, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2560", "text_source": "native", "pages": 41, "words": 19929, "common_word_rate": 0.4304, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2561", "text_source": "native", "pages": 45, "words": 21060, "common_word_rate": 0.4305, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 273"}
+{"doc_id": "nfo-2777", "text_source": "native", "pages": 3, "words": 641, "common_word_rate": 0.4197, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2778", "text_source": "native", "pages": 5, "words": 1820, "common_word_rate": 0.5033, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2781", "text_source": "native", "pages": 5, "words": 1382, "common_word_rate": 0.5152, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2784", "text_source": "none", "pages": 2, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-2787", "text_source": "native", "pages": 1, "words": 85, "common_word_rate": 0.4706, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2790", "text_source": "native", "pages": 2, "words": 252, "common_word_rate": 0.5119, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2793", "text_source": "native", "pages": 3, "words": 496, "common_word_rate": 0.5343, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2796", "text_source": "native", "pages": 2, "words": 526, "common_word_rate": 0.5057, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-2999", "text_source": "native", "pages": 40, "words": 13859, "common_word_rate": 0.4627, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3000", "text_source": "native", "pages": 44, "words": 13783, "common_word_rate": 0.4525, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3001", "text_source": "native", "pages": 44, "words": 16689, "common_word_rate": 0.4626, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3002", "text_source": "native", "pages": 44, "words": 16903, "common_word_rate": 0.4703, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3003", "text_source": "native", "pages": 68, "words": 24279, "common_word_rate": 0.4322, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3004", "text_source": "native", "pages": 92, "words": 36197, "common_word_rate": 0.4413, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3020", "text_source": "native", "pages": 7, "words": 2499, "common_word_rate": 0.459, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3021", "text_source": "converted", "pages": null, "words": 6710, "common_word_rate": 0.5064, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-3024", "text_source": "converted", "pages": null, "words": 4378, "common_word_rate": 0.5139, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-3026", "text_source": "native", "pages": 9, "words": 4220, "common_word_rate": 0.4761, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3032", "text_source": "native", "pages": 12, "words": 4565, "common_word_rate": 0.4697, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3033", "text_source": "native", "pages": 11, "words": 4028, "common_word_rate": 0.4786, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3034", "text_source": "native", "pages": 16, "words": 9706, "common_word_rate": 0.4938, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3035", "text_source": "native", "pages": 14, "words": 5469, "common_word_rate": 0.4997, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3044", "text_source": "native", "pages": 14, "words": 3850, "common_word_rate": 0.4917, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3045", "text_source": "native", "pages": 14, "words": 4042, "common_word_rate": 0.4693, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3046", "text_source": "native", "pages": 14, "words": 3739, "common_word_rate": 0.4787, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3055", "text_source": "converted", "pages": null, "words": 3290, "common_word_rate": 0.5182, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-3056", "text_source": "converted", "pages": null, "words": 4058, "common_word_rate": 0.5034, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-3061", "text_source": "native", "pages": 16, "words": 6031, "common_word_rate": 0.4958, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3064", "text_source": "native", "pages": 9, "words": 4324, "common_word_rate": 0.4577, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3065", "text_source": "native", "pages": 8, "words": 4357, "common_word_rate": 0.4354, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3066", "text_source": "native", "pages": 10, "words": 5152, "common_word_rate": 0.4507, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3068", "text_source": "native", "pages": 6, "words": 3172, "common_word_rate": 0.4682, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3078", "text_source": "native", "pages": 12, "words": 7058, "common_word_rate": 0.4575, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3080", "text_source": "native", "pages": 8, "words": 4425, "common_word_rate": 0.431, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3081", "text_source": "native", "pages": 8, "words": 4553, "common_word_rate": 0.4709, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3085", "text_source": "native", "pages": 3, "words": 828, "common_word_rate": 0.3635, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3086", "text_source": "native", "pages": 8, "words": 4243, "common_word_rate": 0.47, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3087", "text_source": "native", "pages": 7, "words": 4668, "common_word_rate": 0.4304, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 55"}
+{"doc_id": "nfo-3089", "text_source": "native", "pages": 10, "words": 9113, "common_word_rate": 0.4739, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 96"}
+{"doc_id": "nfo-3097", "text_source": "native", "pages": 7, "words": 4031, "common_word_rate": 0.4711, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 56"}
+{"doc_id": "nfo-3098", "text_source": "native", "pages": 7, "words": 3048, "common_word_rate": 0.4357, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 37"}
+{"doc_id": "nfo-3100", "text_source": "native", "pages": 6, "words": 4394, "common_word_rate": 0.4877, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 71"}
+{"doc_id": "nfo-3102", "text_source": "native", "pages": 4, "words": 2093, "common_word_rate": 0.4419, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 28"}
+{"doc_id": "nfo-3109", "text_source": "native", "pages": 6, "words": 4146, "common_word_rate": 0.4875, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 73"}
+{"doc_id": "nfo-3110", "text_source": "native", "pages": 5, "words": 2406, "common_word_rate": 0.4518, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 4"}
+{"doc_id": "nfo-3112", "text_source": "native", "pages": 8, "words": 4105, "common_word_rate": 0.4529, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3114", "text_source": "native", "pages": 5, "words": 2791, "common_word_rate": 0.4425, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 19"}
+{"doc_id": "nfo-3121", "text_source": "native", "pages": 6, "words": 3519, "common_word_rate": 0.4623, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 37"}
+{"doc_id": "nfo-3123", "text_source": "native", "pages": 6, "words": 3100, "common_word_rate": 0.4574, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 30"}
+{"doc_id": "nfo-3125", "text_source": "native", "pages": 5, "words": 2716, "common_word_rate": 0.465, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3127", "text_source": "native", "pages": 6, "words": 3787, "common_word_rate": 0.4814, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3133", "text_source": "native", "pages": 5, "words": 3575, "common_word_rate": 0.4727, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3134", "text_source": "native", "pages": 6, "words": 3170, "common_word_rate": 0.4603, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3135", "text_source": "native", "pages": 6, "words": 3648, "common_word_rate": 0.4857, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-3136", "text_source": "none", "pages": 8, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-3145", "text_source": "native", "pages": 9, "words": 3890, "common_word_rate": 0.5123, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3146", "text_source": "native", "pages": 12, "words": 218, "common_word_rate": 0.3578, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "10 of 12 pages are images of text with no text layer: needs OCR"}
+{"doc_id": "nfo-3147", "text_source": "native", "pages": 9, "words": 849, "common_word_rate": 0.3981, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3148", "text_source": "none", "pages": 9, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-3157", "text_source": "native", "pages": 10, "words": 3530, "common_word_rate": 0.4858, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3158", "text_source": "native", "pages": 10, "words": 3962, "common_word_rate": 0.4965, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3159", "text_source": "native", "pages": 9, "words": 3052, "common_word_rate": 0.5013, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3160", "text_source": "native", "pages": 8, "words": 3056, "common_word_rate": 0.4843, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3169", "text_source": "native", "pages": 9, "words": 3389, "common_word_rate": 0.4954, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3171", "text_source": "native", "pages": 13, "words": 4219, "common_word_rate": 0.4352, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3173", "text_source": "native", "pages": 11, "words": 3813, "common_word_rate": 0.4833, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3175", "text_source": "native", "pages": 8, "words": 1668, "common_word_rate": 0.4694, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3181", "text_source": "native", "pages": 8, "words": 2191, "common_word_rate": 0.4669, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3182", "text_source": "native", "pages": 9, "words": 3760, "common_word_rate": 0.4832, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 2"}
+{"doc_id": "nfo-3184", "text_source": "native", "pages": 8, "words": 2758, "common_word_rate": 0.4862, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3187", "text_source": "native", "pages": 11, "words": 5004, "common_word_rate": 0.44, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3193", "text_source": "native", "pages": 12, "words": 6980, "common_word_rate": 0.4821, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3195", "text_source": "native", "pages": 14, "words": 7021, "common_word_rate": 0.4679, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3197", "text_source": "native", "pages": 11, "words": 6162, "common_word_rate": 0.4938, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3199", "text_source": "native", "pages": 14, "words": 8262, "common_word_rate": 0.4736, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3205", "text_source": "native", "pages": 12, "words": 4291, "common_word_rate": 0.4931, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3206", "text_source": "native", "pages": 16, "words": 6735, "common_word_rate": 0.4661, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3208", "text_source": "native", "pages": 14, "words": 4856, "common_word_rate": 0.4769, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3210", "text_source": "native", "pages": 13, "words": 4041, "common_word_rate": 0.4759, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3217", "text_source": "native", "pages": 13, "words": 4271, "common_word_rate": 0.4727, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3218", "text_source": "native", "pages": 20, "words": 5989, "common_word_rate": 0.4765, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3220", "text_source": "native", "pages": 22, "words": 5639, "common_word_rate": 0.4671, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3222", "text_source": "native", "pages": 22, "words": 6393, "common_word_rate": 0.4702, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3229", "text_source": "native", "pages": 16, "words": 4295, "common_word_rate": 0.4778, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3230", "text_source": "native", "pages": 21, "words": 6253, "common_word_rate": 0.4942, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3231", "text_source": "native", "pages": 20, "words": 5918, "common_word_rate": 0.4951, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3232", "text_source": "native", "pages": 13, "words": 2522, "common_word_rate": 0.5044, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3241", "text_source": "native", "pages": 16, "words": 4479, "common_word_rate": 0.5057, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3242", "text_source": "native", "pages": 15, "words": 4402, "common_word_rate": 0.5011, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3243", "text_source": "native", "pages": 16, "words": 4498, "common_word_rate": 0.4622, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3252", "text_source": "native", "pages": 72, "words": 30543, "common_word_rate": 0.4719, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3253", "text_source": "native", "pages": 64, "words": 30088, "common_word_rate": 0.4927, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3254", "text_source": "native", "pages": 66, "words": 32520, "common_word_rate": 0.4827, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3255", "text_source": "native", "pages": 64, "words": 27587, "common_word_rate": 0.4871, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3256", "text_source": "native", "pages": 48, "words": 15505, "common_word_rate": 0.4617, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3257", "text_source": "native", "pages": 44, "words": 14657, "common_word_rate": 0.4601, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3258", "text_source": "native", "pages": 40, "words": 11376, "common_word_rate": 0.4447, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3259", "text_source": "native", "pages": 36, "words": 10266, "common_word_rate": 0.4516, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3260", "text_source": "native", "pages": 36, "words": 10788, "common_word_rate": 0.4481, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3261", "text_source": "native", "pages": 3, "words": 2374, "common_word_rate": 0.4794, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3262", "text_source": "native", "pages": 36, "words": 12145, "common_word_rate": 0.461, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3263", "text_source": "native", "pages": 36, "words": 11427, "common_word_rate": 0.4481, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3264", "text_source": "native", "pages": 4, "words": 1437, "common_word_rate": 0.437, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3265", "text_source": "native", "pages": 40, "words": 11503, "common_word_rate": 0.443, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3266", "text_source": "native", "pages": 40, "words": 12327, "common_word_rate": 0.438, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3267", "text_source": "native", "pages": 40, "words": 12873, "common_word_rate": 0.4445, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3268", "text_source": "native", "pages": 40, "words": 12822, "common_word_rate": 0.4482, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3269", "text_source": "native", "pages": 40, "words": 13719, "common_word_rate": 0.4374, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3270", "text_source": "native", "pages": 44, "words": 14799, "common_word_rate": 0.4473, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3271", "text_source": "native", "pages": 68, "words": 24279, "common_word_rate": 0.4322, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3272", "text_source": "native", "pages": 92, "words": 35927, "common_word_rate": 0.4447, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-3273", "text_source": "native", "pages": 100, "words": 34470, "common_word_rate": 0.4356, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4211", "text_source": "native", "pages": 6, "words": 2539, "common_word_rate": 0.5439, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4222", "text_source": "native", "pages": 4, "words": 1298, "common_word_rate": 0.5555, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4226-1", "text_source": "none", "pages": 13, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4226-2", "text_source": "native", "pages": 3, "words": 1029, "common_word_rate": 0.4694, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4227", "text_source": "native", "pages": 2, "words": 641, "common_word_rate": 0.5382, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4228", "text_source": "native", "pages": 8, "words": 3015, "common_word_rate": 0.54, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4229", "text_source": "native", "pages": 3, "words": 1509, "common_word_rate": 0.5494, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4230", "text_source": "native", "pages": 3, "words": 872, "common_word_rate": 0.4495, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4238", "text_source": "native", "pages": 6, "words": 2375, "common_word_rate": 0.4989, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4248", "text_source": "none", "pages": 6, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4249", "text_source": "native", "pages": 13, "words": 5295, "common_word_rate": 0.5029, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4250", "text_source": "none", "pages": 13, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4251", "text_source": "native", "pages": 5, "words": 1805, "common_word_rate": 0.4565, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4252", "text_source": "native", "pages": 8, "words": 3546, "common_word_rate": 0.4884, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4253", "text_source": "native", "pages": 3, "words": 911, "common_word_rate": 0.5082, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4254", "text_source": "native", "pages": 10, "words": 4640, "common_word_rate": 0.4983, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4334", "text_source": "native", "pages": 23, "words": 1828, "common_word_rate": 0.477, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4336-1", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4336-2", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4337", "text_source": "native", "pages": 25, "words": 3253, "common_word_rate": 0.5204, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4338", "text_source": "native", "pages": 30, "words": 2099, "common_word_rate": 0.4574, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4339", "text_source": "none", "pages": 23, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4340", "text_source": "native", "pages": 7, "words": 1476, "common_word_rate": 0.4749, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4341-1", "text_source": "native", "pages": 9, "words": 109, "common_word_rate": 0.2385, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4341-2", "text_source": "native", "pages": 22, "words": 4927, "common_word_rate": 0.5277, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4342", "text_source": "native", "pages": 11, "words": 453, "common_word_rate": 0.34, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4343", "text_source": "native", "pages": 15, "words": 6251, "common_word_rate": 0.5242, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4344-1", "text_source": "converted", "pages": 25, "words": 861, "common_word_rate": 0.3751, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to pdf (Impress has no txt filter), then pdftotext -layout; pages = slides"}
+{"doc_id": "nfo-4344-2", "text_source": "native", "pages": 25, "words": 869, "common_word_rate": 0.374, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4345", "text_source": "none", "pages": 16, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4346", "text_source": "native", "pages": 7, "words": 1415, "common_word_rate": 0.506, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4347", "text_source": "native", "pages": 11, "words": 618, "common_word_rate": 0.3139, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4348", "text_source": "native", "pages": 14, "words": 3889, "common_word_rate": 0.5194, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4349", "text_source": "native", "pages": 18, "words": 6255, "common_word_rate": 0.4737, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4350", "text_source": "native", "pages": 11, "words": 4184, "common_word_rate": 0.5072, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4351", "text_source": "native", "pages": 33, "words": 14281, "common_word_rate": 0.5046, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4352", "text_source": "native", "pages": 13, "words": 1115, "common_word_rate": 0.496, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-1", "text_source": "native", "pages": 8, "words": 2675, "common_word_rate": 0.5234, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-2", "text_source": "native", "pages": 12, "words": 3092, "common_word_rate": 0.523, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-3", "text_source": "native", "pages": 3, "words": 170, "common_word_rate": 0.2824, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-4", "text_source": "native", "pages": 5, "words": 1482, "common_word_rate": 0.442, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-5", "text_source": "native", "pages": 8, "words": 2374, "common_word_rate": 0.4638, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4353-6", "text_source": "native", "pages": 11, "words": 2763, "common_word_rate": 0.4777, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4354", "text_source": "native", "pages": 4, "words": 725, "common_word_rate": 0.5048, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4355", "text_source": "native", "pages": 4, "words": 1818, "common_word_rate": 0.5, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4356", "text_source": "native", "pages": 13, "words": 4274, "common_word_rate": 0.507, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4357-1", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4357-2", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4357-3", "text_source": "none", "pages": 1, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-4358", "text_source": "native", "pages": 3, "words": 1751, "common_word_rate": 0.5237, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4359", "text_source": "native", "pages": 5, "words": 2620, "common_word_rate": 0.5393, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4362", "text_source": "native", "pages": 3, "words": 1264, "common_word_rate": 0.5174, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4363", "text_source": "native", "pages": 4, "words": 2312, "common_word_rate": 0.5238, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4364", "text_source": "native", "pages": 3, "words": 1169, "common_word_rate": 0.5415, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4365", "text_source": "native", "pages": 2, "words": 1102, "common_word_rate": 0.5045, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4366", "text_source": "native", "pages": 3, "words": 1349, "common_word_rate": 0.5004, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4367", "text_source": "native", "pages": 3, "words": 1047, "common_word_rate": 0.4795, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4368", "text_source": "native", "pages": 3, "words": 1212, "common_word_rate": 0.5066, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4376", "text_source": "native", "pages": 3, "words": 937, "common_word_rate": 0.4984, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4377", "text_source": "native", "pages": 3, "words": 1720, "common_word_rate": 0.4942, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4378", "text_source": "native", "pages": 2, "words": 918, "common_word_rate": 0.4412, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4379", "text_source": "native", "pages": 3, "words": 1855, "common_word_rate": 0.524, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4380", "text_source": "native", "pages": 4, "words": 1641, "common_word_rate": 0.4899, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4381", "text_source": "native", "pages": 3, "words": 1412, "common_word_rate": 0.4979, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4382", "text_source": "native", "pages": 4, "words": 1473, "common_word_rate": 0.4969, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4383", "text_source": "native", "pages": 4, "words": 1865, "common_word_rate": 0.5019, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4384", "text_source": "native", "pages": 4, "words": 1770, "common_word_rate": 0.5011, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4385", "text_source": "native", "pages": 3, "words": 1273, "common_word_rate": 0.4996, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4392", "text_source": "native", "pages": 2, "words": 720, "common_word_rate": 0.4708, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4393", "text_source": "native", "pages": 2, "words": 595, "common_word_rate": 0.4908, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4394", "text_source": "native", "pages": 2, "words": 653, "common_word_rate": 0.4609, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4395", "text_source": "native", "pages": 3, "words": 849, "common_word_rate": 0.4688, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4396", "text_source": "native", "pages": 3, "words": 1010, "common_word_rate": 0.4762, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4398", "text_source": "native", "pages": 3, "words": 1127, "common_word_rate": 0.4907, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4399", "text_source": "native", "pages": 3, "words": 1058, "common_word_rate": 0.518, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4400", "text_source": "native", "pages": 3, "words": 970, "common_word_rate": 0.4948, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4401", "text_source": "native", "pages": 4, "words": 1974, "common_word_rate": 0.5111, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4402", "text_source": "native", "pages": 2, "words": 625, "common_word_rate": 0.432, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4411", "text_source": "native", "pages": 3, "words": 992, "common_word_rate": 0.5363, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4412", "text_source": "native", "pages": 3, "words": 1279, "common_word_rate": 0.5246, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4413", "text_source": "native", "pages": 8, "words": 2514, "common_word_rate": 0.4905, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4414", "text_source": "native", "pages": 5, "words": 2187, "common_word_rate": 0.5098, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4415", "text_source": "native", "pages": 4, "words": 1282, "common_word_rate": 0.4704, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4416", "text_source": "native", "pages": 6, "words": 1675, "common_word_rate": 0.4884, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4417", "text_source": "native", "pages": 4, "words": 1021, "common_word_rate": 0.4564, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4418", "text_source": "native", "pages": 5, "words": 1722, "common_word_rate": 0.5203, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4419", "text_source": "native", "pages": 3, "words": 852, "common_word_rate": 0.5023, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4420", "text_source": "native", "pages": 4, "words": 1154, "common_word_rate": 0.5173, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4886", "text_source": "native", "pages": 4, "words": 1417, "common_word_rate": 0.5067, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4888", "text_source": "native", "pages": 2, "words": 477, "common_word_rate": 0.5052, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4889", "text_source": "native", "pages": 2, "words": 348, "common_word_rate": 0.4856, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4890", "text_source": "native", "pages": 2, "words": 667, "common_word_rate": 0.4618, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4891", "text_source": "native", "pages": 2, "words": 484, "common_word_rate": 0.5723, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4892", "text_source": "native", "pages": 2, "words": 745, "common_word_rate": 0.5208, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4893", "text_source": "native", "pages": 1, "words": 279, "common_word_rate": 0.448, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4894", "text_source": "native", "pages": 1, "words": 301, "common_word_rate": 0.5216, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4895", "text_source": "native", "pages": 2, "words": 428, "common_word_rate": 0.507, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4896", "text_source": "native", "pages": 2, "words": 361, "common_word_rate": 0.4598, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4897", "text_source": "native", "pages": 3, "words": 823, "common_word_rate": 0.4848, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4898", "text_source": "native", "pages": 2, "words": 305, "common_word_rate": 0.4754, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4899", "text_source": "native", "pages": 2, "words": 630, "common_word_rate": 0.4698, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4956", "text_source": "native", "pages": 4, "words": 574, "common_word_rate": 0.4268, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4957", "text_source": "native", "pages": 4, "words": 545, "common_word_rate": 0.3963, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-4958", "text_source": "native", "pages": 4, "words": 1759, "common_word_rate": 0.5003, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5462", "text_source": "native", "pages": 4, "words": 1836, "common_word_rate": 0.5, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5464", "text_source": "native", "pages": 3, "words": 1201, "common_word_rate": 0.5037, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5466", "text_source": "native", "pages": 2, "words": 472, "common_word_rate": 0.4513, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5470", "text_source": "native", "pages": 3, "words": 1199, "common_word_rate": 0.4871, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5481", "text_source": "native", "pages": 4, "words": 1317, "common_word_rate": 0.5186, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5482", "text_source": "native", "pages": 14, "words": 3403, "common_word_rate": 0.4984, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5497", "text_source": "native", "pages": 3, "words": 1026, "common_word_rate": 0.5302, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5498", "text_source": "native", "pages": 2, "words": 700, "common_word_rate": 0.5071, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5499", "text_source": "native", "pages": 6, "words": 2610, "common_word_rate": 0.5261, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5500", "text_source": "native", "pages": 5, "words": 2185, "common_word_rate": 0.5355, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5511", "text_source": "native", "pages": 3, "words": 1029, "common_word_rate": 0.4694, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5512", "text_source": "none", "pages": 13, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-5517", "text_source": "native", "pages": 4, "words": 1982, "common_word_rate": 0.5414, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5518", "text_source": "native", "pages": 5, "words": 1608, "common_word_rate": 0.5149, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5519", "text_source": "native", "pages": 9, "words": 2496, "common_word_rate": 0.5068, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5533", "text_source": "native", "pages": 4, "words": 1469, "common_word_rate": 0.5337, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5534", "text_source": "none", "pages": 14, "words": null, "common_word_rate": null, "ocr_mean_confidence": 90.02, "repair_fonts": null, "notes": "image-only; OCR'd in the gate sample (text/ocr/), not promoted: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-5540", "text_source": "native", "pages": 3, "words": 1057, "common_word_rate": 0.5184, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5541", "text_source": "native", "pages": 4, "words": 1889, "common_word_rate": 0.5315, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5542", "text_source": "native", "pages": 4, "words": 1052, "common_word_rate": 0.5105, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5543", "text_source": "native", "pages": 17, "words": 5888, "common_word_rate": 0.4808, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5559", "text_source": "native", "pages": 5, "words": 1533, "common_word_rate": 0.5062, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5565", "text_source": "native", "pages": 3, "words": 1666, "common_word_rate": 0.5108, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5566", "text_source": "native", "pages": 3, "words": 985, "common_word_rate": 0.5289, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5567", "text_source": "native", "pages": 9, "words": 3574, "common_word_rate": 0.5442, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5568", "text_source": "native", "pages": 2, "words": 708, "common_word_rate": 0.5184, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5569", "text_source": "native", "pages": 2, "words": 506, "common_word_rate": 0.4723, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5570", "text_source": "native", "pages": 4, "words": 1259, "common_word_rate": 0.494, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5591", "text_source": "native", "pages": 2, "words": 695, "common_word_rate": 0.5079, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5592", "text_source": "native", "pages": 5, "words": 2492, "common_word_rate": 0.5225, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5593", "text_source": "native", "pages": 4, "words": 1069, "common_word_rate": 0.4911, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5594", "text_source": "none", "pages": 8, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-5595", "text_source": "none", "pages": 2, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-5596", "text_source": "native", "pages": 5, "words": 1746, "common_word_rate": 0.5109, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5597", "text_source": "native", "pages": 5, "words": 1219, "common_word_rate": 0.5086, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5598", "text_source": "native", "pages": 4, "words": 1093, "common_word_rate": 0.5087, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5625", "text_source": "native", "pages": 6, "words": 2418, "common_word_rate": 0.4404, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5626", "text_source": "native", "pages": 5, "words": 1866, "common_word_rate": 0.545, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5627", "text_source": "native", "pages": 3, "words": 1093, "common_word_rate": 0.5215, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5640", "text_source": "native", "pages": 3, "words": 760, "common_word_rate": 0.4908, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5641", "text_source": "native", "pages": 3, "words": 1095, "common_word_rate": 0.5041, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5642", "text_source": "native", "pages": 2, "words": 687, "common_word_rate": 0.4949, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5643", "text_source": "native", "pages": 2, "words": 470, "common_word_rate": 0.5426, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5663", "text_source": "converted", "pages": null, "words": 2148, "common_word_rate": 0.54, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-5665", "text_source": "converted", "pages": null, "words": 2118, "common_word_rate": 0.4396, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-5666", "text_source": "converted", "pages": null, "words": 1096, "common_word_rate": 0.5055, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "libreoffice --headless --convert-to txt (Writer, UTF-8)"}
+{"doc_id": "nfo-5862", "text_source": "repaired", "pages": 2, "words": 558, "common_word_rate": 0.5466, "ocr_mean_confidence": null, "repair_fonts": [{"font": "AAAAAE+Calibri-Italic", "obj": "9", "map": {"+": "ft"}}, {"font": "AAAAAI+Calibri", "obj": "13", "map": {"=": "ft", "B": "tt", "M": "ti"}}, {"font": "AAAAAK+Calibri-Italic", "obj": "15", "map": {"@": "ti"}}], "notes": "18 stand-in glyphs re-mapped by patching each font's ToUnicode in a copy and re-running pdftotext -layout; digit runs identical to raw minus 0 stand-in glyphs that showed as digits"}
+{"doc_id": "nfo-5863", "text_source": "repaired", "pages": 3, "words": 988, "common_word_rate": 0.4828, "ocr_mean_confidence": null, "repair_fonts": [{"font": "AAAAAE+Calibri-Italic", "obj": "9", "map": {";": "ti"}}, {"font": "AAAAAG+Calibri-Bold", "obj": "11", "map": {"6": "ti"}}, {"font": "AAAAAI+Calibri", "obj": "13", "map": {">": "ti", "T": "tt", "Z": "ft", "\\": "tti"}}], "notes": "67 stand-in glyphs re-mapped by patching each font's ToUnicode in a copy and re-running pdftotext -layout; digit runs identical to raw minus 1 stand-in glyphs that showed as digits"}
+{"doc_id": "nfo-5869", "text_source": "native", "pages": 1, "words": 220, "common_word_rate": 0.3545, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5870", "text_source": "native", "pages": 15, "words": 5163, "common_word_rate": 0.5322, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5972", "text_source": "native", "pages": 136, "words": 51083, "common_word_rate": 0.4333, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5978", "text_source": "native", "pages": 1, "words": 147, "common_word_rate": 0.2041, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5984", "text_source": "native", "pages": 136, "words": 51083, "common_word_rate": 0.4333, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-5997", "text_source": "native", "pages": 4, "words": 2068, "common_word_rate": 0.5566, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-6495", "text_source": "none", "pages": 18, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "image-only; OCR not run: gate failed, see notes/ocr-sample.md"}
+{"doc_id": "nfo-6511", "text_source": "native", "pages": 45, "words": 22292, "common_word_rate": 0.4232, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 5"}
+{"doc_id": "nfo-6787", "text_source": "repaired", "pages": 4, "words": 1776, "common_word_rate": 0.4876, "ocr_mean_confidence": null, "repair_fonts": [{"font": "AAAAAC+Calibri-Bold", "obj": "7", "map": {"A": "ti"}}, {"font": "AAAAAE+Calibri-Italic", "obj": "9", "map": {"(": "ti"}}, {"font": "AAAAAG+Calibri", "obj": "11", "map": {"8": "ti", "J": "tt", "k": "ft"}}], "notes": "85 stand-in glyphs re-mapped by patching each font's ToUnicode in a copy and re-running pdftotext -layout; digit runs identical to raw minus 73 stand-in glyphs that showed as digits"}
+{"doc_id": "nfo-6905", "text_source": "native", "pages": 52, "words": 10377, "common_word_rate": 0.3746, "ocr_mean_confidence": null, "repair_fonts": null, "notes": null}
+{"doc_id": "nfo-8200", "text_source": "native", "pages": 100, "words": 37775, "common_word_rate": 0.4034, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "ligatures expanded: 3"}
+{"doc_id": "nfo-8202", "text_source": "native", "pages": 65, "words": 1140, "common_word_rate": 0.4491, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "61 of 65 pages are images of text with no text layer: needs OCR"}
+{"doc_id": "nfo-doc-agree-to-disagree", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-awareness-of-risk", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-balancing-the-books", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-be-in-two-places-at-the-same-time", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-bogus-cheque", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-buyers-remorse-not-grounds-for-termination", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-careful-of-new-phishing-scams-and-carefully-read-your-notifications-from-the-ban", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-chargebacks-when-do-they-apply", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-clear-communication-is-key", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-comply-or-pay", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-emails-intercepted-by-fraudster", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-even-debts-can-expire", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-failure-to-follow-correct-inter-bank-fraud-reporting-procedure", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-failure-to-follow-mandate-can-be-costly", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-fair-play", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-flying-high", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-for-richer-or-poorer", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-gesture-of-goodwill", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-going-nowhere", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-going-nowhere-2", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-helpful-tips", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-i-didnt-say-i-do-no-spousal-consent", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-if-it-seems-to-good-to-be-true-it-probably-is", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-incorrect-payment-banks-failure-to-act-timeously-customer-service-breakdown", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-inter-banking-in-motion", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-international-transfer-debacle", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-is-it-an-age-old-problem", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-is-it-business-or-personal", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-it-wasnt-me", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-let-fairness-and-reasonableness-be-our-guide", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-mastercard-rules-no-authority-to-debit", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-mistaken-identity", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-no-credit-no-problem", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-no-limits-but-i-didnt-do-it", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-no-mandate", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-no-mr-banker-i-did-not-agree-to-that", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-no-passing-the-buck", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-olti-complaints-data-2023", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-payment-made-in-error-2", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-please-advise-me", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-risky-business", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-terms-and-conditions-have-to-be-crystal-clear", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-when-can-you-exit-debt-review", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
+{"doc_id": "nfo-doc-wrong-bank-card-noted-on-the-complainants-profile", "text_source": "none", "pages": null, "words": null, "common_word_rate": null, "ocr_mean_confidence": null, "repair_fonts": null, "notes": "HTML-only page (digest); text stays in html/, not extracted in Stage 2"}
