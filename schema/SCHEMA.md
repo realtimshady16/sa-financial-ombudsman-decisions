@@ -48,7 +48,8 @@ Required by the brief, in order:
 | field | type | notes |
 |---|---|---|
 | `doc_id` | string | NFO: `nfo-<wpdm_id>` (`-<n>` per file in a multi-file package). FAIS: `fais-det-<sha256(filename)[:12]>`, `fais-ar-<YYYY>-<YY>`, `fais-nl-<slug>`, `fais-cs-<slug>` |
-| `url` | url | **published-facing** link. NFO: the doc page. FAIS determinations: the `/determinations/` list page (D1 option a), paired with `filename_sha256` |
+| `url` | url | **published-facing** link, chosen per document by `citation_policy` (below). NFO: the doc page. FAIS with a name in the filename: the `/determinations/` list page, paired with `filename_sha256` |
+| `citation_policy` | enum | `direct` when the filename carries no personal name; `hash` when it does — see D1 below |
 | `fetch_url` | url\|null | where the bytes came from. **Restricted** for FAIS determinations (the filename carries a party name) |
 | `sha256` | hex | of the bytes served — the only integrity record (the NFO `.md` card's size is wrong) |
 | `fetched_at` | datetime | UTC |
@@ -154,3 +155,22 @@ No prose abstracts in v1.
 | `period` | string | as `period_covered` |
 | `measure` | enum | Stage 4 codebook: `received` · `accepted` · `formal` · `closed` · … (what "complaint" means differs by era) |
 | `verification` | enum | `hand` · `anchored+reconciled+sampled` · `anchored+reconciled` — never null |
+
+## Citation policy (D1, decided 2026-11-22)
+
+On FAIS the filename *is* the case caption, so a direct link puts a party name into the URL — and from
+there into any page, sitemap or git history that carries it. Measured on the live determinations table
+(552 links, 539 unique): **515 filenames contain a party name**, 26 are case-numbered, 11 say "Redacted"
+while still carrying surnames. NFO determinations carry no names at all.
+
+Rule, applied per document:
+
+- **`citation: direct`** — filename carries no personal name: all NFO determinations, the 26
+  case-numbered FAIS files, annual reports, newsletters, trend reports, financial statements.
+- **`citation: hash`** — filename carries a party name: `url` = `/determinations/`, with
+  `filename_sha256` identifying the document. One extra click, no name in our output.
+
+A hyperlink to lawfully published material is not a republication — that is why this design is
+defensible. The two things it does not buy: a direct link opens a **PDF**, not the ombud's page (the
+list page is the page); and the *index* still processes personal information even when every individual
+link does not, which is the reason the hash tier exists.
