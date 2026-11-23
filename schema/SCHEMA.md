@@ -70,7 +70,8 @@ Extras recorded in Stage 1 (stable names; later stages may add, not rename):
 `fonts_missing_tounicode`, `cmap_hole_count`, `cmap_holes`, `words`, `words_per_page`,
 `common_word_rate`, `tion_count`, `suspect_tokens`, `camel_tokens`, `soft_hyphens`, `ligature_chars`,
 `replacement_chars`, `pdf_readable`, `category_source`, `served_filename`,
-`suspect`, `suspect_reasons`, `restricted_fields`, `restricted` (local only).
+`suspect`, `suspect_reasons`, `restricted_fields`, `restricted` (local only),
+`needs_ocr`, `damaged`, `unreadable`, `damage_reasons`.
 
 **`doc_type` vocabulary**
 
@@ -93,7 +94,7 @@ no restricted fields.
 | field | type | notes |
 |---|---|---|
 | `doc_id` | string | → `document` |
-| `text_source` | enum | `native` · `ocr` · `repaired` · `converted` · `none` (see below) |
+| `text_source` | enum | `native` · `ocr` · `html` · `repaired` · `converted` · `none` (see below) |
 | `pages` | int\|null | PDF pages. For the converted `.ppt` it is the slide count; `null` for `.doc` and HTML |
 | `words` | int\|null | letter runs in `text/final`, the same `pdfcheck.text_metrics` count as `document.words` |
 | `common_word_rate` | float\|null | Stage 1's metric on `text/final`. English-only, so non-English newsletters score low by design |
@@ -102,6 +103,19 @@ no restricted fields.
 | `notes` | string\|null | how the text was made, normalisation counts, and any known gap (watermark-only text layer, embedded image pages) |
 
 **`text_source` vocabulary**
+
+**Damage flags — `suspect` is not one thing.** `suspect` was originally a single boolean and read as
+"this document is damaged", which overstated it sixtyfold. Derive, never infer:
+
+| flag | meaning | count at 2026-11-23 |
+|---|---|---|
+| `needs_ocr` | no text layer — a scan awaiting OCR | 185 |
+| `damaged` | text present but corrupt (`quartz_cmap_holes`, `no_tion_in_long_english_text`, `replacement_chars`, `many_suspect_tokens`) | 4 |
+| `unreadable` | neither: truncated at the source, permanent gap | 2 |
+
+`scripts/flags.py` computes all three from `suspect_reasons` and writes them into both census files.
+**No figure in `figures.csv` may come from a document where `text_source` is `ocr` or `html`** — OCR is
+good enough for words and not for digits, which is why the split exists.
 
 | value | meaning |
 |---|---|

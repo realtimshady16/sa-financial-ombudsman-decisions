@@ -686,3 +686,30 @@ PASS  privacy: no FAIS party name or filename in any committable file — 1912 r
    image page must not have their amounts read until that page is OCR'd.
 3. When reading OCR'd determinations, treat `1%`/`1*`/`2*!` as the ordinals "1st"/"2nd", and
    treat a trailing digit fused onto a complete amount group (`R800 0004`) as a footnote marker.
+
+---
+
+## 7. Stage 2b — text coverage after OCR, HTML extraction and the flag split
+
+Added 2026-11-23 after the OCR run and the two cleanups.
+
+| `text_source` | documents |
+|---|---|
+| native | 738 |
+| ocr | 166 |
+| html | 68 |
+| converted | 8 |
+| repaired | 3 |
+| none | 21 |
+
+**983 of 1004 documents now carry usable text; 4 137 575 words.** The 21 that do not are 19 designed
+documents (image-only annual reports, newsletters and statements — Tesseract mangles their digits, see
+`notes/ocr-sample.md`) and 2 PDFs truncated on the server.
+
+The `suspect` flag has been split (`scripts/flags.py`): **185 `needs_ocr`, 4 `damaged`, 2 `unreadable`**.
+The earlier reading of "191 damaged documents" was wrong by a factor of sixty — those were scans, not
+corruption.
+
+The 68 web-only documents are no longer a gap. 24 FAIS case studies and 44 NFO pages had their text
+extracted from the archived HTML (`scripts/htmltext.py`), which is the cheapest coverage win in the
+project: real narrative case studies, no OCR involved.

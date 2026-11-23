@@ -22,6 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from normalize import normalize  # noqa: E402
 from pdfcheck import text_metrics  # noqa: E402
+from htmltext import html_to_text  # noqa: E402
 from repair import DAMAGED  # noqa: E402
 
 FINAL = os.path.join(ROOT, "text", "final")
@@ -93,8 +94,18 @@ def main():
             m["text_source"] = "converted"
             m["notes"] = how
         elif snap.startswith("html/"):
-            m["text_source"] = "none"
-            m["notes"] = "HTML-only page (digest); text stays in html/, not extracted in Stage 2"
+            # Web-only documents (24 FAIS case studies, 44 NFO pages). Their text is in the archived
+            # page and nowhere else, so extract it rather than recording a permanent gap.
+            src = os.path.join(ROOT, snap)
+            raw_text = html_to_text(src) if os.path.exists(src) else ""
+            if len(raw_text.split()) >= 40:
+                text, norm = normalize(raw_text)
+                write_final(d, text)
+                m["text_source"] = "html"
+                m["notes"] = "web-only document; text extracted from the archived page"
+            else:
+                m["text_source"] = "none"
+                m["notes"] = f"HTML-only page but extraction yielded {len(raw_text.split())} words; inspect html/{d}.html"
         elif r.get("pdf_readable") is False:
             m["text_source"] = "none"
             m["notes"] = "PDF truncated at the source (no trailer, no catalog); qpdf recovery fails; permanent gap unless re-served"
