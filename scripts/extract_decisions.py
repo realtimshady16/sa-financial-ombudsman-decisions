@@ -570,14 +570,35 @@ def anchor(quote, pages):
 _last_call = [0.0]
 
 
+def _runner_for(model):
+    """Two doors to the same model, and they use different credentials.
+
+    `pi -p --model anthropic/*` uses pi's own OAuth in ~/.pi/agent/auth.json.
+    `claude -p --model claude-*` uses the Claude Code CLI's sign-in, which is also what T3's
+    claudeAgent provider uses. When one expires the other still works, so the runner follows the
+    model name: claude-* goes through the CLI, anything else through pi.
+    """
+    return "claude" if str(model).startswith("claude") else "pi"
+
+
 def call_model(model, input_path, retries=2):
-    """One document per call, through pi (Tim's harness; provider credentials stay in pi).
+    """One document per call, through pi or the Claude Code CLI (see _runner_for).
     -> (parsed_json|None, meta)"""
-    pi = os.environ.get("PI_BIN", "pi")
-    cmd = [pi, "-p", "--mode", "json", "--no-tools", "--no-session", "--no-context-files",
-           "--no-skills", "--no-extensions", "--no-mcp", "--no-prompt-templates", "--no-themes",
-           "--model", model, "--system-prompt", SYSTEM, "@" + input_path, INSTRUCTION]
-    meta = {"model": model, "attempts": 0}
+    runner = _runner_for(model)
+    meta = {"model": model, "runner": runner, "attempts": 0}
+    if runner == "claude":
+        with open(input_path, encoding="utf-8") as f:
+            prompt = SYSTEM + "\n\n" + INSTRUCTION + "\n\n--- DOCUMENT ---\n\n" + f.read()
+        cmd = [os.environ.get("CLAUDE_BIN", "claude"), "-p", "--model", model,
+               "--output-format", "json"]
+        stdin_text = prompt
+    else:
+        cmd = [os.environ.get("PI_BIN", "pi"), "-p", "--mode", "json", "--no-tools",
+               "--no-session", "--no-context-files", "--no-skills", "--no-extensions",
+               "--no-mcp", "--no-prompt-templates", "--no-themes",
+               "--model", model, "--system-prompt", SYSTEM, "@" + input_path, INSTRUCTION]
+        stdin_text = ""
+
     for attempt in range(retries + 1):
         gap = time.time() - _last_call[0]
         if gap < MIN_GAP_S:
@@ -585,22 +606,51 @@ def call_model(model, input_path, retries=2):
         _last_call[0] = time.time()
         meta["attempts"] = attempt + 1
         try:
-            p = subprocess.run(cmd, capture_output=True, text=True, timeout=600, cwd=WORK)
+            p = subprocess.run(cmd, capture_output=True, text=True, timeout=900, cwd=WORK,
+                               input=stdin_text)
         except subprocess.TimeoutExpired:
             meta["error"] = "timeout"
             continue
+
         reply, usage = None, None
-        for line in p.stdout.splitlines():
+        if runner == "claude":
             try:
-                ev = json.loads(line)
+                ev = json.loads(p.stdout or "{}")
             except ValueError:
+                meta["error"] = f"unparseable runner output (rc={p.returncode}): {p.stdout[-300:]}"
                 continue
-            if ev.get("type") == "message_end" and ev.get("message", {}).get("role") == "assistant":
-                msg = ev["message"]
-                reply = "".join(c.get("text", "") for c in msg.get("content", []) if c.get("type") == "text")
-                usage = msg.get("usage")
-                meta["model_reported"] = f"{msg.get('provider')}/{msg.get('model')}"
-                meta["stop"] = msg.get("stopReason")
+            if ev.get("is_error"):
+                meta["error"] = f"runner error: {str(ev.get('result'))[:300]}"
+                continue
+            reply = ev.get("result")
+            usage = ev.get("usage")
+            meta["cost_usd"] = ev.get("total_cost_usd")
+            meta["duration_ms"] = ev.get("duration_ms")
+            mu = ev.get("modelUsage") or {}
+            if mu:
+                # The CLI may run a small internal step on a cheap model and the real work on the
+                # one asked for; record the requested model when present, else the biggest
+                # output-token consumer. Never "whichever key came first" — that labelled a
+                # Sonnet extraction as haiku.
+                def _out(v):
+                    return (v or {}).get("outputTokens") or (v or {}).get("output_tokens") or 0
+                meta["model_reported"] = model if model in mu else max(mu, key=lambda k: _out(mu.get(k)))
+                meta["models_all"] = sorted(mu)
+            meta["stop"] = ev.get("stop_reason")
+        else:
+            for line in p.stdout.splitlines():
+                try:
+                    ev = json.loads(line)
+                except ValueError:
+                    continue
+                if ev.get("type") == "message_end" and ev.get("message", {}).get("role") == "assistant":
+                    msg = ev["message"]
+                    reply = "".join(c.get("text", "") for c in msg.get("content", [])
+                                    if c.get("type") == "text")
+                    usage = msg.get("usage")
+                    meta["model_reported"] = f"{msg.get('provider')}/{msg.get('model')}"
+                    meta["stop"] = msg.get("stopReason")
+
         meta["usage"] = usage
         meta["returncode"] = p.returncode
         if reply is None:
