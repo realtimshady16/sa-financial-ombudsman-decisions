@@ -5,6 +5,8 @@ Financial Ombud Scheme** (NFO: the merged OLTI / OBS / OSTI / Credit Ombud) and 
 as machine-readable records: outcome, topic on two independent axes, statutory provisions verified
 verbatim, and a canonical link to the office that published it.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24465702.svg)](https://doi.org/10.5281/zenodo.24465702)
+
 **5 years of it did not exist before in any usable form.** Both offices publish only PDFs on
 WordPress, with no CSV, no API and no index; the determinations have never been searchable by subject,
 firm or provision. That is what this repo is for.
@@ -92,7 +94,8 @@ snapshots.
 
 ## Cite
 
-> Tim, *South African financial ombudsman determinations, 2005–2025* (2026), CC BY 4.0.
+> Tim, *South African financial ombudsman determinations, 2005–2025* (2026). CC BY 4.0.
+> https://doi.org/10.5281/zenodo.24465702
 
 See `CITATION.cff`. The determinations themselves remain the offices' documents — cite them too, via
 `citation_url`.
