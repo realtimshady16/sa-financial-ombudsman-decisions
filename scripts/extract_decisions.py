@@ -654,7 +654,14 @@ def call_model(model, input_path, retries=2):
                 meta["error"] = f"unparseable runner output (rc={p.returncode}): {p.stdout[-300:]}"
                 continue
             if ev.get("is_error"):
-                meta["error"] = f"runner error: {str(ev.get('result'))[:300]}"
+                err = str(ev.get("result") or "")[:300]
+                meta["error"] = f"runner error: {err}"
+                # A usage/credential limit is not a document problem: retrying the same document
+                # 500 times writes 500 empty records and calls it progress. Surface it and stop.
+                fatal = bool(ev.get("api_error")) and ev.get("api_error_status") in (401, 403, 429)
+                if fatal or "usage_limit" in err or "limit" in err.lower():
+                    meta["fatal"] = f"{ev.get('api_error') or 'runner'}: {err}"
+                    return None, meta
                 continue
             reply = ev.get("result")
             usage = ev.get("usage")
@@ -851,6 +858,9 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
         ans, meta = call_model(model, inp)
         with open(reply_path, "w", encoding="utf-8") as f:
             json.dump({"answer": ans, "meta": meta}, f, ensure_ascii=False, indent=1)
+    if meta.get("fatal"):
+        raise SystemExit(f"extraction aborted: {meta['fatal']}\n"
+                         f"  no record written for {canon_id}; records already on disk are kept and the run resumes")
     rec["extraction_model"] = meta.get("model_reported") or model
     rec["prompt_sha256"] = PROMPT_SHA
 
