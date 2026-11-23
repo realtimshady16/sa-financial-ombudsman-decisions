@@ -1,0 +1,13 @@
+[Unit]
+Description=Check whether the SA financial ombuds have published new documents
+Documentation=https://github.com/realtimshady16/sa-financial-ombudsman-decisions
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Projects/oss/ombudsman-data
+ExecStart=/usr/bin/python3 -u scripts/watch_sitemaps.py --changed-exit
+StandardOutput=append:%h/Projects/oss/ombudsman-data/local/watch/timer.log
+StandardError=append:%h/Projects/oss/ombudsman-data/local/watch/timer.log
+# exit 3 means "something changed": systemd marks the unit failed, which is how it becomes visible
+# in `systemctl --user --failed`. A clean run exits 0 and stays invisible.
+SuccessExitStatus=0

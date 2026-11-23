@@ -73,6 +73,7 @@ topics describe the **adviser's conduct**, and forcing them into one vocabulary 
 | `report.md` | what was fetched, what was missing, what was damaged, and the spot reads |
 | `notes/` | the working record: the OCR quality gate, the outcome hand-check, the validator state |
 | `LIMITS.md` | what this cannot tell you |
+| `deploy/` | the monthly freshness-check timer, and how to read it |
 
 Not committed, by design: the source PDFs, the extracted text, and the unrestricted records. FAIS
 determinations name complainants in their text, so the text stays local and the published package
@@ -88,9 +89,11 @@ the two quality gates that changed the design (the OCR gate failed on digits, so
 from a scan; the outcome gate sampled only `upheld` cases, so the non-upheld records were checked by
 hand).
 
-Verification: `python3 scripts/check_decisions.py` (16 checks passing, 3 open and documented in
-`notes/validation-report.md`), `python3 scripts/package.py`, and `sha256sum -c SHA256SUMS` for the
-snapshots.
+Verification: `python3 scripts/check_decisions.py` (**19 of 19 checks passing**), `python3
+scripts/package.py`, and `sha256sum -c SHA256SUMS` for the snapshots. `scripts/finalise.py` is the
+idempotent post-pass — re-extraction regenerates records from model answers, so the citation
+verification, the respondent screen, the hand-verified outcomes and the citation locator all live
+there and are re-applied in one command.
 
 ## Cite
 

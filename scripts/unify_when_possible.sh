@@ -22,6 +22,12 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
     bash scripts/unify_model.sh "" "$MODEL"
     rc=$?
     echo "$(ts) unify finished with exit $rc"
+    # a re-extraction regenerates records from model answers, so the post-pass must run after it:
+    # citation drops, the respondent screen, the hand decisions and the locator all live there.
+    echo "$(ts) finalising (citation verification, respondents, hand decisions, locator)"
+    python3 scripts/finalise.py 2>&1 | sed "s/^/$(ts)   /"
+    python3 scripts/package.py 2>&1 | tail -2 | sed "s/^/$(ts)   /"
+    echo "$(ts) done — review and commit"
     exit "$rc"
   fi
   why=$(printf '%s' "$out" | python3 -c 'import json,sys

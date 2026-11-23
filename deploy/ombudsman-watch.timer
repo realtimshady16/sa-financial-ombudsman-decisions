@@ -1,0 +1,11 @@
+[Unit]
+Description=Monthly check for new determinations from the SA financial ombuds
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+RandomizedDelaySec=1h
+Unit=ombudsman-watch.service
+
+[Install]
+WantedBy=timers.target
