@@ -54,6 +54,8 @@ else
   count=$(echo "$ids" | wc -w)
   echo "$(ts) re-labelling $count record(s)"
   python3 -u -I scripts/extract_decisions.py --force --model "$MODEL" $ids 2>&1 | sed "s/^/$(ts)   /"
+  rc2=${PIPESTATUS[0]}
+  [ "$rc2" -ne 0 ] && echo "$(ts) pass 2 exited $rc2"
 fi
 
 echo "$(ts) done; models now:"
