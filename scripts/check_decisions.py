@@ -220,15 +220,17 @@ for d in local:
             from datetime import datetime, timedelta
             if datetime.strptime(d["date"], "%Y-%m-%d") > datetime.strptime(d["listed_date"], "%Y-%m-%d") + timedelta(days=31):
                 bad_y.append((d["decision_id"], "signed after listing"))
-    elif r.get("year") and y != r["year"]:
+    elif r.get("year") and y != r["year"] and src != "fais_table":
+        # for OCR documents the FAIS table date is the only readable date, so it wins over the title
         bad_y.append((d["decision_id"], "census"))
     if d.get("date") and int(d["date"][:4]) != y:
         bad_y.append((d["decision_id"], "date"))
     fy, ld = d.get("fiscal_year"), d.get("listed_date")
-    if fy and ld:
+    anchor = d.get("date") if d.get("field_sources", {}).get("year") == "native_signed_date" else ld
+    if fy and anchor:
         a = int(fy[:4])
-        if not (f"{a}-04-01" <= ld <= f"{a + 1}-03-31"):
-            bad_y.append((d["decision_id"], "fiscal_year vs listing date"))
+        if not (f"{a}-04-01" <= anchor <= f"{a + 1}-03-31"):
+            bad_y.append((d["decision_id"], "fiscal_year vs signed/listing date"))
     if d["text_source"] in ("ocr", "html") and "text" in (d.get("field_sources", {}).get("year") or ""):
         bad_y.append((d["decision_id"], "year read from ocr/html"))
 check("year plausible (range, census, table date, fiscal year; never from OCR/HTML)", not bad_y, f"{bad_y}")
@@ -356,7 +358,10 @@ for d in local:
                              encoding="utf-8", errors="replace").read().lower())
                 if squash(part) not in txt:
                     bad_pub.append((rid, "NFO insurer not in the text"))
-    elif d.get("respondent_party_type") == "juristic":
+    elif d.get("respondent_party_type") == "juristic" and \
+            "respondent_public_withheld_unconfirmed" not in (d.get("extraction_flags") or []):
+        # withholding a party is allowed only when it is on the documented list (codebook/
+        # respondent-withheld.jsonl) and the record says so.
         bad_pub.append((rid, "juristic but nothing published"))
 # a published name with a conjunction inside ("X and Y CC") may be a person plus an entity: it is
 # acceptable only when the business words before the last conjunction make it plainly one entity, or

@@ -334,6 +334,13 @@
     "null"
    ],
    "description": "Human-usable pointer into the office's own table, for documents whose direct URL would carry a name (D1)."
+  },
+  "rules_cited_loose": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Provisions whose number is present in the text but whose instrument is not named nearby: the number is verified, the attribution is inferred. Kept separate from rules_cited so the distinction is visible."
   }
  },
  "allOf": [
@@ -462,7 +469,11 @@
    "then": {
     "properties": {
      "respondent_public": {
-      "type": "string"
+      "type": [
+       "string",
+       "null"
+      ],
+      "description": "juristic parties are normally published; null only for the documented withhold list in codebook/respondent-withheld.jsonl"
      }
     }
    }

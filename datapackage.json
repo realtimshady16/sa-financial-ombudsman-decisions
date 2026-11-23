@@ -246,6 +246,11 @@
       "name": "citation_locator",
       "type": "string",
       "description": ""
+     },
+     {
+      "name": "rules_cited_loose",
+      "type": "array",
+      "description": ""
      }
     ]
    },
