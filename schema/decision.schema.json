@@ -1,464 +1,471 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ombudsman-data/schema/decision.schema.json",
-  "title": "decision — one row of decisions.jsonl / decisions.public.jsonl (schema v1, Stage 3)",
-  "description": "One record per distinct determination document (byte-identical copies are folded into duplicate_doc_ids). Structured fields only; no prose abstracts. Vocabularies: codebook/topics.md, codebook/outcomes.md. Fields listed in restricted_fields exist only in the local decisions.jsonl and are null in decisions.public.jsonl.",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "decision_id",
-    "office",
-    "division",
-    "doc_id",
-    "year",
-    "outcome",
-    "respondent_canonical",
-    "respondent_raw",
-    "rules_cited",
-    "citation_policy",
-    "citation_url",
-    "page_anchor",
-    "text_source",
-    "extraction_method",
-    "extraction_confidence",
-    "schema_version",
-    "restricted_fields",
-    "topic_defence",
-    "topic_conduct",
-    "respondent_public"
-  ],
-  "properties": {
-    "decision_id": {
-      "type": "string",
-      "pattern": "^(nfo-fd-[0-9]{1,3}|fais-d-[0-9a-f]{12})$",
-      "description": "NFO: nfo-fd-<case number>. FAIS: fais-d-<the 12 hex of the canonical file's doc_id>. Never contains a name."
-    },
-    "schema_version": {
-      "const": "decision/1"
-    },
-    "office": {
-      "enum": [
-        "NFO",
-        "FAIS"
-      ]
-    },
-    "division": {
-      "enum": [
-        "OLTI",
-        "OBS",
-        "OSTI",
-        "CO",
-        "NFO",
-        "FAIS",
-        null
-      ]
-    },
-    "kind": {
-      "enum": [
-        "determination",
-        "recommendation"
-      ]
-    },
-    "doc_id": {
-      "type": "string",
-      "pattern": "^(nfo-[0-9]+(-[0-9]+)?|fais-det-[0-9a-f]{12})$",
-      "description": "the canonical file in sources.jsonl"
-    },
-    "duplicate_doc_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "other census rows with byte-identical files (same sha256)"
-    },
-    "year": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 2003,
-      "maximum": 2026,
-      "description": "decision year: FAIS from the official table's date, NFO from the document title. Never read from OCR or HTML text"
-    },
-    "date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
-      "description": "FAIS: the signed date ('DATED AT ...') when the text is native and the date is not after the listing; otherwise the official table's date. NFO: null"
-    },
-    "listed_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
-      "description": "FAIS only: the date in the official /determinations/ table (YYYYMMDD). It is the listing date: 13 of 321 native files were signed in a different year"
-    },
-    "fiscal_year": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9]{4}/[0-9]{2}$"
-    },
-    "product_line": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "FAIS: the table's category label verbatim; NFO: 'Long-term' (all OLTI)"
-    },
-    "topic_defence": {
-      "enum": [
-        "claim_not_paid",
-        "non_disclosure",
-        "exclusion_clause",
-        "late_notification",
-        "policy_interpretation",
-        "disability_assessment",
-        "lapse_and_cancellation",
-        "service_and_compensation",
-        "beneficiary_and_cession",
-        "other",
-        null
-      ],
-      "description": "axis 1 (codebook/topics.md): the insurer's reason in a dispute over a claim or policy decision, as ruled on. null when no insurer decision is in dispute, or when there is no ruling"
-    },
-    "topic_conduct": {
-      "enum": [
-        "advice_suitability",
-        "misappropriation_fraud",
-        "unlicensed_provider",
-        "mandate_breach",
-        "fees_and_charges",
-        "intermediary_cover_failure",
-        "sale_disclosure",
-        "other",
-        null
-      ],
-      "description": "axis 2 (codebook/topics.md): what the adviser, broker or provider did wrong, as the ombud found it. null when no conduct finding is made, or when there is no ruling. One record may carry both axes"
-    },
-    "outcome": {
-      "enum": [
-        "upheld",
-        "partly_upheld",
-        "dismissed",
-        "referred",
-        "settled",
-        "amendment",
-        "no_ruling",
-        null
-      ]
-    },
-    "respondent_canonical": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "whitespace/ampersand/legal-suffix normalised. Restricted for both offices"
-    },
-    "respondent_raw": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "as listed (FAIS table) or as written (NFO text). Restricted for both offices: never in the public file"
-    },
-    "respondent_party_type": {
-      "enum": [
-        "juristic",
-        "natural",
-        "mixed",
-        "unknown",
-        null
-      ]
-    },
-    "respondent_source": {
-      "enum": [
-        "fais_table",
-        "text_anchored",
-        null
-      ]
-    },
-    "rules_cited": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^(FAIS Act|General Code|FSOS Act|FSR Act|LTIA|STIA|PPR|FAIS Ombud Rules|OLTI Rules|Prescription Act|CPA|NCA|PFA|CISCA|Companies Act|Insurance Act|MSA) (s|r)[0-9]{1,3}[A-Z]?(\\.[0-9]{1,3}[A-Z]?)*(\\([0-9a-z]{1,4}\\))*$"
-      },
-      "description": "provisions of known instruments the document cites. Each one is verified against the text: the model proposes (instrument, number, the words that cite it); a proposal is kept only if those words are verbatim in the document, carry the provision's number, and the instrument is named at or before them. A regex pass over the text is added (verbatim by construction). Sorted, not in order of citation"
-    },
-    "citation_policy": {
-      "enum": [
-        "direct",
-        "hash"
-      ]
-    },
-    "citation_url": {
-      "type": "string",
-      "format": "uri",
-      "pattern": "^https://"
-    },
-    "filename_sha256": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9a-f]{64}$"
-    },
-    "page_anchor": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 1,
-      "description": "1-based page of text/final holding the outcome statement"
-    },
-    "outcome_quote": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 400,
-      "description": "verbatim outcome sentence as the extractor anchored it (masked text). Restricted: never published"
-    },
-    "text_source": {
-      "enum": [
-        "native",
-        "ocr",
-        "html",
-        "repaired",
-        "converted",
-        "none"
-      ]
-    },
-    "extraction_method": {
-      "enum": [
-        "model+rules",
-        "rules",
-        "none"
-      ]
-    },
-    "extraction_model": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "extraction_confidence": {
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
-    },
-    "extraction_flags": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^[a-z_]+$"
-      }
-    },
-    "field_sources": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
-    "extractor_version": {
-      "type": "string"
-    },
-    "prompt_sha256": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9a-f]{64}$"
-    },
-    "extracted_at": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "restricted_fields": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "allOf": [
-        {
-          "contains": {
-            "const": "respondent_raw"
-          }
-        },
-        {
-          "contains": {
-            "const": "respondent_canonical"
-          }
-        },
-        {
-          "contains": {
-            "const": "outcome_quote"
-          }
-        }
-      ],
-      "description": "fields nulled in decisions.public.jsonl. Always respondent_raw, respondent_canonical and outcome_quote, for both offices: only respondent_public is published"
-    },
-    "respondent_public": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "the respondent name(s) that may be published: entities only (scripts/respondents.py). null when the respondent is a natural person or the string cannot be shown to be an entity. A mixed string ('X CC and Jan Smith') carries the entity part only. NFO: the insurer"
-    },
-    "rules_proposed": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 0,
-      "description": "how many provisions the model proposed (null when there was no model call)"
-    },
-    "rules_dropped": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 0,
-      "description": "how many of those proposals failed verification and were dropped. rules_proposed - rules_dropped, less duplicates, were kept"
-    }
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "ombudsman-data/schema/decision.schema.json",
+ "title": "decision — one row of decisions.jsonl / decisions.public.jsonl (schema v1, Stage 3)",
+ "description": "One record per distinct determination document (byte-identical copies are folded into duplicate_doc_ids). Structured fields only; no prose abstracts. Vocabularies: codebook/topics.md, codebook/outcomes.md. Fields listed in restricted_fields exist only in the local decisions.jsonl and are null in decisions.public.jsonl.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "decision_id",
+  "office",
+  "division",
+  "doc_id",
+  "year",
+  "outcome",
+  "respondent_canonical",
+  "respondent_raw",
+  "rules_cited",
+  "citation_policy",
+  "citation_url",
+  "page_anchor",
+  "text_source",
+  "extraction_method",
+  "extraction_confidence",
+  "schema_version",
+  "restricted_fields",
+  "topic_defence",
+  "topic_conduct",
+  "respondent_public"
+ ],
+ "properties": {
+  "decision_id": {
+   "type": "string",
+   "pattern": "^(nfo-fd-[0-9]{1,3}|fais-d-[0-9a-f]{12})$",
+   "description": "NFO: nfo-fd-<case number>. FAIS: fais-d-<the 12 hex of the canonical file's doc_id>. Never contains a name."
   },
-  "allOf": [
+  "schema_version": {
+   "const": "decision/1"
+  },
+  "office": {
+   "enum": [
+    "NFO",
+    "FAIS"
+   ]
+  },
+  "division": {
+   "enum": [
+    "OLTI",
+    "OBS",
+    "OSTI",
+    "CO",
+    "NFO",
+    "FAIS",
+    null
+   ]
+  },
+  "kind": {
+   "enum": [
+    "determination",
+    "recommendation"
+   ]
+  },
+  "doc_id": {
+   "type": "string",
+   "pattern": "^(nfo-[0-9]+(-[0-9]+)?|fais-det-[0-9a-f]{12})$",
+   "description": "the canonical file in sources.jsonl"
+  },
+  "duplicate_doc_ids": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "other census rows with byte-identical files (same sha256)"
+  },
+  "year": {
+   "type": [
+    "integer",
+    "null"
+   ],
+   "minimum": 2003,
+   "maximum": 2026,
+   "description": "decision year: FAIS from the official table's date, NFO from the document title. Never read from OCR or HTML text"
+  },
+  "date": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+   "description": "FAIS: the signed date ('DATED AT ...') when the text is native and the date is not after the listing; otherwise the official table's date. NFO: null"
+  },
+  "listed_date": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+   "description": "FAIS only: the date in the official /determinations/ table (YYYYMMDD). It is the listing date: 13 of 321 native files were signed in a different year"
+  },
+  "fiscal_year": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9]{4}/[0-9]{2}$"
+  },
+  "product_line": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "FAIS: the table's category label verbatim; NFO: 'Long-term' (all OLTI)"
+  },
+  "topic_defence": {
+   "enum": [
+    "claim_not_paid",
+    "non_disclosure",
+    "exclusion_clause",
+    "late_notification",
+    "policy_interpretation",
+    "disability_assessment",
+    "lapse_and_cancellation",
+    "service_and_compensation",
+    "beneficiary_and_cession",
+    "other",
+    null
+   ],
+   "description": "axis 1 (codebook/topics.md): the insurer's reason in a dispute over a claim or policy decision, as ruled on. null when no insurer decision is in dispute, or when there is no ruling"
+  },
+  "topic_conduct": {
+   "enum": [
+    "advice_suitability",
+    "misappropriation_fraud",
+    "unlicensed_provider",
+    "mandate_breach",
+    "fees_and_charges",
+    "intermediary_cover_failure",
+    "sale_disclosure",
+    "other",
+    null
+   ],
+   "description": "axis 2 (codebook/topics.md): what the adviser, broker or provider did wrong, as the ombud found it. null when no conduct finding is made, or when there is no ruling. One record may carry both axes"
+  },
+  "outcome": {
+   "enum": [
+    "upheld",
+    "partly_upheld",
+    "dismissed",
+    "referred",
+    "settled",
+    "amendment",
+    "no_ruling",
+    null
+   ]
+  },
+  "respondent_canonical": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "whitespace/ampersand/legal-suffix normalised. Restricted for both offices"
+  },
+  "respondent_raw": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "as listed (FAIS table) or as written (NFO text). Restricted for both offices: never in the public file"
+  },
+  "respondent_party_type": {
+   "enum": [
+    "juristic",
+    "natural",
+    "mixed",
+    "unknown",
+    null
+   ]
+  },
+  "respondent_source": {
+   "enum": [
+    "fais_table",
+    "text_anchored",
+    null
+   ]
+  },
+  "rules_cited": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "^(FAIS Act|General Code|FSOS Act|FSR Act|LTIA|STIA|PPR|FAIS Ombud Rules|OLTI Rules|Prescription Act|CPA|NCA|PFA|CISCA|Companies Act|Insurance Act|MSA) (s|r)[0-9]{1,3}[A-Z]?(\\.[0-9]{1,3}[A-Z]?)*(\\([0-9a-z]{1,4}\\))*$"
+   },
+   "description": "provisions of known instruments the document cites. Each one is verified against the text: the model proposes (instrument, number, the words that cite it); a proposal is kept only if those words are verbatim in the document, carry the provision's number, and the instrument is named at or before them. A regex pass over the text is added (verbatim by construction). Sorted, not in order of citation"
+  },
+  "citation_policy": {
+   "enum": [
+    "direct",
+    "hash"
+   ]
+  },
+  "citation_url": {
+   "type": "string",
+   "format": "uri",
+   "pattern": "^https://"
+  },
+  "filename_sha256": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9a-f]{64}$"
+  },
+  "page_anchor": {
+   "type": [
+    "integer",
+    "null"
+   ],
+   "minimum": 1,
+   "description": "1-based page of text/final holding the outcome statement"
+  },
+  "outcome_quote": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "maxLength": 400,
+   "description": "verbatim outcome sentence as the extractor anchored it (masked text). Restricted: never published"
+  },
+  "text_source": {
+   "enum": [
+    "native",
+    "ocr",
+    "html",
+    "repaired",
+    "converted",
+    "none"
+   ]
+  },
+  "extraction_method": {
+   "enum": [
+    "model+rules",
+    "rules",
+    "none"
+   ]
+  },
+  "extraction_model": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "extraction_confidence": {
+   "enum": [
+    "high",
+    "medium",
+    "low"
+   ]
+  },
+  "extraction_flags": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "^[a-z_]+$"
+   }
+  },
+  "field_sources": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "extractor_version": {
+   "type": "string"
+  },
+  "prompt_sha256": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9a-f]{64}$"
+  },
+  "extracted_at": {
+   "type": "string",
+   "format": "date-time"
+  },
+  "restricted_fields": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "allOf": [
     {
-      "if": {
-        "properties": {
-          "office": {
-            "const": "FAIS"
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "filename_sha256"
-        ],
-        "properties": {
-          "decision_id": {
-            "pattern": "^fais-d-"
-          }
-        }
-      }
+     "contains": {
+      "const": "respondent_raw"
+     }
     },
     {
-      "if": {
-        "properties": {
-          "office": {
-            "const": "FAIS"
-          },
-          "citation_policy": {
-            "const": "hash"
-          }
-        },
-        "required": [
-          "office",
-          "citation_policy"
-        ]
-      },
-      "then": {
-        "properties": {
-          "citation_url": {
-            "const": "https://www.faisombud.co.za/determinations/"
-          }
-        }
-      }
+     "contains": {
+      "const": "respondent_canonical"
+     }
     },
     {
-      "if": {
-        "properties": {
-          "office": {
-            "const": "NFO"
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "decision_id": {
-            "pattern": "^nfo-fd-"
-          },
-          "citation_policy": {
-            "const": "direct"
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "text_source": {
-            "enum": [
-              "ocr",
-              "html"
-            ]
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "field_sources": {
-            "not": {
-              "properties": {
-                "year": {
-                  "pattern": "text"
-                }
-              },
-              "required": [
-                "year"
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "respondent_party_type": {
-            "enum": [
-              "natural",
-              "unknown"
-            ]
-          }
-        },
-        "required": [
-          "respondent_party_type"
-        ]
-      },
-      "then": {
-        "properties": {
-          "respondent_public": {
-            "type": "null"
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "respondent_party_type": {
-            "const": "juristic"
-          }
-        },
-        "required": [
-          "respondent_party_type"
-        ]
-      },
-      "then": {
-        "properties": {
-          "respondent_public": {
-            "type": "string"
-          }
-        }
-      }
+     "contains": {
+      "const": "outcome_quote"
+     }
     }
-  ]
+   ],
+   "description": "fields nulled in decisions.public.jsonl. Always respondent_raw, respondent_canonical and outcome_quote, for both offices: only respondent_public is published"
+  },
+  "respondent_public": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "the respondent name(s) that may be published: entities only (scripts/respondents.py). null when the respondent is a natural person or the string cannot be shown to be an entity. A mixed string ('X CC and Jan Smith') carries the entity part only. NFO: the insurer"
+  },
+  "rules_proposed": {
+   "type": [
+    "integer",
+    "null"
+   ],
+   "minimum": 0,
+   "description": "how many provisions the model proposed (null when there was no model call)"
+  },
+  "rules_dropped": {
+   "type": [
+    "integer",
+    "null"
+   ],
+   "minimum": 0,
+   "description": "how many of those proposals failed verification and were dropped. rules_proposed - rules_dropped, less duplicates, were kept"
+  },
+  "citation_locator": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "Human-usable pointer into the office's own table, for documents whose direct URL would carry a name (D1)."
+  }
+ },
+ "allOf": [
+  {
+   "if": {
+    "properties": {
+     "office": {
+      "const": "FAIS"
+     }
+    }
+   },
+   "then": {
+    "required": [
+     "filename_sha256"
+    ],
+    "properties": {
+     "decision_id": {
+      "pattern": "^fais-d-"
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "office": {
+      "const": "FAIS"
+     },
+     "citation_policy": {
+      "const": "hash"
+     }
+    },
+    "required": [
+     "office",
+     "citation_policy"
+    ]
+   },
+   "then": {
+    "properties": {
+     "citation_url": {
+      "const": "https://www.faisombud.co.za/determinations/"
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "office": {
+      "const": "NFO"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "decision_id": {
+      "pattern": "^nfo-fd-"
+     },
+     "citation_policy": {
+      "const": "direct"
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "text_source": {
+      "enum": [
+       "ocr",
+       "html"
+      ]
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "field_sources": {
+      "not": {
+       "properties": {
+        "year": {
+         "pattern": "text"
+        }
+       },
+       "required": [
+        "year"
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "respondent_party_type": {
+      "enum": [
+       "natural",
+       "unknown"
+      ]
+     }
+    },
+    "required": [
+     "respondent_party_type"
+    ]
+   },
+   "then": {
+    "properties": {
+     "respondent_public": {
+      "type": "null"
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "respondent_party_type": {
+      "const": "juristic"
+     }
+    },
+    "required": [
+     "respondent_party_type"
+    ]
+   },
+   "then": {
+    "properties": {
+     "respondent_public": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ ]
 }

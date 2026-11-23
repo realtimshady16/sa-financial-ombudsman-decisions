@@ -1,0 +1,675 @@
+{
+ "profile": "tabular-data-package",
+ "name": "sa-financial-ombudsman-decisions",
+ "title": "South African financial ombudsman determinations, 2005–2025",
+ "description": "A name-free index of every determination published by the National Financial Ombud Scheme (NFO) and the FAIS Ombud: outcome, topic on two axes, statutory provisions verified verbatim, and a link to the ombud’s own publication. The determinations themselves remain the offices’ documents; this package indexes and cites them and reproduces none of their text.",
+ "version": "1.0.0",
+ "created": "2026-11-23",
+ "keywords": [
+  "south africa",
+  "ombudsman",
+  "financial services",
+  "complaints",
+  "fais",
+  "nfo",
+  "open data"
+ ],
+ "licenses": [
+  {
+   "name": "CC-BY-4.0",
+   "title": "Creative Commons Attribution 4.0 International",
+   "path": "LICENSE-DATA.md"
+  },
+  {
+   "name": "MIT",
+   "title": "MIT License",
+   "path": "LICENSE"
+  }
+ ],
+ "contributors": [
+  {
+   "title": "Tim",
+   "role": "author"
+  }
+ ],
+ "sources": [
+  {
+   "title": "National Financial Ombud Scheme (NFO)",
+   "path": "https://nfosa.co.za/documents-archive/"
+  },
+  {
+   "title": "FAIS Ombud determinations",
+   "path": "https://www.faisombud.co.za/determinations/"
+  }
+ ],
+ "resources": [
+  {
+   "name": "decisions",
+   "path": "decisions.public.jsonl",
+   "profile": "tabular-data-resource",
+   "format": "jsonl",
+   "mediatype": "application/x-ndjson",
+   "count": 545,
+   "schema": {
+    "fields": [
+     {
+      "name": "decision_id",
+      "type": "string",
+      "description": "Stable id: office prefix + document hash or NFO case number"
+     },
+     {
+      "name": "schema_version",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "office",
+      "type": "string",
+      "description": "NFO or FAIS"
+     },
+     {
+      "name": "division",
+      "type": "string",
+      "description": "OLTI / OBS / OSTI / Credit Ombud / FAIS"
+     },
+     {
+      "name": "kind",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "doc_id",
+      "type": "string",
+      "description": "Join key into sources and text_manifest"
+     },
+     {
+      "name": "duplicate_doc_ids",
+      "type": "array",
+      "description": "Other census docs that are byte-identical copies of this decision"
+     },
+     {
+      "name": "date",
+      "type": "string",
+      "description": "Date the decision was signed, ISO 8601"
+     },
+     {
+      "name": "year",
+      "type": "integer",
+      "description": "Year the decision was signed (or, absent a signed date, the publication year)"
+     },
+     {
+      "name": "fiscal_year",
+      "type": "string",
+      "description": "South African fiscal year the decision falls in (April–March)"
+     },
+     {
+      "name": "product_line",
+      "type": "string",
+      "description": "Long-term / short-term / banking / credit / advice, as the office classifies it"
+     },
+     {
+      "name": "respondent_raw",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "respondent_canonical",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "respondent_public",
+      "type": "string",
+      "description": "Entity respondent, published only when the party is a company. Null otherwise"
+     },
+     {
+      "name": "respondent_party_type",
+      "type": "string",
+      "description": "juristic / natural / unknown"
+     },
+     {
+      "name": "respondent_source",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "citation_policy",
+      "type": "string",
+      "description": "direct where the filename carries no personal name; hash where it does"
+     },
+     {
+      "name": "citation_url",
+      "type": "string",
+      "description": "Canonical link to the ombud’s own publication"
+     },
+     {
+      "name": "filename_sha256",
+      "type": "string",
+      "description": "Hash of the source filename, used to identify hash-policy documents"
+     },
+     {
+      "name": "text_source",
+      "type": "string",
+      "description": "native / ocr / html / converted / repaired / none — how the text was produced"
+     },
+     {
+      "name": "restricted_fields",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "listed_date",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "extraction_model",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "prompt_sha256",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "outcome",
+      "type": "string",
+      "description": "upheld / partly_upheld / dismissed / settled / referred / amendment / no_ruling"
+     },
+     {
+      "name": "topic_defence",
+      "type": "string",
+      "description": "The insurer-side issue (10 terms), for defence-shaped complaints"
+     },
+     {
+      "name": "topic_conduct",
+      "type": "string",
+      "description": "The adviser-conduct issue (8 terms), for conduct-shaped complaints"
+     },
+     {
+      "name": "rules_cited",
+      "type": "array",
+      "description": "Statutory provisions found verbatim in the decision text (never model-inferred)"
+     },
+     {
+      "name": "rules_proposed",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "rules_dropped",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "outcome_quote",
+      "type": "string",
+      "description": "Verbatim words from the ruling (local file only)"
+     },
+     {
+      "name": "page_anchor",
+      "type": "integer",
+      "description": "Page of the outcome quote in the source PDF"
+     },
+     {
+      "name": "extraction_method",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "extraction_confidence",
+      "type": "string",
+      "description": "high / medium / low as assessed at extraction"
+     },
+     {
+      "name": "extraction_flags",
+      "type": "array",
+      "description": "Machine-readable notes on how the record was produced and revised"
+     },
+     {
+      "name": "field_sources",
+      "type": "object",
+      "description": ""
+     },
+     {
+      "name": "extractor_version",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "extracted_at",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "citation_locator",
+      "type": "string",
+      "description": ""
+     }
+    ]
+   },
+   "description": "One record per determination file. Name-free: complainant names are never present."
+  },
+  {
+   "name": "decisions_csv",
+   "path": "decisions.public.csv",
+   "profile": "tabular-data-resource",
+   "format": "csv",
+   "mediatype": "text/csv",
+   "count": 545,
+   "description": "The same records for spreadsheet use; list values are pipe-joined."
+  },
+  {
+   "name": "documents",
+   "path": "sources.public.jsonl",
+   "profile": "tabular-data-resource",
+   "format": "jsonl",
+   "mediatype": "application/x-ndjson",
+   "count": 1004,
+   "schema": {
+    "fields": [
+     {
+      "name": "doc_id",
+      "type": "string",
+      "description": "Join key into sources and text_manifest"
+     },
+     {
+      "name": "url",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "fetch_url",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "sha256",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "fetched_at",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "bytes",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "office",
+      "type": "string",
+      "description": "NFO or FAIS"
+     },
+     {
+      "name": "division",
+      "type": "string",
+      "description": "OLTI / OBS / OSTI / Credit Ombud / FAIS"
+     },
+     {
+      "name": "doc_type",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "period_covered",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "pages",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "producer",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "fonts_have_tounicode",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "has_text_layer",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "year",
+      "type": "integer",
+      "description": "Year the decision was signed (or, absent a signed date, the publication year)"
+     },
+     {
+      "name": "fiscal_year",
+      "type": "string",
+      "description": "South African fiscal year the decision falls in (April–March)"
+     },
+     {
+      "name": "title",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "language",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "category",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "tags",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "updated",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "wpdm_id",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "package_url",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "package_file_index",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "doc_pages",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "in_wpdmpro_sitemap",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "source_filename",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "served_filename",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "filename_sha256",
+      "type": "string",
+      "description": "Hash of the source filename, used to identify hash-policy documents"
+     },
+     {
+      "name": "listing_row_indices",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "link_labels",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "date_raw_ok",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "snapshot",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "text_raw",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "content_type",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "last_modified",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "creator",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "pdf_created",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "pdf_version",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "encrypted",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "fonts",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "fonts_missing_tounicode",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "cmap_hole_count",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "cmap_holes",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "words",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "words_per_page",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "common_word_rate",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "tion_count",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "suspect_tokens",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "soft_hyphens",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "camel_tokens",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "ligature_chars",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "replacement_chars",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "pdf_readable",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "html_title",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "html_modified",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "suspect",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "suspect_reasons",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "restricted_fields",
+      "type": "array",
+      "description": ""
+     },
+     {
+      "name": "pdfinfo_error",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "pdffonts_error",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "cmap_error",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "pdftotext_error",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "needs_ocr",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "damaged",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "unreadable",
+      "type": "boolean",
+      "description": ""
+     },
+     {
+      "name": "damage_reasons",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "category_source",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "note",
+      "type": "string",
+      "description": ""
+     }
+    ]
+   },
+   "description": "The census: one row per published file, with hashes and extraction diagnostics."
+  },
+  {
+   "name": "text_manifest",
+   "path": "text_manifest.jsonl",
+   "profile": "tabular-data-resource",
+   "format": "jsonl",
+   "mediatype": "application/x-ndjson",
+   "count": 1004,
+   "schema": {
+    "fields": [
+     {
+      "name": "doc_id",
+      "type": "string",
+      "description": "Join key into sources and text_manifest"
+     },
+     {
+      "name": "text_source",
+      "type": "string",
+      "description": "native / ocr / html / converted / repaired / none — how the text was produced"
+     },
+     {
+      "name": "pages",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "words",
+      "type": "integer",
+      "description": ""
+     },
+     {
+      "name": "common_word_rate",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "ocr_mean_confidence",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "repair_fonts",
+      "type": "string",
+      "description": ""
+     },
+     {
+      "name": "notes",
+      "type": "string",
+      "description": ""
+     }
+    ]
+   },
+   "description": "How each document’s text was produced, and its quality."
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "South African financial ombudsman determinations, 2005-2025"
+abstract: >-
+  A name-free index of every determination published by the National Financial Ombud Scheme (NFO)
+  and the FAIS Ombud: outcome, topic on two independent axes, statutory provisions verified verbatim,
+  and a canonical link to the ombud's own publication. The determinations remain the offices'
+  documents; this dataset indexes and cites them.
+authors:
+  - given-names: Tim
+    affiliation: Independent
+version: 1.0.0
+date-released: 2026-11-23
+license: CC-BY-4.0
+keywords:
+  - South Africa
+  - ombudsman
+  - financial services
+  - complaints
+  - open data
+  - FAIS
+  - NFO
+url: "https://github.com/realtimshady16/sa-financial-ombudsman-decisions"
+repository-code: "https://github.com/realtimshady16/sa-financial-ombudsman-decisions"
+references:
+  - type: data
+    title: "National Financial Ombud Scheme — documents archive"
+    url: "https://nfosa.co.za/documents-archive/"
+  - type: data
+    title: "FAIS Ombud — determinations"
+    url: "https://www.faisombud.co.za/determinations/"

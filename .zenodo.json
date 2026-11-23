@@ -1,0 +1,34 @@
+{
+  "title": "South African financial ombudsman determinations, 2005-2025",
+  "description": "A name-free index of every determination published by the National Financial Ombud Scheme (NFO) and the FAIS Ombud: outcome, topic on two independent axes, statutory provisions verified verbatim, and a canonical link to the ombud's own publication.",
+  "upload_type": "dataset",
+  "license": "cc-by-4.0",
+  "version": "1.0.0",
+  "language": "eng",
+  "keywords": [
+    "South Africa",
+    "ombudsman",
+    "financial services",
+    "complaints",
+    "open data",
+    "FAIS",
+    "NFO"
+  ],
+  "creators": [
+    {
+      "name": "Tim"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://nfosa.co.za/documents-archive/",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://www.faisombud.co.za/determinations/",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ]
+}
