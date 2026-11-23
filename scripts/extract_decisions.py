@@ -721,6 +721,10 @@ def read_text(doc_id):
         return f.read()
 
 
+class Deferred(Exception):
+    """No usable model answer for this document. Not fatal: skip it, write nothing, retry next pass."""
+
+
 def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False, reprocess=False):
     r = census_by_id[doc_id]
     did, canon_id, dups = mapping[doc_id]
@@ -872,9 +876,7 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
             os.remove(reply_path)
         except OSError:
             pass
-        raise SystemExit(f"extraction deferred: no model answer for {canon_id} after "
-                         f"{meta.get('attempts')} attempt(s): {meta['error']}\n"
-                         f"  no record written; the run resumes and retries this document")
+        raise Deferred(f"no model answer after {meta.get('attempts')} attempt(s): {meta['error']}")
     if not isinstance(ans, dict):
         flags.add("model_invalid")
         ans = {}
@@ -1105,7 +1107,7 @@ def main(argv):
     validator = jsonschema.Draft202012Validator(json.load(open(SCHEMA)),
                                                 format_checker=jsonschema.FormatChecker())
     have = existing()
-    secs, failed = [], []
+    secs, failed, skipped = [], [], []
     for n, doc_id in enumerate(todo, 1):
         did = mapping[doc_id][0]
         if did in have and not force:
@@ -1113,7 +1115,14 @@ def main(argv):
                           "at": datetime.now(timezone.utc).isoformat()})
             print(f"[{n}/{len(todo)}] {doc_id} -> {did}: record exists, skipped")
             continue
-        out = extract(doc_id, by_id, manifest, rows, mapping, model, dry_run=dry, reprocess=reproc)
+        try:
+            out = extract(doc_id, by_id, manifest, rows, mapping, model, dry_run=dry, reprocess=reproc)
+        except Deferred as e:
+            skipped.append(did)
+            log_progress({"doc_id": doc_id, "decision_id": did, "status": "deferred",
+                          "error": str(e)[:300], "at": datetime.now(timezone.utc).isoformat()})
+            print(f"[{n}/{len(todo)}] {doc_id} -> {did}: DEFERRED, no record written ({e})")
+            continue
         if out is None:
             print(f"[{n}/{len(todo)}] {doc_id}: dry run, masked input written to local/extract/")
             continue
@@ -1145,6 +1154,8 @@ def main(argv):
     n_pub = publish()
     if failed:
         print(f"SCHEMA-INVALID, not written ({len(failed)}): {failed}")
+    if skipped:
+        print(f"DEFERRED, no record written ({len(skipped)}) — rerun to retry: {skipped}")
     if secs:
         print(f"extracted {len(secs)}; median {statistics.median(secs):.1f}s/doc; "
               f"decisions.public.jsonl: {n_pub} records")
