@@ -146,29 +146,33 @@ page's and is not stable.
 | `office` / `division` / `kind` | enum | from the census. `kind` is always `determination` in v1 (recommendations are a separate set of 24 files) |
 | `year`, `date`, `fiscal_year` | int, date, `YYYY/YY` | FAIS: from the official table's date. NFO: from the title. A year is read from text only if the census has none **and** the text is native. **Never from OCR or HTML** |
 | `product_line` | string | FAIS table `category` verbatim. NFO: `Long-term` |
-| `topic`, `topics_secondary` | enum, enum[≤2] | codebook/topics.md. The issue the decision turns on. Model-assigned |
+| `topic_defence` | enum\|null | **axis 1** (codebook/topics.md): what the insurer's side said, in a dispute over a claim or a policy decision, and what the ombud rules on. Its own 10-term vocabulary. `null` when no insurer decision is in dispute. Model-assigned |
+| `topic_conduct` | enum\|null | **axis 2** (codebook/topics.md): what the adviser, broker or provider did wrong, as the ombud found it. Its own 8-term vocabulary. `null` when no conduct finding is made. Model-assigned. A record may carry both axes, one, or (for a non-ruling) neither. **v2 replaces v1's single `topic` and `topics_secondary`** |
 | `outcome` | enum\|null | `upheld` · `partly_upheld` · `dismissed` · `referred` · `settled` · `amendment` · `no_ruling` (codebook/outcomes.md). Model-assigned and cross-checked by a rule. `null` only when there is no usable text |
 | `page_anchor` | int\|null | page of `text/final` on which the model's verbatim outcome quote was **found**. A quote that cannot be found gives `null` and confidence `low` |
 | `outcome_quote` | string\|null | **restricted**: the anchored sentence, from masked text. Kept locally for audit, never published |
-| `respondent_raw`, `respondent_canonical` | string\|null | FAIS: the table's respondent, **restricted in v1** (see below). NFO: the insurer as written, kept only if the string occurs in the text |
-| `respondent_party_type`, `respondent_source` | enum | `juristic` · `natural` · `mixed` · `unknown`. `fais_table` · `text_anchored` |
-| `rules_cited` | string[] | regex over the text, never the model. Normalised to `<instrument> s<section>(<sub>)` or `<instrument> r<rule>`. Instruments: FAIS Act, General Code, FSOS Act, FSR Act, LTIA, STIA, PPR, FAIS Ombud Rules, OLTI Rules, and a few others. Procedural provisions are included (every FAIS caption cites FAIS Act s28(1)). FAIS Act or General Code section numbers outside the real range are dropped as OCR noise |
+| `respondent_raw`, `respondent_canonical` | string\|null | FAIS: the table's respondent. NFO: the insurer as written, kept only if the string occurs in the text. **Restricted for both offices: local only, never in the public file** |
+| `respondent_public` | string\|null | **the only respondent field that is published.** The name of the respondent when it is an *entity* (Pty Ltd, CC, Ltd, Insurers, Bank, Brokers, Administrators …), `null` when it is a natural person (a sole adviser is a person) or cannot be shown to be an entity. `X CC and Jan Smith` carries `X CC` only; `Jan Smith t/a Z` carries nothing. Computed by `scripts/respondents.py`; the validator re-checks it independently |
+| `respondent_party_type`, `respondent_source` | enum | `juristic` (every party an entity) · `mixed` (some) · `natural` (none, and none looks like a business) · `unknown` (no entity, but a business-looking name we refused to publish). `fais_table` · `text_anchored` |
+| `rules_cited` | string[] | normalised to `<instrument> s<section>(<sub>)` or `<instrument> r<rule>`. **The model proposes, the text verifies:** the model lists provisions with the words that cite each; a proposal is kept only if those words occur verbatim in the document, contain the provision's number and every sub-part, and the instrument is named in those words or earlier in the document. A regex pass over the text is merged in (verbatim by construction). Anything the text cannot show is dropped and counted. Sorted, not in order of citation. Ranges list their two ends only |
+| `rules_proposed`, `rules_dropped` | int\|null | how many provisions the model proposed and how many failed verification. Recall per office is in `codebook/rules.md` |
 | `citation_policy`, `citation_url`, `filename_sha256` | | D1, below. Recomputed independently by the validator |
 | `text_source` | enum | copied from `text_manifest.jsonl`; the validator checks it |
-| `extraction_method`, `extraction_model`, `prompt_sha256`, `extractor_version` | | `model+rules` · `rules` · `none`. The model is `opencode-go/deepseek-v4.1-flash` through `pi -p` |
+| `extraction_method`, `extraction_model`, `prompt_sha256`, `extractor_version` | | `model+rules` · `rules` · `none`. The model is recorded per record (`anthropic/claude-sonnet-5-5` through `pi -p` for the v2 run) |
 | `extraction_confidence`, `extraction_flags` | enum, string[] | `low` if the model and the rule disagree, the quote cannot be anchored, or the model reply is invalid or off-vocabulary. `medium` if the rule is silent, the text is OCR, the model is unsure, or a page is an image not yet OCR'd. Otherwise `high` |
 | `field_sources` | object | which mechanism set each field |
-| `restricted_fields` | string[] | nulled in `decisions.public.jsonl`. FAIS: `respondent_raw`, `respondent_canonical`, `outcome_quote`. NFO: `outcome_quote` |
+| `restricted_fields` | string[] | nulled in `decisions.public.jsonl`: always `respondent_raw`, `respondent_canonical`, `outcome_quote`, for both offices |
 
 **No prose abstracts and no amounts in v1.** An abstract is interpretation. An amount from an
 OCR'd determination is exactly the digit risk the Stage 2 gate measured.
 
-**FAIS respondents are unpublished in v1, deliberately.** The Stage 1/2 privacy gate
-(`check_text.py`) treats *every* FAIS respondent string as restricted. Many respondents are sole
-traders, and "juristic" names can carry a person's name ("X t/a Y", "Z Brokers CC"). The
-participant rule below ("publish only where `party_type = juristic`") needs a party-type register
-that has been checked by hand, which is Stage 6. Until then `respondent_party_type` is published,
-and the name is not.
+**Respondents: entities are published, natural persons are withheld (decided for v2).** The FAIS table names
+the parties; many respondents are sole advisers, and a sole adviser is a person. `respondent_public`
+carries a name only when the party is an entity, and the rule errs towards withholding. The committed
+file never carries `respondent_raw`. Residual risk, stated: a business named after its owner
+("Surname Brokers") can pass the screen; Stage 6's firm register is where that closes. Complainant names,
+and every respondent string that is not published, remain restricted (`check_text.py` and
+`check_decisions.py` treat them as needles; they exempt only the strings published as `respondent_public`).
 
 **Text sent to the model is masked first** (`scripts/redact.py`): party names from the
 restricted table, honorific + name, capitalised words never seen in lower case in the corpus, and

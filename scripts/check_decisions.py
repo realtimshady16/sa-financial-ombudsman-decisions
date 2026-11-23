@@ -21,6 +21,13 @@ Checks, each printed PASS/FAIL (exit 1 on any FAIL):
   7. the public file is exactly the local file with the restricted fields nulled
   8. every document the progress log calls "done" has its record on disk (no silent no-ops)
   9. the committed tree (tracked + untracked-not-ignored files) contains no restricted string
+ 10. every rules_cited entry is found in the document text, by a check written here (no code shared
+     with the extractor): the instrument is named in the text, and the provision's number occurs
+     right after a section/rule/clause keyword with each sub-part following it
+ 11. respondent_public: null for every natural/unknown party; where set, it is an entity-looking
+     name that occurs in the FAIS table's respondent string (or, for NFO, in the text); the public
+     file never carries respondent_raw or respondent_canonical
+ 12. topic axes: values from their own vocabularies; both null exactly when there is no ruling
 
 Then prints counts by office / topic / outcome / confidence.
 """
@@ -133,10 +140,24 @@ check("citation_policy / citation_url / filename_sha256 follow D1 and the census
 low = lowercase_vocab()
 needles = set()
 name_tokens = set()
+
+
+def squash(x):
+    return re.sub(r"\s+", " ", x.lower().replace("&", "and")).strip(" ,.;")
+
+
+# respondent names that are published on purpose (entities): not restricted strings. Everything
+# else in the respondent column, and every complainant string, still is.
+published = {squash(d["respondent_public"]) for d in public if d.get("respondent_public")}
+published |= {squash(p) for d in public for p in (d.get("respondent_public") or "").split(" | ") if p}
+n_exempt = 0
 for r in rows.values():
     for k in ("complainant", "respondent"):
         v = (r.get(k) or "").strip()
         if len(v) >= 6:
+            if k == "respondent" and squash(v) in published:
+                n_exempt += 1
+                continue
             needles.add(v.lower())
     for t in re.findall(r"[^\W\d_]+", r.get("complainant") or ""):
         if len(t) >= 4 and low.get(t.lower(), 0) < 50:
@@ -167,7 +188,8 @@ def leaks(rec, skip=()):
         for s in strings(v):
             sl = s.lower()
             hits += sum(1 for n in needles if n in sl)
-            hits += sum(1 for t in re.findall(r"[^\W\d_]+", sl) if t in name_tokens)
+            if k != "respondent_public":     # an entity's own name may hold a first name; it comes from the respondent column, not the complainants
+                hits += sum(1 for t in re.findall(r"[^\W\d_]+", sl) if t in name_tokens)
     return hits
 
 
@@ -236,6 +258,7 @@ tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, tex
 untracked = subprocess.run(["git", "ls-files", "--others", "--exclude-standard"], cwd=ROOT,
                            capture_output=True, text=True).stdout.split()
 tree_hits = {}
+IDRE = re.compile(r"(?<![0-9A-Za-z=/_-])\d{6}\s?\d{4}\s?\d{2}\s?\d(?![0-9A-Za-z])")   # not inside a hex hash
 for t in sorted(set(tracked + untracked)):
     p = os.path.join(ROOT, t)
     if not os.path.isfile(p):
@@ -245,13 +268,125 @@ for t in sorted(set(tracked + untracked)):
     n = sum(1 for s in needles if s in hay)
     if n:
         tree_hits[t] = n      # file and count only, never the string
-check("committed tree carries no restricted string", not tree_hits,
-      f"{len(needles)} strings x {len(set(tracked + untracked))} files; hits {tree_hits}")
+    if t.endswith(".md") or t.endswith(".json") or t.endswith(".jsonl") or t.endswith(".py"):
+        for m in IDRE.finditer(hay):          # SA identity numbers: 13 digits, possibly spaced
+            if re.fullmatch(r"\d{13}", re.sub(r"\s", "", m.group(0))):
+                tree_hits[t + " [id-number-shaped]"] = tree_hits.get(t + " [id-number-shaped]", 0) + 1
+check("committed tree carries no restricted string and no ID-number-shaped digit run", not tree_hits,
+      f"{len(needles)} strings ({n_exempt} respondent strings exempt as published entities) x "
+      f"{len(set(tracked + untracked))} files; hits {tree_hits}")
+
+# ---- 10. rules_cited verified against the text, independently
+ALIAS = {
+    "General Code": r"general code|\bthe code\b|\bcode\b", "FAIS Act": r"fais act|intermediary services act|\bthe act\b",
+    "FSOS Act": r"fsos act|ombud schemes act", "FSR Act": r"fsr act|fsra\b|financial sector regulation",
+    "LTIA": r"ltia\b|long[- ]term insurance act", "STIA": r"stia\b|short[- ]term insurance act",
+    "PPR": r"\bppr\b|policyholder protection", "FAIS Ombud Rules": r"rules on proceedings|\brules\b",
+    "OLTI Rules": r"\brules\b|\bolti\b", "Prescription Act": r"prescription act", "CPA": r"consumer protection act|\bcpa\b",
+    "NCA": r"national credit act|\bnca\b", "PFA": r"pension funds act", "CISCA": r"collective investment|cisca",
+    "Companies Act": r"companies act", "Insurance Act": r"insurance act", "MSA": r"medical schemes act|\bmsa\b"}
+KEY = r"(?:sections?|sec\.|ss?\.?|clauses?|rules?|regulations?|paragraphs?|para\.?)"
+PAR = re.compile(r"\(\s*([0-9a-z]{1,4})\s*\)")
+
+
+def unverified(rec):
+    p = os.path.join(ROOT, "text", "final", rec["doc_id"] + ".txt")
+    if not rec.get("rules_cited"):
+        return []
+    t = PAR.sub(r"(\1)", re.sub(r"\s+", " ", open(p, encoding="utf-8", errors="replace").read().lower()))
+    bad = []
+    for c in rec["rules_cited"]:
+        m = re.match(r"^(.+?) ([sr])(\d{1,3}[a-z]?(?:\.\d{1,3}[a-z]?)*)((?:\([0-9a-z]{1,4}\))*)$", c, re.I)
+        if not m or m.group(1) not in ALIAS:
+            bad.append(c)
+            continue
+        lab, base, subs = m.group(1), m.group(3).lower(), re.findall(r"\([0-9a-z]{1,4}\)", m.group(4).lower())
+        ok_c = False
+        for hit in re.finditer(r"(?<![\d.])" + re.escape(base) + r"(?!\d|\.\d)", t):
+            before = t[max(0, hit.start() - 90): hit.start()]
+            after = t[hit.end(): hit.end() + 60]
+            if re.search(KEY + r"[^.;]{0,70}$", before, re.I) and all(x in after for x in subs) \
+                    and re.search(ALIAS[lab], t[: hit.end() + 120]):
+                ok_c = True
+                break
+        if not ok_c:
+            bad.append(c)
+    return bad
+
+
+bad_rules = {}
+n_rules = 0
+for d in local:
+    if d["text_source"] != "none":
+        n_rules += len(d["rules_cited"])
+        u = unverified(d)
+        if u:
+            bad_rules[d["decision_id"]] = u
+check("every rules_cited entry is found in the document text (zero unverified)", not bad_rules,
+      f"{n_rules} entries over {len(local)} records; unverified {bad_rules}")
+bad_cnt = [d["decision_id"] for d in local if d.get("rules_dropped") is not None
+           and (d["rules_dropped"] > d["rules_proposed"] or d["rules_proposed"] < 0)]
+check("rules_dropped <= rules_proposed", not bad_cnt, f"{bad_cnt}")
+
+# ---- 11. respondent_public
+ENTITY_END = re.compile(r"(?:pty|ltd|limited|cc|bk|bpk|inc|npc|soc|corporation|company|insurers?|insurance|assurance|"
+                        r"bank|underwriters?|holdings|proprietary|brokers?|consultants?|consulting|services|"
+                        r"administrators?|group|trust|fund|scheme|association|society|investments?|management|"
+                        r"managers|capital|securities)\W*(?:\([^)]*\))?\W*$", re.I)
+bad_pub = []
+for d in local:
+    rid = d["decision_id"]
+    if d.get("respondent_public"):
+        if d.get("respondent_party_type") in ("natural", "unknown"):
+            bad_pub.append((rid, "set for a natural/unknown party"))
+        for part in d["respondent_public"].split(" | "):
+            if d["office"] == "FAIS" and not ENTITY_END.search(part.strip()):
+                bad_pub.append((rid, "does not look like an entity"))
+            if d["office"] == "FAIS":
+                raw = squash(" | ".join(dict.fromkeys(rows[i]["respondent"].strip()
+                      for i in by_id[d["doc_id"]].get("listing_row_indices") or [] if rows[i].get("respondent"))))
+                if squash(part) not in raw.replace("(pty) ltd", "(pty) ltd"):
+                    # the canonical form re-cases and re-spaces; compare on letters and digits only
+                    if re.sub(r"\W", "", squash(part)) not in re.sub(r"\W", "", raw):
+                        bad_pub.append((rid, "not in the table's respondent"))
+            else:
+                txt = re.sub(r"\s+", " ", open(os.path.join(ROOT, "text", "final", d["doc_id"] + ".txt"),
+                             encoding="utf-8", errors="replace").read().lower())
+                if squash(part) not in txt:
+                    bad_pub.append((rid, "NFO insurer not in the text"))
+    elif d.get("respondent_party_type") == "juristic":
+        bad_pub.append((rid, "juristic but nothing published"))
+for d in public:
+    if d.get("respondent_raw") or d.get("respondent_canonical"):
+        bad_pub.append((d["decision_id"], "public file carries a restricted respondent field"))
+check("respondent_public: entities only, null for natural/unknown, never raw in the public file", not bad_pub, f"{bad_pub}")
+
+# ---- 12. topic axes
+DEF = {"claim_not_paid", "non_disclosure", "exclusion_clause", "late_notification", "policy_interpretation",
+       "disability_assessment", "lapse_and_cancellation", "service_and_compensation", "beneficiary_and_cession", "other"}
+CON = {"advice_suitability", "misappropriation_fraud", "unlicensed_provider", "mandate_breach", "fees_and_charges",
+       "intermediary_cover_failure", "sale_disclosure", "other"}
+bad_t = []
+for d in local:
+    if d["topic_defence"] is not None and d["topic_defence"] not in DEF:
+        bad_t.append((d["decision_id"], "defence term"))
+    if d["topic_conduct"] is not None and d["topic_conduct"] not in CON:
+        bad_t.append((d["decision_id"], "conduct term"))
+    if d["outcome"] in ("amendment", "no_ruling", None) and (d["topic_defence"] or d["topic_conduct"]):
+        bad_t.append((d["decision_id"], "topic on a document with no ruling"))
+check("topic_defence / topic_conduct come from their own vocabularies; none on a non-ruling", not bad_t, f"{bad_t}")
 
 # ---- counts
 print()
 print("records:", len(local), dict(Counter(d["office"] for d in local)))
-for k in ("topic", "outcome", "extraction_confidence", "text_source"):
+both = Counter((d["office"], d["topic_defence"] is not None, d["topic_conduct"] is not None) for d in local)
+print("axes filled (office, defence, conduct): " + ", ".join(f"{k} {v}" for k, v in sorted(both.items())))
+pub_n = Counter((d["office"], bool(d.get("respondent_public")), d.get("respondent_party_type")) for d in local)
+print("respondent_public set (office, published, party_type): " + ", ".join(f"{k} {v}" for k, v in sorted(pub_n.items(), key=str)))
+rp = Counter(d["office"] for d in local if d.get("rules_proposed"))
+print("rules: model proposed", sum(d.get("rules_proposed") or 0 for d in local), "dropped", sum(d.get("rules_dropped") or 0 for d in local),
+      "kept entries", sum(len(d["rules_cited"]) for d in local))
+for k in ("topic_defence", "topic_conduct", "outcome", "extraction_confidence", "text_source"):
     c = Counter((d["office"], d[k]) for d in local)
     print(f"{k}:")
     for off in ("NFO", "FAIS"):

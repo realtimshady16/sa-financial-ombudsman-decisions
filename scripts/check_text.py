@@ -74,10 +74,29 @@ for d in REPAIRED:
 
 # ---- privacy: FAIS party names and determination filenames must not appear in anything committed
 needles = set()
+
+
+def squash(x):
+    return re.sub(r"\s+", " ", x.lower().replace("&", "and")).strip(" ,.;")
+
+
+# Stage 3 publishes the names of entity respondents on purpose (decisions.public.jsonl,
+# respondent_public; natural persons are withheld). A respondent string that is published whole is
+# therefore not a restricted string any more; every complainant string and every other respondent
+# string still is. scripts/check_decisions.py re-checks what is published.
+published = set()
+pub_path = os.path.join(ROOT, "decisions.public.jsonl")
+if os.path.exists(pub_path):
+    for line in open(pub_path, encoding="utf-8"):
+        if line.strip():
+            rp = json.loads(line).get("respondent_public")
+            if rp:
+                published.add(squash(rp))
+                published.update(squash(x) for x in rp.split(" | "))
 for r in jl(os.path.join("local", "fais-determination-rows.jsonl")):
     for k in ("complainant", "respondent"):
         v = (r.get(k) or "").strip()
-        if len(v) >= 6:
+        if len(v) >= 6 and not (k == "respondent" and squash(v) in published):
             needles.add(v.lower())
     for fobj in r["files"]:
         fn = fobj["filename"]

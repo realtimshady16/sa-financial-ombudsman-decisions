@@ -44,8 +44,8 @@ def main(ids):
             v = d.get(k)
             show[k] = (mask(v, extra=extra) if d["office"] == "FAIS" else v) if v else None
         show["outcome_quote"] = mask(d["outcome_quote"], extra=extra, level=level) if d.get("outcome_quote") else None
-        for k in ("decision_id", "year", "date", "fiscal_year", "product_line", "topic", "topics_secondary",
-                  "outcome", "page_anchor", "outcome_quote", "rules_cited", "respondent_raw",
+        for k in ("decision_id", "year", "date", "fiscal_year", "product_line", "topic_defence", "topic_conduct",
+                  "outcome", "page_anchor", "outcome_quote", "rules_cited", "rules_proposed", "rules_dropped", "respondent_public", "respondent_raw",
                   "respondent_canonical", "respondent_party_type", "citation_policy", "citation_url",
                   "extraction_confidence", "extraction_flags"):
             print(f"  {k:22s} {show.get(k)}")

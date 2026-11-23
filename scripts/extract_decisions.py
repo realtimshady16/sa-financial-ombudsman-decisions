@@ -21,9 +21,19 @@ HTML text**. Determinations are read for words.
   year, date, fiscal_year, product_line             FAIS: the official table; NFO: the title
   respondent_*                                     FAIS: the official table; NFO: the model, kept
                                                    only if the string is found in the text
-  rules_cited                                      regex over the text (never the model)
+  respondent_public                                the entity names only (scripts/respondents.py);
+                                                   null for a natural person. respondent_raw and
+                                                   respondent_canonical stay local
+  rules_cited                                      the model PROPOSES (instrument, provision and the
+                                                   verbatim words citing it); the text VERIFIES: kept
+                                                   only if those words are in the document, carry the
+                                                   provision's number, and the instrument is named at
+                                                   or before them. Unverifiable proposals are dropped
+                                                   and counted. A regex pass over the text is added
+                                                   (verbatim by construction)
   outcome                                          model, cross-checked by a rule over the order
-  topic, topics_secondary                          model, constrained to codebook/topics.md
+  topic_defence, topic_conduct                     model, two axes, each constrained to its own
+                                                   vocabulary in codebook/topics.md
   page_anchor                                      the page where the model's verbatim outcome
                                                    quote is actually found
 
@@ -49,11 +59,12 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from redact import mask  # noqa: E402
+import respondents  # noqa: E402
 
 import jsonschema  # noqa: E402
 
-VERSION = "extract_decisions/1.1"
-DEFAULT_MODEL = "opencode-go/deepseek-v4.1-flash"
+VERSION = "extract_decisions/2.0"
+DEFAULT_MODEL = "anthropic/claude-sonnet-5-5"
 LOCAL_OUT = os.path.join(ROOT, "decisions.jsonl")             # gitignored: restricted fields
 PUBLIC_OUT = os.path.join(ROOT, "decisions.public.jsonl")     # committed
 PROGRESS = os.path.join(ROOT, "local", "decisions-progress.jsonl")
@@ -64,14 +75,7 @@ SCHEMA = os.path.join(ROOT, "schema", "decision.schema.json")
 FAIS_LIST = "https://www.faisombud.co.za/determinations/"
 MIN_GAP_S = 2.0          # rate limit between model calls (sequential anyway)
 
-TOPICS = {
-    "advice_suitability": "advice not appropriate to the client's needs, circumstances or risk tolerance; no proper needs analysis or explanation of risk; includes replacement advice (cash in A, buy B)",
-    "misappropriation_fraud": "the provider/representative took, diverted or never invested the client's money, or ran a fraudulent or fictitious scheme",
-    "unlicensed_provider": "the respondent operated without a licence/registration (FAIS licence, insurer registration) and the finding turns on that; typically premiums collected, claims never paid",
-    "mandate_breach": "acted without, beyond or contrary to the client's instructions, or failed to carry out instructions in time (unauthorised switches, surrenders, paid-up, cover removed or kept)",
-    "fees_and_charges": "the core complaint is undisclosed, excessive or wrongly levied costs, commission or penalties",
-    "intermediary_cover_failure": "a broker/intermediary failed to arrange, renew, update or correctly specify cover (incl. under-insurance), so a claim failed or was reduced",
-    "sale_disclosure": "the product's nature, terms or conditions were misrepresented or not disclosed at sale; the question is what was agreed (no consensus, accidental cover sold as life cover), not suitability of advice",
+DEFENCE = {   # axis 1: the insurer's (or product provider's) reason in a dispute over a claim or policy decision
     "claim_not_paid": "a claim was not paid or paid late with no specific contractual defence in dispute (plain non-payment, insurer-binder dispute, unpaid funeral claims)",
     "non_disclosure": "claim declined or policy avoided because the insured did not disclose or misrepresented information at application",
     "exclusion_clause": "claim declined under an exclusion: pre-existing condition, suicide, a named exclusion, or risk materialised before cover",
@@ -81,8 +85,19 @@ TOPICS = {
     "lapse_and_cancellation": "the policy or cover on a life lapsed, was cancelled or terminated, or reinstatement was refused",
     "service_and_compensation": "poor service, administrative error or delay; compensation for distress or inconvenience; interest on late payment",
     "beneficiary_and_cession": "who is entitled to the money: beneficiary nominations, cession, payment to the wrong person",
-    "other": "fits none of the above",
+    "other": "an insurer's defence or a claim/policy dispute that fits none of the above",
 }
+CONDUCT = {   # axis 2: what the adviser / intermediary / provider did wrong, as the ombud found it
+    "advice_suitability": "advice not appropriate to the client's needs, circumstances or risk tolerance; no proper needs analysis or explanation of risk; includes replacement advice (cash in A, buy B), and an adviser who sold a scheme in which he or his firm had a conflicting interest or ran it, when the finding is about the advice and not about money taken",
+    "misappropriation_fraud": "the ombud FINDS that the provider/representative took, diverted or never invested the client's money, or ran a fraudulent or fictitious scheme. Running or having an interest in a scheme is not enough on its own: there must be a finding of taking, diversion or fraud",
+    "unlicensed_provider": "the respondent rendered financial services or carried on insurance business without a licence/registration, and the finding turns on that; typically premiums collected, claims never paid",
+    "mandate_breach": "acted without, beyond or contrary to the client's instructions, or failed to carry out instructions in time (unauthorised switches, surrenders, paid-up, cover removed or kept)",
+    "fees_and_charges": "the core complaint is undisclosed, excessive or wrongly levied costs, commission or penalties",
+    "intermediary_cover_failure": "a broker/intermediary failed to arrange, renew, update or correctly specify cover (incl. under-insurance), so a claim failed or was reduced",
+    "sale_disclosure": "at the point of sale the product's nature, terms or conditions were misrepresented or not disclosed; the question is what was agreed (no consensus, accidental cover sold as life cover, a condition never mentioned), not suitability of advice",
+    "other": "provider or intermediary conduct that fits none of the above",
+}
+TOPICS = {**DEFENCE, **CONDUCT}   # kept for callers that want every term
 OUTCOMES = {
     "upheld": "the complainant gets the relief at issue — an order to pay/compensate/assess the claim/reinstate/refund — even if the word 'upheld' is never used; includes a merits-only finding with quantum left to the parties",
     "partly_upheld": "some relief granted and some expressly refused, or the award expressly reduced for the complainant's own conduct (not merely capped)",
@@ -93,6 +108,9 @@ OUTCOMES = {
     "no_ruling": "the file contains no ruling at all (a chart, annexure or covering letter)",
 }
 
+INSTRUMENTS_LIST = ("FAIS Act, General Code, FSOS Act, FSR Act, LTIA, STIA, PPR, FAIS Ombud Rules, "
+                    "OLTI Rules, Prescription Act, CPA, NCA, PFA, CISCA, Companies Act, Insurance Act, MSA")
+
 SYSTEM = """You index South African financial-ombud determinations for a research dataset. You read
 one determination (its text, with personal names replaced by [X]) and return ONE JSON object, nothing
 else. You classify words only. Never invent text; quote exactly.
@@ -101,8 +119,9 @@ Return exactly these keys:
 {"is_ruling": true|false,
  "outcome": <one outcome value>,
  "outcome_quote": "<the sentence(s) in the text that state the outcome, copied character for character, at most 300 characters>",
- "topic": <one topic value>,
- "topics_secondary": [<0 to 2 further topic values the decision also rules on>],
+ "topic_defence": <one DEFENCE value, or null>,
+ "topic_conduct": <one CONDUCT value, or null>,
+ "rules_cited": [ {"instrument": <one instrument label>, "kind": "s"|"r", "number": "<e.g. 8(1)(a)>", "cite": "<the words in the text that cite it, copied character for character, at most 100 characters, including the number>"} , ...],
  "respondent_name": "<NFO only: the insurer's name exactly as written in the text, or null if it is not named; FAIS: null>",
  "certainty": "high"|"medium"|"low",
  "doubt": "<at most 25 words on anything that made this hard, or empty>"}
@@ -117,12 +136,29 @@ Outcome traps:
 - Read whose appeal it is: the insurer's appeal failing means the complaint is upheld.
 - "The insurer's decision is upheld/confirmed" means the complaint is dismissed.
 
-TOPIC values (the issue the decision turns on, not the product line):
-""" + "\n".join(f"- {k}: {v}" for k, v in TOPICS.items()) + """
+TWO TOPIC AXES. Fill each one on its own; either may be null, both may be filled.
+topic_defence = what the INSURER'S side said in a dispute over a claim or a policy decision, and what the ombud
+rules on. null when no insurer decision is in dispute (a pure adviser-misconduct case).
+DEFENCE values:
+""" + "\n".join(f"- {k}: {v}" for k, v in DEFENCE.items()) + """
 
-Topic precedence when several fit: misappropriation_fraud first, then unlicensed_provider, then the
-issue the ombud's finding actually turns on. If the document has no ruling (outcome amendment or
-no_ruling), topic is null.
+topic_conduct = what the ADVISER, BROKER or PROVIDER did wrong, as the ombud found it. null when no conduct
+finding is made (an insurer-decision case with nothing wrong found on the intermediary's side).
+CONDUCT values:
+""" + "\n".join(f"- {k}: {v}" for k, v in CONDUCT.items()) + """
+
+Conduct precedence when several fit: misappropriation_fraud only on a finding that money was taken,
+diverted, never invested, or the scheme was fraudulent or fictitious; then unlicensed_provider; then the
+issue the finding actually turns on. If the document has no ruling (outcome amendment or no_ruling), both
+topics are null.
+
+rules_cited: list the provisions of these instruments that the document cites, each as it is cited:
+""" + INSTRUMENTS_LIST + """.
+Use "kind" "s" for a section/clause/paragraph of an Act or the Code, "r" for a numbered rule. "number" is the
+section number with its sub-parts as written, no spaces: "8(1)(a)", "3(1)(b)", "28(1)". "cite" is
+copied from the text exactly, including the number; it need not name the instrument. A provision whose
+instrument is not in the list is omitted. A section you only infer, or that is not written in the text, is
+omitted. At most 40 entries; one entry per distinct provision.
 """
 PROMPT_SHA = hashlib.sha256(SYSTEM.encode()).hexdigest()
 INSTRUCTION = ("The file above is one determination. Page breaks are marked '=== page N ==='. "
@@ -197,44 +233,7 @@ def citation(r, rows):
 
 # ----------------------------------------------------------------------------- respondent
 
-JURISTIC = re.compile(r"\b(ltd|limited|\(?pty\)?|cc|bk|bpk|inc|npc|soc|corporation|company|co\b|"
-                      r"assurance|insurance|insurers?|bank|underwriters?|holdings|group|trust|"
-                      r"fund|scheme|association|society|brokers?|consultants|services)\b", re.I)
-
-
-def canonical_name(s):
-    if not s:
-        return None
-    s = re.sub(r"\s+", " ", s).strip(" ,.;")
-    s = re.sub(r"\s*&\s*", " and ", s)
-    s = re.sub(r"\(\s*pty\s*\)", "(Pty)", s, flags=re.I)
-    s = re.sub(r"\bltd\b\.?", "Ltd", s, flags=re.I)
-    s = re.sub(r"\blimited\b", "Limited", s, flags=re.I)
-    s = re.sub(r"\bcc\b", "CC", s, flags=re.I)
-    if s.isupper():
-        s = s.title().replace("(Pty)", "(Pty)").replace(" Cc", " CC")
-    return s
-
-
-def party_type(raw, text=None):
-    """Crude and conservative: 'juristic' only when every part joined by and/&/,/; carries a
-    juristic marker, or the text itself calls the whole string a company. A trading-as sole
-    trader is 'natural'. No marker at all is 'unknown', not 'natural': this is a heuristic."""
-    if not raw:
-        return None
-    if re.search(r"\bt/a\b|trading as|h/a\b", raw, re.I):
-        return "natural"
-    if text and len(raw) >= 8 and re.search(
-            re.escape(re.sub(r"\s+", " ", raw).strip()) + r"[^.]{0,60}?(?:a company|duly incorporated|"
-            r"registration number|close corporation)", re.sub(r"\s+", " ", text), re.I):
-        return "juristic"           # "X and Y (Pty) Ltd, a company duly incorporated ..." is one firm
-    parts = [p for p in re.split(r"\s+(?:and|&)\s+|\s*/\s*|;|,\s+", raw) if p.strip()]
-    marked = [bool(JURISTIC.search(p)) for p in parts]
-    if all(marked):
-        return "juristic"
-    if any(marked):
-        return "mixed"
-    return "unknown"
+canonical_name = respondents.canonical_name
 
 
 # ----------------------------------------------------------------------------- rules cited
@@ -268,9 +267,10 @@ SECTION = re.compile(
 
 
 def _expand(listing):
-    """'8 (1) (a), (b) and (c)' -> ['8(1)(a)', '8(1)(b)', '8(1)(c)']; '7, 8 and 11' -> ['7','8','11']."""
+    """'8 (1) (a), (b) and (c)' -> ['8(1)(a)', '8(1)(b)', '8(1)(c)']; '7, 8 and 11' -> ['7','8','11'].
+    A range yields its two ends: '(a) to (d)' -> (a), (d) -- what is literally in the text."""
     out, cur = [], None
-    rng = False
+    rng = False      # "(a) to (d)" yields (a) and (d) only: a letter in between is not in the text
     for tok in re.findall(r"\d{1,3}[A-Z]?|\(\s*[0-9a-z]{1,4}\s*\)|,|\band\b|\bor\b|\bto\b|&", listing, re.I):
         if tok.lower() == "to":
             rng, sep = True, True
@@ -283,13 +283,7 @@ def _expand(listing):
             par = "(" + re.sub(r"[\s()]", "", tok).lower() + ")"
             if cur is None:
                 continue
-            last = cur[1][-1] if cur[1] else None
-            if rng and last and re.fullmatch(r"\([a-z]\)", last) and re.fullmatch(r"\([a-z]\)", par) \
-                    and last < par:       # "(a) to (d)": every letter in between
-                for c in range(ord(last[1]) + 1, ord(par[1]) + 1):
-                    out.append(cur)
-                    cur = [cur[0], cur[1][:-1] + [f"({chr(c)})"]]
-            elif sep and cur[1]:      # a sibling: same depth as the last paragraph
+            if sep and cur[1]:      # a sibling: same depth as the last paragraph
                 out.append(cur)
                 cur = [cur[0], cur[1][:-1] + [par]]
             else:
@@ -372,6 +366,93 @@ def rules_cited(text, office):
             seen.add(f)
             out.append(f)
     return out, flags
+
+
+# ----------------------------------------------------------------------------- rules: model proposes, text verifies
+
+ALIASES = {   # an instrument counts as "named" if one of these occurs in the document at or before the citing words
+    "General Code": r"general code|\bthe code\b|\bcode of conduct\b|\bcode\b",
+    "FAIS Act": r"fais act|financial advisory and intermediary services act|\bthe act\b",
+    "FSOS Act": r"fsos act|ombud schemes act",
+    "FSR Act": r"fsr act|fsra\b|financial sector regulation act",
+    "LTIA": r"ltia\b|long[- ]term insurance act",
+    "STIA": r"stia\b|short[- ]term insurance act",
+    "PPR": r"\bppr\b|policyholder protection",
+    "FAIS Ombud Rules": r"rules on proceedings|\brules\b",
+    "OLTI Rules": r"\brules\b|\bolti\b",
+    "Prescription Act": r"prescription act",
+    "CPA": r"consumer protection act|\bcpa\b",
+    "NCA": r"national credit act|\bnca\b",
+    "PFA": r"pension funds act",
+    "CISCA": r"collective investment schemes|cisca\b",
+    "Companies Act": r"companies act",
+    "Insurance Act": r"insurance act",
+    "MSA": r"medical schemes act|\bmsa\b",
+}
+RULE_KINDS = {"FAIS Ombud Rules", "OLTI Rules", "PPR"}        # instruments whose provisions are "rules"
+_PARENS = re.compile(r"\(\s*([0-9a-z]{1,4})\s*\)")
+_NUM = re.compile(r"^(\d{1,3}[a-z]?(?:\.\d{1,3}[a-z]?)*)((?:\([0-9a-z]{1,4}\))*)$")
+
+
+def _flat(s):
+    return _PARENS.sub(r"(\1)", _norm(s))
+
+
+def verify_rule_proposals(props, mpages):
+    """props: the model's rules_cited list. -> (kept_cites, n_proposed, n_dropped, reasons Counter).
+    A proposal is kept only if (1) its `cite` words occur verbatim in the (masked) text the model saw,
+    without a mask token; (2) the provision's section number and every sub-part appear in those words;
+    (3) the instrument is named at or before them (in the words or earlier in the document); (4) the
+    instrument is one we know and the section number is in the real range. Nothing else is kept,
+    and every drop is counted."""
+    flat = _flat(" ".join(mpages))
+    kept, reasons, n = [], Counter(), 0
+    if not isinstance(props, list):
+        return [], 0, 0, reasons
+    for pr in props[:60]:
+        n += 1
+        if not isinstance(pr, dict):
+            reasons["malformed"] += 1
+            continue
+        lab, kind = pr.get("instrument"), (pr.get("kind") or "").lower()
+        num = _PARENS.sub(r"(\1)", re.sub(r"\s+", "", str(pr.get("number") or "")).lower())
+        num = re.sub(r"^(?:s|r|section|rule)\.?", "", num)
+        cite = _flat(str(pr.get("cite") or "")).strip(' ."')
+        if lab not in ALIASES:
+            reasons["instrument_unknown"] += 1
+            continue
+        if kind not in ("s", "r") or (lab not in RULE_KINDS and kind == "r"):
+            reasons["kind"] += 1
+            continue
+        m = _NUM.match(num)
+        if not m:
+            reasons["number_malformed"] += 1
+            continue
+        base, subs = m.group(1), re.findall(r"\([0-9a-z]{1,4}\)", m.group(2))
+        if lab in MAX_SECTION and kind == "s" and not (1 <= int(re.match(r"\d+", base).group(0)) <= MAX_SECTION[lab]):
+            reasons["out_of_range"] += 1
+            continue
+        if len(cite) < 4 or "[x]" in cite:
+            reasons["cite_empty_or_masked"] += 1
+            continue
+        pos = flat.find(cite)
+        if pos < 0:
+            reasons["cite_not_in_text"] += 1
+            continue
+        if not re.search(r"(?<![\d.])" + re.escape(base) + r"(?!\d|\.\d)", cite) or any(x not in cite for x in subs):
+            reasons["number_not_in_cite"] += 1
+            continue
+        if not re.search(ALIASES[lab], flat[: pos + len(cite)]):
+            reasons["instrument_not_named"] += 1
+            continue
+        kept.append(f"{lab} {kind}{re.sub(r'[a-z]$', lambda x: x.group(0).upper(), base)}{''.join(subs)}")
+    return list(dict.fromkeys(kept)), n, sum(reasons.values()), reasons
+
+
+def _sort_key(c):
+    lab, _, rest = c.rpartition(" ")
+    m = re.match(r"[sr](\d+)", rest)
+    return (lab, int(m.group(1)) if m else 0, rest)
 
 
 # ----------------------------------------------------------------------------- rule outcome
@@ -575,7 +656,7 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
         resp = " | ".join(dict.fromkeys(x["respondent"].strip() for x in trows if x.get("respondent")))
         rec["respondent_raw"] = resp or None
         rec["respondent_canonical"] = canonical_name(resp) if resp else None
-        rec["respondent_party_type"] = party_type(resp)   # refined against the text below
+        rec["respondent_public"], rec["respondent_party_type"] = respondents.public_name(resp)   # refined against the text below
         rec["respondent_source"] = "fais_table" if resp else None
         fsrc["respondent"] = "fais_table"
     else:
@@ -588,8 +669,7 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
     rec["citation_policy"], rec["citation_url"] = pol, url
     rec["filename_sha256"] = r.get("filename_sha256")
     rec["text_source"] = m["text_source"]
-    rec["restricted_fields"] = (["respondent_raw", "respondent_canonical", "outcome_quote"]
-                                if office == "FAIS" else ["outcome_quote"])
+    rec["restricted_fields"] = ["respondent_raw", "respondent_canonical", "outcome_quote"]
 
     text = read_text(canon_id)
     cwr = m.get("common_word_rate")
@@ -603,12 +683,12 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
         flags.add("no_usable_text")
         if office == "FAIS":
             rec["listed_date"] = rec.get("date")
-        rec.update(topic=None, topics_secondary=[], outcome=None, rules_cited=[], page_anchor=None,
-                   outcome_quote=None, extraction_method="none", extraction_model=None,
+        rec.update(topic_defence=None, topic_conduct=None, outcome=None, rules_cited=[], rules_proposed=None,
+                   rules_dropped=None, page_anchor=None, outcome_quote=None, extraction_method="none", extraction_model=None,
                    extraction_confidence="low", prompt_sha256=None)
         if office == "NFO":
-            rec.update(respondent_raw=None, respondent_canonical=None, respondent_party_type=None,
-                       respondent_source=None)
+            rec.update(respondent_raw=None, respondent_canonical=None, respondent_public=None,
+                       respondent_party_type=None, respondent_source=None)
         if rec.get("year") is None and office == "FAIS":
             flags.add("year_unknown")
         return finish(rec, flags, fsrc, t0, {"model": None})
@@ -617,14 +697,13 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
     if pages and not pages[-1].strip():
         pages = pages[:-1]
 
-    # ---- rules cited: regex over the unmasked text (output is generic, never a name)
+    # ---- rules cited, part 1: regex over the unmasked text (verbatim by construction; the model's
+    # verified proposals are added below)
     rc, rflags = rules_cited(text, office)
-    rec["rules_cited"] = rc
     flags |= rflags
-    fsrc["rules_cited"] = "regex"
 
     if office == "FAIS" and rec.get("respondent_raw"):
-        rec["respondent_party_type"] = party_type(rec["respondent_raw"], text)
+        rec["respondent_public"], rec["respondent_party_type"] = respondents.public_name(rec["respondent_raw"], text)
 
     # ---- FAIS date: the official table's date is the *listing* date. In 301 of 321 native files
     # it equals the signed date, but a January 2021 bulk listing carries decisions signed in
@@ -692,14 +771,17 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
         flags.add("model_invalid")
         ans = {}
     m_out = ans.get("outcome") if ans.get("outcome") in OUTCOMES else None
-    m_top = ans.get("topic") if ans.get("topic") in TOPICS else None
+    m_def = ans.get("topic_defence") if ans.get("topic_defence") in DEFENCE else None
+    m_con = ans.get("topic_conduct") if ans.get("topic_conduct") in CONDUCT else None
     if ans and ans.get("outcome") is not None and m_out is None:
         flags.add("model_outcome_off_vocab")
-    if ans and ans.get("topic") is not None and m_top is None:
+    if ans and ((ans.get("topic_defence") is not None and m_def is None)
+                or (ans.get("topic_conduct") is not None and m_con is None)):
         flags.add("model_topic_off_vocab")
-    sec = [t for t in (ans.get("topics_secondary") or []) if t in TOPICS and t != m_top][:2]
     if m_out in ("amendment", "no_ruling"):
-        m_top, sec = None, []
+        m_def, m_con = None, None
+    elif ans and m_out and m_def is None and m_con is None:
+        flags.add("no_topic_assigned")
     quote = (ans.get("outcome_quote") or "").strip()[:400] or None
     page, how = anchor(quote, mpages)
     if page is None:
@@ -717,13 +799,22 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
     elif m_out is not None and r_out != m_out:
         flags.add("rule_model_disagree")
     rec["outcome"] = m_out
-    rec["topic"] = m_top
-    rec["topics_secondary"] = sec
+    rec["topic_defence"] = m_def
+    rec["topic_conduct"] = m_con
+    mc, n_prop, n_drop, why = verify_rule_proposals(ans.get("rules_cited"), mpages)
+    rec["rules_cited"] = sorted(set(rc) | set(mc), key=_sort_key)
+    rec["rules_proposed"], rec["rules_dropped"] = n_prop, n_drop
+    meta["rules_dropped_why"] = dict(why)
+    meta["rules_model_only"] = sorted(set(mc) - set(rc))
+    meta["rules_regex_only"] = sorted(set(rc) - set(mc))
+    if n_drop:
+        flags.add("rules_proposal_dropped")
     rec["outcome_quote"] = quote
     rec["page_anchor"] = page if page is not None else (r_page if r_out == m_out else None)
     if page is None and rec["page_anchor"] is not None:
         flags.add("page_from_rule")
-    fsrc.update(outcome="model+rule_check", topic="model", page_anchor="anchored_quote")
+    fsrc.update(outcome="model+rule_check", topic_defence="model", topic_conduct="model",
+                rules_cited="model_proposed_text_verified+regex", page_anchor="anchored_quote")
 
     # ---- NFO respondent: the model's string, kept only if it is in the text
     if office == "NFO":
@@ -731,6 +822,7 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
         if name and _norm(name) in _norm(text):
             rec["respondent_raw"] = name
             rec["respondent_canonical"] = canonical_name(name)
+            rec["respondent_public"] = canonical_name(name)
             # the NFO's jurisdiction is over subscribing insurers, so the respondent is juristic
             rec["respondent_party_type"] = "juristic"
             rec["respondent_source"] = "text_anchored"
@@ -739,8 +831,8 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
                 flags.add("respondent_not_anchored")
             else:
                 flags.add("respondent_not_named")
-            rec.update(respondent_raw=None, respondent_canonical=None, respondent_party_type=None,
-                       respondent_source=None)
+            rec.update(respondent_raw=None, respondent_canonical=None, respondent_public=None,
+                       respondent_party_type=None, respondent_source=None)
         fsrc["respondent"] = "model_anchored"
 
     rec["extraction_method"] = "model+rules" if ans else "rules"
@@ -921,9 +1013,12 @@ def main(argv):
                       "seconds": meta.get("seconds"), "model": meta.get("model_reported") or meta.get("model"),
                       "usage": meta.get("usage"), "attempts": meta.get("attempts"),
                       "rule_outcome": meta.get("rule_outcome"), "error": meta.get("error"),
+                      "rules_dropped_why": meta.get("rules_dropped_why"),
+                      "rules_model_only": len(meta.get("rules_model_only") or []),
+                      "rules_regex_only": len(meta.get("rules_regex_only") or []),
                       "at": datetime.now(timezone.utc).isoformat()})
         secs.append(meta.get("seconds") or 0)
-        print(f"[{n}/{len(todo)}] {doc_id} -> {did}: {rec['outcome']} / {rec['topic']} "
+        print(f"[{n}/{len(todo)}] {doc_id} -> {did}: {rec['outcome']} / {rec['topic_defence']} / {rec['topic_conduct']} "
               f"[{rec['extraction_confidence']}] {meta.get('seconds')}s {','.join(rec['extraction_flags'])}")
     n_pub = publish()
     if secs:

@@ -19,7 +19,7 @@ published.** The repo has no remote.
 | `report.md` | yes | counts, reconciliation against the sitemaps, extraction health, failures, spot reads |
 | `text_manifest.jsonl` | yes | Stage 2: one row per document, giving how its text was made (`native`/`ocr`/`repaired`/`converted`/`none`), word count, quality, and repair map. No names |
 | `notes/` | yes | hand-written inputs to the report: spot reads, the OCR gate sample, the residual text defects, the Stage 3 decision-sample gate (`decision-sample.md`) |
-| `schema/decision.schema.json`, `codebook/` | yes | Stage 3: the decision record contract; the `topic` and `outcome` vocabularies with their corpus evidence; the 20-document sample list and the 532-document queue |
+| `schema/decision.schema.json`, `codebook/` | yes | Stage 3: the decision record contract; the two topic axes (`topic_defence`, `topic_conduct`), the `outcome` vocabulary and the `rules_cited` verification, each with its corpus evidence; the 20-document sample list and the 532-document queue |
 | `decisions.public.jsonl` | yes | Stage 3: one name-free record per determination file (20 so far, the sample) |
 | `decisions.jsonl` | **no** | the same records with restricted fields (FAIS respondent as listed, the anchored outcome quote) |
 | `scripts/` | yes | Stage 1: `census.py` → `harvest.py` → `build.py` → `check.py`. Stage 2: `ocr.py`, `repair.py`, `text_final.py` → `check_text.py` |

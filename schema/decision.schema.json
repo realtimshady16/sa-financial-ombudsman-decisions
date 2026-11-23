@@ -11,7 +11,6 @@
     "division",
     "doc_id",
     "year",
-    "topic",
     "outcome",
     "respondent_canonical",
     "respondent_raw",
@@ -23,7 +22,10 @@
     "extraction_method",
     "extraction_confidence",
     "schema_version",
-    "restricted_fields"
+    "restricted_fields",
+    "topic_defence",
+    "topic_conduct",
+    "respondent_public"
   ],
   "properties": {
     "decision_id": {
@@ -108,15 +110,8 @@
       ],
       "description": "FAIS: the table's category label verbatim; NFO: 'Long-term' (all OLTI)"
     },
-    "topic": {
+    "topic_defence": {
       "enum": [
-        "advice_suitability",
-        "misappropriation_fraud",
-        "unlicensed_provider",
-        "mandate_breach",
-        "fees_and_charges",
-        "intermediary_cover_failure",
-        "sale_disclosure",
         "claim_not_paid",
         "non_disclosure",
         "exclusion_clause",
@@ -128,14 +123,22 @@
         "beneficiary_and_cession",
         "other",
         null
-      ]
+      ],
+      "description": "axis 1 (codebook/topics.md): the insurer's reason in a dispute over a claim or policy decision, as ruled on. null when no insurer decision is in dispute, or when there is no ruling"
     },
-    "topics_secondary": {
-      "type": "array",
-      "maxItems": 2,
-      "items": {
-        "$ref": "#/properties/topic"
-      }
+    "topic_conduct": {
+      "enum": [
+        "advice_suitability",
+        "misappropriation_fraud",
+        "unlicensed_provider",
+        "mandate_breach",
+        "fees_and_charges",
+        "intermediary_cover_failure",
+        "sale_disclosure",
+        "other",
+        null
+      ],
+      "description": "axis 2 (codebook/topics.md): what the adviser, broker or provider did wrong, as the ombud found it. null when no conduct finding is made, or when there is no ruling. One record may carry both axes"
     },
     "outcome": {
       "enum": [
@@ -154,14 +157,14 @@
         "string",
         "null"
       ],
-      "description": "whitespace/ampersand/legal-suffix normalised; not yet a firm register (Stage 6). Restricted for FAIS"
+      "description": "whitespace/ampersand/legal-suffix normalised. Restricted for both offices"
     },
     "respondent_raw": {
       "type": [
         "string",
         "null"
       ],
-      "description": "as listed (FAIS table) or as written (NFO text). Restricted for FAIS"
+      "description": "as listed (FAIS table) or as written (NFO text). Restricted for both offices: never in the public file"
     },
     "respondent_party_type": {
       "enum": [
@@ -185,7 +188,7 @@
         "type": "string",
         "pattern": "^(FAIS Act|General Code|FSOS Act|FSR Act|LTIA|STIA|PPR|FAIS Ombud Rules|OLTI Rules|Prescription Act|CPA|NCA|PFA|CISCA|Companies Act|Insurance Act|MSA) (s|r)[0-9]{1,3}[A-Z]?(\\.[0-9]{1,3}[A-Z]?)*(\\([0-9a-z]{1,4}\\))*$"
       },
-      "description": "every provision of a known instrument the text cites, normalised, in order of first citation (procedural provisions included)"
+      "description": "provisions of known instruments the document cites. Each one is verified against the text: the model proposes (instrument, number, the words that cite it); a proposal is kept only if those words are verbatim in the document, carry the provision's number, and the instrument is named at or before them. A regex pass over the text is added (verbatim by construction). Sorted, not in order of citation"
     },
     "citation_policy": {
       "enum": [
@@ -282,7 +285,48 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "allOf": [
+        {
+          "contains": {
+            "const": "respondent_raw"
+          }
+        },
+        {
+          "contains": {
+            "const": "respondent_canonical"
+          }
+        },
+        {
+          "contains": {
+            "const": "outcome_quote"
+          }
+        }
+      ],
+      "description": "fields nulled in decisions.public.jsonl. Always respondent_raw, respondent_canonical and outcome_quote, for both offices: only respondent_public is published"
+    },
+    "respondent_public": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "the respondent name(s) that may be published: entities only (scripts/respondents.py). null when the respondent is a natural person or the string cannot be shown to be an entity. A mixed string ('X CC and Jan Smith') carries the entity part only. NFO: the insurer"
+    },
+    "rules_proposed": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "how many provisions the model proposed (null when there was no model call)"
+    },
+    "rules_dropped": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "how many of those proposals failed verification and were dropped. rules_proposed - rules_dropped, less duplicates, were kept"
     }
   },
   "allOf": [
@@ -301,25 +345,6 @@
         "properties": {
           "decision_id": {
             "pattern": "^fais-d-"
-          },
-          "restricted_fields": {
-            "allOf": [
-              {
-                "contains": {
-                  "const": "respondent_raw"
-                }
-              },
-              {
-                "contains": {
-                  "const": "respondent_canonical"
-                }
-              },
-              {
-                "contains": {
-                  "const": "outcome_quote"
-                }
-              }
-            ]
           }
         }
       }
@@ -362,11 +387,6 @@
           },
           "citation_policy": {
             "const": "direct"
-          },
-          "restricted_fields": {
-            "contains": {
-              "const": "outcome_quote"
-            }
           }
         }
       }
@@ -395,6 +415,47 @@
                 "year"
               ]
             }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "respondent_party_type": {
+            "enum": [
+              "natural",
+              "unknown"
+            ]
+          }
+        },
+        "required": [
+          "respondent_party_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "respondent_public": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "respondent_party_type": {
+            "const": "juristic"
+          }
+        },
+        "required": [
+          "respondent_party_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "respondent_public": {
+            "type": "string"
           }
         }
       }
