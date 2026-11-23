@@ -864,6 +864,17 @@ def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False,
     rec["extraction_model"] = meta.get("model_reported") or model
     rec["prompt_sha256"] = PROMPT_SHA
 
+    if not isinstance(ans, dict) and meta.get("error") and not meta.get("raw_reply"):
+        # No answer at all — transport down, timeout, or a limit that slipped through. That is not a
+        # finding about the document, so write nothing and stop; the run resumes and retries it.
+        # (A *bad* answer — unparseable but present — still becomes a flagged record; it is evidence.)
+        try:
+            os.remove(reply_path)
+        except OSError:
+            pass
+        raise SystemExit(f"extraction deferred: no model answer for {canon_id} after "
+                         f"{meta.get('attempts')} attempt(s): {meta['error']}\n"
+                         f"  no record written; the run resumes and retries this document")
     if not isinstance(ans, dict):
         flags.add("model_invalid")
         ans = {}
