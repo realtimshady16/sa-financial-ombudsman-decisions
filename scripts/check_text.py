@@ -13,7 +13,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ok = True
-SOURCES = {"native", "ocr", "repaired", "converted", "none"}
+SOURCES = {"native", "ocr", "html", "repaired", "converted", "none"}
 REPAIRED = ["nfo-5862", "nfo-5863", "nfo-6787"]
 
 
