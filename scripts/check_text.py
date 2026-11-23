@@ -96,7 +96,7 @@ if os.path.exists(pub_path):
 for r in jl(os.path.join("local", "fais-determination-rows.jsonl")):
     for k in ("complainant", "respondent"):
         v = (r.get(k) or "").strip()
-        if len(v) >= 6 and not (k == "respondent" and squash(v) in published):
+        if len(v) >= 6 and not (k == "respondent" and any(squash(v) in pn for pn in published)):   # published whole, or contained in a published entity name (another row may omit "(Pty) Ltd")
             needles.add(v.lower())
     for fobj in r["files"]:
         fn = fobj["filename"]

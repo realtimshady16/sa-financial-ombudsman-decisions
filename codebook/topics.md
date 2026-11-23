@@ -76,7 +76,7 @@ agreement. Product line is a separate field, `product_line`, from the FAIS table
 | `non_disclosure` | the claim was declined, or the policy avoided, because the insured did not disclose information, or misrepresented it, at application | NFO cases 2, 7, 48 (`nfo-5481`, `nfo-5499`, `nfo-4252`); `fais-det-bab03d430019` (medical-scheme membership application) | 68 / 8 |
 | `exclusion_clause` | the claim was declined under an exclusion: a pre-existing condition, suicide, a named exclusion, or the risk having materialised before cover began | NFO cases 9, 19, 46, 49, 56 (`nfo-5511`, `nfo-4230`, `nfo-5626`, `nfo-4253`, `nfo-5862`) | 66 / 13 |
 | `late_notification` | the claim or notice was lodged outside a contractual time limit, and whether that can be condoned (the NFO's equity jurisdiction) | NFO cases 5, 8, 12, 13, 16, 25 (`nfo-5497`, `nfo-5500`, `nfo-4228`, `nfo-5517`, `nfo-4229`, `nfo-4238`) | 13 / 10 |
-| `policy_interpretation` | what the policy wording means: definitions (dependant, cousin, extended family, adopted child, insurable interest), commencement, waiting periods, benefit calculation, overlapping cover | NFO cases 6, 10, 21, 27, 28, 34, 38, 39, 41, 55, 58 (`nfo-5498`, `nfo-5512`, `nfo-5541`, `nfo-5559`, `nfo-4249`, `nfo-5570`, `nfo-5593`, `nfo-5594`, `nfo-5596`, `nfo-5470`, `nfo-6787`); `fais-det-f507db46d649` (mechanical-breakdown benefit wording) | 53 / 14 |
+| `policy_interpretation` | what the policy wording means: definitions (dependant, cousin, extended family, adopted child, insurable interest), commencement, waiting periods, benefit calculation, overlapping cover | NFO cases 6, 10, 21, 27, 28, 34, 38, 39, 41, 55, 58 (`nfo-5498` (**gate note:** Sonnet filed it under `lapse_and_cancellation` and a careful reader could too: a funeral policy lapsed and was reinstated, and the question is the new waiting period. The ratio is the waiting-period wording, so it stays here), `nfo-5512`, `nfo-5541`, `nfo-5559`, `nfo-4249`, `nfo-5570`, `nfo-5593`, `nfo-5594`, `nfo-5596`, `nfo-5470`, `nfo-6787`); `fais-det-f507db46d649` (mechanical-breakdown benefit wording) | 53 / 14 |
 | `disability_assessment` | whether the insured meets the definition of disability or incapacity (own occupation or alternative occupation), and the termination, review or level of disability or income benefits | NFO cases 3, 15, 23, 32, 40, 44, 54, 57 (`nfo-5482`, `nfo-5519`, `nfo-5543`, `nfo-5569`, `nfo-5595`, `nfo-4251`, `nfo-4254`, `nfo-5863`) | 18 / 22 |
 | `lapse_and_cancellation` | the policy, or cover on one life, lapsed, was cancelled or terminated, or was refused reinstatement | NFO cases 1, 17, 20, 33, 37, 52 (`nfo-4211`: the insurer ended disability cover for unpaid premiums after scheme membership ceased; I had listed it under `disability_assessment` from its headnote, and the hand check in `notes/decision-sample.md` moved it. Also `nfo-5533`, `nfo-5540`, `nfo-5566`, `nfo-5592`, `nfo-5642`) | lapse / cancel / reinstate 197 / 22 (mostly incidental in FAIS) |
 | `service_and_compensation` | poor service, administrative error or delay, compensation for distress and inconvenience, interest on late payment | NFO cases 4, 22, 26, 29, 31, 36, 45 (`nfo-4222`, `nfo-5542`, `nfo-4248`, `nfo-5565`, `nfo-5568`, `nfo-5591`, `nfo-5625`) | 1 / 8 |
@@ -84,6 +84,19 @@ agreement. Product line is a separate field, `product_line`, from the FAIS table
 | `other` | fits none of the above. The codebook lists every such document below, and none is forced into a term | see below | — |
 
 ## Documents that fit nothing (`other`), so far
+
+**Conduct axis**
+
+- `fais-det-0b57feb5bc19` (2025). A funeral-policy provider with no underwriter did not pay a R10 000
+  claim, and the ombud finds it failed Policyholder Protection Rule 2A.8 (assess and decide within two
+  business days) and the Treating Customers Fairly outcomes. It is not unsuitable advice, fraud or a
+  licence question. The Sonnet gate filed the near-identical story of `fais-det-514c4ef9e6b4`
+  (premiums taken without an underwriter) as `unlicensed_provider`, so the two disagree. A
+  `claims_handling` conduct term (a provider's failure to assess, decide or pay a claim) is the
+  candidate, and the full run will show whether enough documents land in `other` to justify it.
+
+**Defence axis**
+
 
 - `nfo-5534` (NFO case 18, 2014). The insurer rejected a claim as **fraudulent** because of false
   declarations on the claim form, and the rejection was set aside on appeal. This is not

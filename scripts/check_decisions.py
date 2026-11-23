@@ -155,7 +155,9 @@ for r in rows.values():
     for k in ("complainant", "respondent"):
         v = (r.get(k) or "").strip()
         if len(v) >= 6:
-            if k == "respondent" and squash(v) in published:
+            # a respondent string is exempt when it is, or is contained in, a name published as
+            # respondent_public: another table row may spell the same entity without "(Pty) Ltd"
+            if k == "respondent" and any(squash(v) in p for p in published):
                 n_exempt += 1
                 continue
             needles.add(v.lower())
@@ -282,7 +284,7 @@ ALIAS = {
     "FSOS Act": r"fsos act|ombud schemes act", "FSR Act": r"fsr act|fsra\b|financial sector regulation",
     "LTIA": r"ltia\b|long[- ]term insurance act", "STIA": r"stia\b|short[- ]term insurance act",
     "PPR": r"\bppr\b|policyholder protection", "FAIS Ombud Rules": r"rules on proceedings|\brules\b",
-    "OLTI Rules": r"\brules\b|\bolti\b", "Prescription Act": r"prescription act", "CPA": r"consumer protection act|\bcpa\b",
+    "OLTI Rules": r"\brules\b|\bolti\b|\bour rules?\b", "Prescription Act": r"prescription act", "CPA": r"consumer protection act|\bcpa\b",
     "NCA": r"national credit act|\bnca\b", "PFA": r"pension funds act", "CISCA": r"collective investment|cisca",
     "Companies Act": r"companies act", "Insurance Act": r"insurance act", "MSA": r"medical schemes act|\bmsa\b"}
 KEY = r"(?:sections?|sec\.|ss?\.?|clauses?|rules?|regulations?|paragraphs?|para\.?)"
@@ -356,6 +358,21 @@ for d in local:
                     bad_pub.append((rid, "NFO insurer not in the text"))
     elif d.get("respondent_party_type") == "juristic":
         bad_pub.append((rid, "juristic but nothing published"))
+# a published name with a conjunction inside ("X and Y CC") may be a person plus an entity: it is
+# acceptable only when the business words before the last conjunction make it plainly one entity, or
+# the document itself calls the whole name a company. Written here, sharing nothing with respondents.py.
+BIZ = re.compile(r"\b(?:insurance|assurance|life|bank|holdings|brokers?|services|group|trust|fund|capital|investments?|"
+                 r"consult\w*|management|administrators?|underwriters?|company|corporation|securities)\b", re.I)
+for d in local:
+    for part in (d.get("respondent_public") or "").split(" | "):
+        body = re.sub(r"\s*\((?:pty|edms)\)\s*(?:ltd|bpk)?\s*$|\s+(?:ltd|limited|cc|bpk|bk|inc|npc)\.?\s*$", "", part.strip(), flags=re.I)
+        seps = list(re.finditer(r"\s+(?:and|&|en)\s+|,\s*", body, re.I))
+        if not part or not seps or BIZ.search(body[:seps[-1].start()]):
+            continue
+        txt = re.sub(r"\s*&\s*", " and ", re.sub(r"\s+", " ", open(os.path.join(ROOT, "text", "final", d["doc_id"] + ".txt"),
+                     encoding="utf-8", errors="replace").read()))
+        if not re.search(re.escape(re.sub(r"\s+", " ", body)) + r"[^.]{0,90}?(?:a company|a private company|a close corporation|duly incorporated|registration (?:no|number)|incorporated in terms of)", txt, re.I):
+            bad_pub.append((d["decision_id"], "published name holds a conjunction the document does not confirm as one company"))
 for d in public:
     if d.get("respondent_raw") or d.get("respondent_canonical"):
         bad_pub.append((d["decision_id"], "public file carries a restricted respondent field"))

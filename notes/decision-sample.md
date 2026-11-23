@@ -1,4 +1,207 @@
-# Stage 3 gate: the 20-document decision sample, verified by hand
+# Stage 3c gate: the 20-document sample on Claude Sonnet 5.5, verified by hand
+
+Run and verified 2026-11-23, on the v2 machinery (two topic axes, text-verified `rules_cited`,
+entity-only `respondent_public`). The v1 gate (DeepSeek, one `topic`) is kept below as history.
+
+**Verdict: the gate passes, narrowly on one field, and the hand check found three defects that the
+validator could not see. All three are fixed and re-checked. The bulk run is cleared to start.**
+
+| gate item | needed | measured |
+|---|---|---|
+| census, citation, `text_source` | 20/20 | **20/20** |
+| `outcome` | ≥ 19/20 | **19/20** (one model error: `nfo-fd-9`) |
+| `topic_defence`, where it applies | ≥ 18/20 | **19/20** over all 20 (12/13 where an insurer decision is in dispute) |
+| `topic_conduct`, where it applies | ≥ 18/20 | **20/20** |
+| `page_anchor` | ≥ 19/20 | **20/20 correct**, 19/20 by the quote mechanism (one by the rule fallback, flagged `low`) |
+| `rules_cited` unsupported by the text | 0 | **0 of 108** entries (checker, plus I read the model's citing words for all of them) |
+| complainant names or ID numbers in the committed tree | 0 | **0** (`check_decisions.py`, 1905 restricted strings and 833 name tokens) |
+
+**Caveats that matter more than the table.**
+
+- **The outcome gate cannot tell a good model from one that always says `upheld`.** All 20 records are
+  `upheld`. The sample has no `dismissed`, and the one real `partly_upheld` is the one Sonnet missed.
+  Both offices publish mostly decisions for the complainant (`codebook/outcomes.md`), so this is the
+  corpus, not the sample. The 19/20 is a statement about `upheld` and says nothing about the rare values.
+- **The sample is not independent of the codebook.** All 9 NFO documents were read when the codebook
+  was derived, and so were 3 of the 11 FAIS ones. The topic scores are optimistic by an unknown amount.
+- **Sonnet is not deterministic.** I ran the whole gate twice (run 1 through the default Claude Code
+  call, run 2 through the lean one below). `outcome` was identical on 20/20. The two topic fields
+  differed on **4 of 40 cells**, always `null` in one run and a term in the other (`nfo-fd-50` conduct,
+  `fais-d-fe7193dd109d` defence, `fais-d-514c4ef9e6b4` defence, `fais-d-0b57feb5bc19` conduct). So
+  whether a *secondary* axis is filled at all is about 90% repeatable, and counts of "documents with
+  both axes" should not be quoted to the unit. The scored run is run 2, which is what the bulk run uses.
+
+## 1. What ran
+
+- **Sample.** The same 20 documents as the v1 gate (`codebook/sample-decisions.jsonl`, seed 20261125):
+  9 NFO (8 native, 1 OCR) and 11 FAIS (7 native, 4 OCR), 2009–2025.
+- **Model.** `claude-sonnet-5-5`, through the Claude Code CLI (`claude -p --output-format json`),
+  because pi's own Anthropic sign-in has expired. Every one of the 20 records carries
+  `extraction_model: claude-sonnet-5-5`. The CLI runs a small internal step on haiku, so its
+  `modelUsage` lists two models; the extractor records the one that was asked for.
+- **The call, changed during the gate.** Run 1 used the CLI as it comes: the extraction prompt was sent
+  as user text, on top of Claude Code's own system prompt and tool definitions. That cost **~$0.14 and
+  ~35k input tokens per document**, of which about 30k was the CLI's own overhead. Run 2 passes
+  `--tools "" --system-prompt <the extraction prompt> --disable-slash-commands --strict-mcp-config
+  --setting-sources "" --no-session-persistence`: **~$0.026 and ~8k tokens**, five times cheaper and
+  twice as fast. On the one document I compared field by field before adopting it, the answer was
+  identical. `prompt_sha256` is unchanged: it hashes the prompt text, not the way it is sent.
+- **Masking.** Model input is masked by `scripts/redact.py` exactly as in v1. No complainant name and
+  no ID number was sent.
+
+## 2. Measured time and cost (run 2, 20 first-time extractions)
+
+| | per document |
+|---|---|
+| wall time | median **4.5 s**, mean 7.6 s, range 2.5–20.9 s (total 153 s) |
+| `total_cost_usd` | median **$0.022**, mean **$0.026**, max $0.068 (total $0.53) |
+| input tokens | median 7.9k, max 13.1k; output median 441, max 2.4k |
+
+`total_cost_usd` is the API-equivalent price the CLI reports. **On Tim's subscription it is allowance,
+not a bill.** It also counts only the final attempt: 2 documents needed retries (below), which adds a
+few cents. Run 1, on the default call, measured $2.82 for the same 20 (mean $0.141).
+
+**Estimate for the bulk run: 524 documents to extract (526 distinct decisions in the queue, 2 already
+done), of which 4 have no usable text and make no model call. About 520 calls: ~$14 API-equivalent and
+~85 minutes**, at the 2 s minimum gap between calls. The sample's longest input was 13k tokens, and some
+FAIS files run to 43 pages, so the tail will be longer.
+
+## 3. Per-field pass rates (20 records, final rules)
+
+A field **passes** when it is what a careful reader would record under the codebook. A call I could
+defend either way is counted as a pass and listed in section 4 as *debatable*.
+
+| field | pass | set by |
+|---|---|---|
+| `decision_id`, `office`, `division`, `doc_id` | 20/20 | census |
+| `citation_policy`, `citation_url` | 20/20 | D1 rule, recomputed independently by the validator |
+| `text_source`, `extraction_method`, `extraction_model` | 20/20 | text manifest / run |
+| `year` | 20/20 | NFO title; FAIS native signed date, else the table. One (`2f28…`, OCR) has no legible year in its text, so it rests on the table and agrees with the case number |
+| `date` (FAIS) | 11/11 | native signed date; OCR files keep the table date, 3 of the 4 checked against the signature line |
+| **`outcome`** | **19/20** | model, cross-checked by a rule |
+| **`topic_defence`** | **19/20** | model |
+| **`topic_conduct`** | **20/20** | model |
+| **`page_anchor`** | **20/20** | the page of the model's verbatim quote; 19/20 by the quote itself |
+| `respondent_raw` | 20/20 | FAIS table (11/11); NFO model string found in the text (9/9) |
+| `respondent_public` | 20/20 published values correct; 3 withheld where a company existed (see §4) | `scripts/respondents.py` |
+| `respondent_party_type` (extra) | 17/20 | the 3 are the same 3 withheld records: `unknown` where `mixed` is true |
+| **`rules_cited`** | **0 wrong of 108** | model proposes, text verifies; regex merged |
+| `extraction_confidence` | not a truth field | see §6 |
+
+## 4. Every disagreement, and whether it is a rule bug or a model error
+
+| record | field | extractor said | the document says | kind |
+|---|---|---|---|---|
+| `nfo-fd-9` (2011) | `outcome` | `upheld` | the office **upheld the insurer** on the first policy (para 6) and ruled for the complainant on the second. The v1 gate settled this as `partly_upheld` | **model error.** The rule cross-check also said `upheld`, so nothing fired: the model and the rule share the blind spot that the order at the end covers only the second policy |
+| `nfo-fd-6` (2010) | `topic_defence` | `lapse_and_cancellation` | a funeral policy lapsed, was reinstated, and the insurer said a new waiting period applied. The case title is "interpretation of conditions regarding reinstatement after lapsing" | **codebook overlap, counted as a miss.** The codebook lists case 6 under `policy_interpretation` (waiting period). Both terms fit; the ratio is the waiting-period wording. A rule for "reinstatement and waiting period" would settle it |
+| `fais-d-0fc4a77f8770` | `respondent_public` | `<person> and <company> CC` | a natural person and a close corporation, joined in the table string | **rule bug, FIXED (the important one).** `scripts/respondents.py` could not tell "X and Y CC" (one entity) from "person and entity". It published the person's name. **The validator did not catch it**: it exempts any table string equal to a published name, so a wrongly published name vouches for itself. Now such a name is published only when the business words before the last "and" make it plainly one entity, or the document itself calls the whole name a company. The validator has its own copy of that test, and I confirmed it fires on the old output |
+| `fais-d-0fc4…`, `fais-d-b57e6fc57f49`, `fais-d-fe7193dd109d` | `respondent_public`, `respondent_party_type` | withheld, `unknown` | each has one real company and one natural person | **the price of the fix, kept on purpose.** Two of the three would have been correct before (a company named after two people, and a table string that lacks "CC"). Withholding errs one way: a wrong withheld costs a name, a wrong publish costs a person. The firm register (Stage 6) is where this closes |
+| `fais-d-9a74e28e5f71` | `page_anchor` | 14, flagged `low` (`quote_not_anchored`) | the order is split by a footnote and a page break: "The complaint is upheld" is on page 14, the payment order on page 15 | **not an error, but the quote mechanism failed here.** The model's quote joined the two parts across the footnote, so it matched no page; the rule fallback found 14. Counted as a pass, scored 19/20 by quote |
+| `fais-d-fe7193dd109d` | `topic_defence` | `exclusion_clause` | the broker conveyed wrong information about an approved immobiliser; the insurer's earlier decline is not what this determination rules on | **debatable.** The codebook's own example allows both axes. Run 1 said `null`. Counted as a pass |
+| `fais-d-514c4ef9e6b4` | `topic_conduct` | `unlicensed_provider` | a funeral home that was a registered FSP but "unlawfully issued policies and accepted premiums without being underwritten" | **debatable.** It fits "carried on insurance business without … registration" and not "no licence at all" |
+| `fais-d-0b57feb5bc19` | `topic_conduct` | `other` | a funeral home with no underwriter that did not pay a claim, against Policyholder Protection Rule 2A.8 | **a codebook gap, not an error.** The same story as `514c` got a different term. A `claims_handling` term for conduct is the candidate; the run will show how many documents fall here. Listed under `other` in `codebook/topics.md` |
+| `fais-d-0b57feb5bc19` | `rules_cited` | the model once filed section 28(1) under *FAIS Ombud Rules* | the citing words read "SECTION 28(1) OF THE FINANCIAL ADVISORY AND …" | **model error, caught by luck**, because "Rules" had not yet appeared in the text. **New rule: if the citing words name a different instrument, drop the proposal.** It did not fire on this sample, so the sample does not test it |
+
+## 5. `rules_cited` in detail
+
+108 entries over 20 documents: **0 unsupported**. The checker confirms every entry's number follows a
+section keyword and its instrument is named; I also read the model's citing words for all of them and
+the surrounding text for the six where the instrument is not next to the number.
+
+- **Recall.** For each document I listed every "section / rule / clause N" mention and compared. An
+  in-list citation was missed in **2 documents of 20**:
+  - `nfo-fd-50`: "Rule 3.2.5", the NFO's own compensation rule. The text never says "Rules" or "our
+    Rule", so the instrument is not named and the entry is dropped by design.
+  - `fais-d-9a74e28e5f71`: "Section 7(1)", a cross-reference inside a quoted provision.
+  - Left out because the instrument is not on the list, correctly: a group scheme's own rules
+    (`nfo-fd-1`: "section 2.6.5 of the Rules"), a policy "clause 5.2", the Inspection of Financial
+    Institutions Act, the Financial Institutions (Protection of Funds) Act, Board Notice 104.
+- **Who found what.** FAIS: 104 entries, of which 26 only the model found, 14 only the regex found,
+  the rest both. The regex alone gave a complete list for **5 of 11** FAIS documents; with the model's
+  proposals it is **10 of 11**. NFO: 4 entries over 9 documents, since NFO reports rarely cite a section.
+- **11 proposals dropped (13 before a small alias fix), and 1 of them is a real loss.** All were
+  `instrument_not_named`. Ten were captions cut off before the instrument ("SECTION 28(1) OF THE
+  FINANCIAL ADVISORY AND"), which the regex recovers anyway; the eleventh is the `nfo-fd-50` Rule above.
+- **A regex rule changed:** a "Rule N.N" in an NFO document used to be filed under the OLTI Rules
+  unconditionally. It now needs the instrument named at or before it, like the model's proposals.
+  `our Rule 3.2.5` counts as naming the NFO's own rules. This removed 1 entry and is why the
+  validator's check #10 now agrees with the extractor.
+
+## 6. Bugs found while running the gate (all fixed)
+
+1. **A schema-invalid record was written and left on disk.** `PPR r2a.8` (lower-case) failed
+   validation *after* it had been appended, and the run crashed. The normaliser now upper-cases the
+   letter in a dotted number at any depth, and a record is validated **before** it is written; an
+   invalid one is logged as `failed_validation` and skipped, and the run goes on. Without this, one
+   odd citation at document 300 of 524 would have stopped the bulk run.
+2. **A retry cost a whole call.** 3 of the first 20 calls were "unparseable reply" (3 attempts on one
+   document, 2 on another). The model copies a line break from the text into a `cite` string, which is
+   a raw newline inside a JSON string and invalid. The parser is now non-strict. Re-calling the two
+   documents that had failed gave a first-attempt parse for both.
+3. **The checker's respondent exemption was circular** (see `fais-d-0fc4…` above).
+
+`extraction_confidence` is still a self-check and not a truth field. Of the 5 records that carry an
+error or a debatable call (`nfo-fd-9`, `nfo-fd-6`, `0fc4`, `fe7193`, `514c`), **none is `low`**:
+four are `high` and one `medium`. The one `low` record (`9a74`) was right. Read `high` as "no check
+fired", not "correct".
+
+## 7. Two records, in full (the public form, so `outcome_quote` is null)
+
+**NFO, both axes set: `nfo-fd-50`** (case 50, 2022; a telephone sale of "non-natural death" cover to
+someone who asked for "life cover"). The insurer's reason for declining was the policy's scope, which
+is `policy_interpretation`; the ombud's finding is about what was agreed at the sale, which is
+`sale_disclosure`.
+
+```json
+{"decision_id": "nfo-fd-50", "office": "NFO", "division": "OLTI", "year": 2022, "product_line": "Long-term",
+ "citation_policy": "direct", "citation_url": "https://nfosa.co.za/docs/final-determinations-2022-case-50/",
+ "text_source": "native", "extraction_model": "claude-sonnet-5-5",
+ "outcome": "upheld", "topic_defence": "policy_interpretation", "topic_conduct": "sale_disclosure",
+ "rules_cited": [], "rules_proposed": 1, "rules_dropped": 1, "page_anchor": 3,
+ "respondent_public": "Liberty Group Limited", "respondent_party_type": "juristic",
+ "extraction_confidence": "high", "extraction_flags": ["rules_proposal_dropped"]}
+```
+
+**FAIS, both axes set: `fais-d-514c4ef9e6b4`** (2024; a funeral home that took premiums and did not
+pay a R20 000 claim). The claim was not paid, and the finding is that it issued policies without an
+underwriter. Signed 1 November 2024, listed 6 December.
+
+```json
+{"decision_id": "fais-d-514c4ef9e6b4", "office": "FAIS", "division": "FAIS", "date": "2024-11-01", "year": 2024,
+ "fiscal_year": "2024/25", "listed_date": "2024-12-06", "product_line": "Long-term",
+ "citation_policy": "hash", "citation_url": "https://www.faisombud.co.za/determinations/",
+ "text_source": "native", "extraction_model": "claude-sonnet-5-5",
+ "outcome": "upheld", "topic_defence": "claim_not_paid", "topic_conduct": "unlicensed_provider",
+ "rules_cited": ["FAIS Act s27(5)(c)", "FAIS Act s28(1)", "FSR Act s230", "FSR Act s230(2)"],
+ "rules_proposed": 4, "rules_dropped": 1, "page_anchor": 6,
+ "respondent_public": "Lebohang Funeral Home (Pty) Ltd", "respondent_party_type": "juristic",
+ "extraction_confidence": "high", "extraction_flags": ["listed_date_differs", "rules_proposal_dropped"]}
+```
+
+(Both records also carry `field_sources`, `prompt_sha256`, `extractor_version`, `extracted_at` and the
+three restricted fields, null in the public file; they are in `decisions.public.jsonl`.)
+
+## 8. Glossary and hooks
+
+- **Axis:** one of the two topic fields. `topic_defence` is the insurer's side of a claim dispute;
+  `topic_conduct` is what the adviser or provider did wrong.
+- **Circular check:** a test that passes because it trusts the thing it tests. Here, the validator
+  exempted a restricted name because it was published, and it was published because the extractor
+  said so.
+- **API-equivalent cost:** what the same tokens would cost on the pay-per-token API. On a subscription
+  it is a measure of allowance used.
+- **What this assumes:** that my hand reading is the ground truth. It is one reader, who also wrote
+  the codebook. Two of the three `topic` calls I scored as misses or "debatable" turn on codebook
+  wording I wrote.
+- **Open questions:** (a) whether `claims_handling` should become a conduct term once the full run shows
+  how many documents land in `other`; (b) whether `outcome` should record "partly" when a determination
+  merely *recites* an earlier ruling against the complainant, as `nfo-fd-9` does; (c) whether the
+  stability of the secondary axis (about 90%) is acceptable, or whether the bulk run should call each
+  document twice and keep only agreement.
+
+---
+
+# Appendix: the v1 gate (DeepSeek, one `topic`) — superseded by the report above
 
 Run and verified 2026-11-23. This note is the gate report for `scripts/extract_decisions.py`.
 

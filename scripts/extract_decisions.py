@@ -357,8 +357,16 @@ def rules_cited(text, office):
             else ("OLTI Rules" if office == "NFO" else None)
         if not lab:
             continue
+        # the instrument must be named in the text at or before the rule (the same test the model's
+        # proposals pass). An NFO document that says "Rule 3.2.5" and never says "Rules" does not
+        # name its instrument, so the entry is not verifiable and is not emitted.
+        if not re.search(ALIASES[lab], t[: m.end() + 60], re.I):
+            continue
         num = re.sub(r"[ ]+", "", m.group(1))
         num = re.sub(r"\([0-9a-zA-Z]{1,4}\)", lambda x: x.group(0).lower(), num)
+        # the dotted part is "2A.8.1": the letter after a number is a capital (the RULE regex is
+        # case-insensitive, so "rule 2a.8" would otherwise yield a lower-case twin of "2A.8")
+        num = re.sub(r"(?<=\d)[a-z](?=\.|\(|$)", lambda x: x.group(0).upper(), num)
         found.append(f"{lab} r{num}")
     seen, out = set(), []
     for f in found:
@@ -372,14 +380,14 @@ def rules_cited(text, office):
 
 ALIASES = {   # an instrument counts as "named" if one of these occurs in the document at or before the citing words
     "General Code": r"general code|\bthe code\b|\bcode of conduct\b|\bcode\b",
-    "FAIS Act": r"fais act|financial advisory and intermediary services act|\bthe act\b",
+    "FAIS Act": r"fais act|financial advisory and intermediary|\bthe act\b",
     "FSOS Act": r"fsos act|ombud schemes act",
-    "FSR Act": r"fsr act|fsra\b|financial sector regulation act",
+    "FSR Act": r"fsr act|fsra\b|financial sector regulation",
     "LTIA": r"ltia\b|long[- ]term insurance act",
     "STIA": r"stia\b|short[- ]term insurance act",
     "PPR": r"\bppr\b|policyholder protection",
     "FAIS Ombud Rules": r"rules on proceedings|\brules\b",
-    "OLTI Rules": r"\brules\b|\bolti\b",
+    "OLTI Rules": r"\brules\b|\bolti\b|\bour rules?\b",
     "Prescription Act": r"prescription act",
     "CPA": r"consumer protection act|\bcpa\b",
     "NCA": r"national credit act|\bnca\b",
@@ -388,6 +396,21 @@ ALIASES = {   # an instrument counts as "named" if one of these occurs in the do
     "Companies Act": r"companies act",
     "Insurance Act": r"insurance act",
     "MSA": r"medical schemes act|\bmsa\b",
+}
+FULL_NAMES = {   # an instrument written out in full: if the citing words carry one, they cannot belong to another
+    "General Code": r"general code of conduct",
+    "FAIS Act": r"fais act|financial advisory and intermediary",
+    "FSOS Act": r"fsos act|ombud schemes",
+    "FSR Act": r"fsr act|financial sector regulation",
+    "LTIA": r"ltia\b|long[- ]term insurance act",
+    "STIA": r"stia\b|short[- ]term insurance act",
+    "PPR": r"policyholder protection rules",
+    "Prescription Act": r"prescription act",
+    "CPA": r"consumer protection act",
+    "NCA": r"national credit act",
+    "PFA": r"pension funds act",
+    "Companies Act": r"companies act",
+    "MSA": r"medical schemes act",
 }
 RULE_KINDS = {"FAIS Ombud Rules", "OLTI Rules", "PPR"}        # instruments whose provisions are "rules"
 _PARENS = re.compile(r"\(\s*([0-9a-z]{1,4})\s*\)")
@@ -445,7 +468,12 @@ def verify_rule_proposals(props, mpages):
         if not re.search(ALIASES[lab], flat[: pos + len(cite)]):
             reasons["instrument_not_named"] += 1
             continue
-        kept.append(f"{lab} {kind}{re.sub(r'[a-z]$', lambda x: x.group(0).upper(), base)}{''.join(subs)}")
+        if any(re.search(pat, cite) for other, pat in FULL_NAMES.items() if other != lab) \
+                and not re.search(FULL_NAMES.get(lab, r"(?!)"), cite):
+            reasons["cite_names_other_instrument"] += 1     # "SECTION 28(1) OF THE FINANCIAL ADVISORY ..." filed under Ombud Rules
+            continue
+        # a letter after a digit in the dotted number is a capital ("2A.8"), at any depth, not only last
+        kept.append(f"{lab} {kind}{re.sub(r'(?<=\d)[a-z]', lambda x: x.group(0).upper(), base)}{''.join(subs)}")
     return list(dict.fromkeys(kept)), n, sum(reasons.values()), reasons
 
 
@@ -588,9 +616,15 @@ def call_model(model, input_path, retries=2):
     meta = {"model": model, "runner": runner, "attempts": 0}
     if runner == "claude":
         with open(input_path, encoding="utf-8") as f:
-            prompt = SYSTEM + "\n\n" + INSTRUCTION + "\n\n--- DOCUMENT ---\n\n" + f.read()
+            prompt = INSTRUCTION + "\n\n--- DOCUMENT ---\n\n" + f.read()
+        # A lean invocation: the extraction prompt is the whole system prompt, no tools, no skills,
+        # no MCP servers, no settings or project context files, no saved session. The default CLI
+        # carries ~30k tokens of its own prompt and tool definitions per call: measured on one
+        # document, 34.8k input tokens and $0.145 against 5.8k and $0.026, with an identical answer.
         cmd = [os.environ.get("CLAUDE_BIN", "claude"), "-p", "--model", model,
-               "--output-format", "json"]
+               "--output-format", "json", "--tools", "", "--system-prompt", SYSTEM,
+               "--disable-slash-commands", "--strict-mcp-config", "--setting-sources", "",
+               "--no-session-persistence"]
         stdin_text = prompt
     else:
         cmd = [os.environ.get("PI_BIN", "pi"), "-p", "--mode", "json", "--no-tools",
@@ -660,7 +694,10 @@ def call_model(model, input_path, retries=2):
         txt = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt)
         m = re.search(r"\{.*\}", txt, re.S)
         try:
-            return json.loads(m.group(0) if m else txt), meta
+            # strict=False: the model copies line breaks from the text into 'cite' strings, and a raw
+            # newline inside a JSON string is rejected by the default parser (3 of the first 20
+            # calls needed a retry for exactly that)
+            return json.loads(m.group(0) if m else txt, strict=False), meta
         except (ValueError, AttributeError):
             meta["error"] = "unparseable reply"
             meta["raw_reply"] = reply[:2000]
@@ -921,7 +958,10 @@ def existing():
 
 def write_and_verify(rec, validator, replace=False):
     """Append (or replace) the record, fsync, re-read the file, parse, find the decision_id, and
-    schema-validate what is on disk. Raises on any failure — never reports success it cannot see."""
+    schema-validate what is on disk. Raises on any failure — never reports success it cannot see.
+    The record is validated in memory FIRST, so a schema-invalid record never reaches the file
+    (the Stage 3c gate found one appended and left behind when validation failed afterwards)."""
+    validator.validate(rec)
     if replace and os.path.exists(LOCAL_OUT):
         keep = [l for l in open(LOCAL_OUT, encoding="utf-8")
                 if l.strip() and json.loads(l)["decision_id"] != rec["decision_id"]]
@@ -1044,7 +1084,7 @@ def main(argv):
     validator = jsonschema.Draft202012Validator(json.load(open(SCHEMA)),
                                                 format_checker=jsonschema.FormatChecker())
     have = existing()
-    secs = []
+    secs, failed = [], []
     for n, doc_id in enumerate(todo, 1):
         did = mapping[doc_id][0]
         if did in have and not force:
@@ -1057,6 +1097,17 @@ def main(argv):
             print(f"[{n}/{len(todo)}] {doc_id}: dry run, masked input written to local/extract/")
             continue
         rec, meta = out
+        try:
+            validator.validate(rec)
+        except jsonschema.ValidationError as e:
+            # a rule produced a schema-invalid record: skip this document, keep the run going.
+            # The model reply is saved in local/extract/, so --reprocess recovers it after a fix.
+            failed.append(did)
+            log_progress({"doc_id": doc_id, "decision_id": did, "status": "failed_validation",
+                          "error": e.message[:300], "seconds": meta.get("seconds"),
+                          "at": datetime.now(timezone.utc).isoformat()})
+            print(f"[{n}/{len(todo)}] {doc_id} -> {did}: SCHEMA-INVALID, not written: {e.message[:120]}")
+            continue
         write_and_verify(rec, validator, replace=did in have)
         have[did] = rec
         log_progress({"doc_id": doc_id, "decision_id": did, "status": "reprocessed" if reproc else "done",
@@ -1071,6 +1122,8 @@ def main(argv):
         print(f"[{n}/{len(todo)}] {doc_id} -> {did}: {rec['outcome']} / {rec['topic_defence']} / {rec['topic_conduct']} "
               f"[{rec['extraction_confidence']}] {meta.get('seconds')}s {','.join(rec['extraction_flags'])}")
     n_pub = publish()
+    if failed:
+        print(f"SCHEMA-INVALID, not written ({len(failed)}): {failed}")
     if secs:
         print(f"extracted {len(secs)}; median {statistics.median(secs):.1f}s/doc; "
               f"decisions.public.jsonl: {n_pub} records")

@@ -48,6 +48,12 @@ hold a ruling, but only in the image, which is not yet OCR'd. The extractor trea
 5. **"The insurer's decision is upheld"** would mean the complaint is dismissed. I did not see
    this phrasing in the sample, but it is the obvious inversion, and the prompt warns about it.
 
+6. **A report that recites an earlier ruling against the complainant.** `nfo-fd-9` (case 9, 2011)
+   covers two policies. The office upheld the insurer on the first, in a recital, and the *final*
+   determination at the end orders payment on the second. The order alone reads `upheld`; the whole
+   document is `partly_upheld`. Sonnet 5.5 and the rule cross-check both said `upheld`, so this is a
+   blind spot they share. Read the whole document, not the last paragraph.
+
 ## What these counts cannot tell you
 
 - **Neither office publishes a random sample of its decisions.** NFO's "Final Determinations" are

@@ -76,6 +76,38 @@ def party_kind(part):
     return "person"
 
 
+BUSINESS_WORD = re.compile(r"\b" + STRONG + r"\b|\b" + WEAK + r"\b", re.I)
+INNER_SEP = re.compile(r"\s*(?:,|;|/|&|\band\b|\ben\b)\s*", re.I)
+LEGAL_TAIL = re.compile(r"(?:\s*\(\s*(?:pty|edms)\s*\)\s*\(?\s*(?:ltd|bpk)\s*\)?|\s+(?:ltd|limited|cc|bk|bpk|inc|npc|soc)\.?)+\s*$", re.I)
+
+
+def _name_body(part):
+    return LEGAL_TAIL.sub("", _tail(part)).strip(" ,.;")
+
+
+def needs_text_confirmation(part):
+    """'X and Y CC' is either one entity named "X and Y" or a person X plus an entity Y. A table
+    string cannot say which, and a wrong guess publishes a person's name. True when the name body
+    holds a conjunction and the words before the last one carry no business marker ("Sanlam Life
+    Insurance and Pensions Ltd" is plainly one entity; "Jan Smith and Fabrikam 3 CC" is not)."""
+    body = _name_body(part)
+    seps = list(INNER_SEP.finditer(body))
+    if not seps:
+        return False
+    return not BUSINESS_WORD.search(body[:seps[-1].start()])
+
+
+def confirmed_single_entity(part, text):
+    """The document itself presents the whole name as one company: '<name> ... a company duly
+    incorporated' (or close corporation / registration number), within one sentence."""
+    if not text:
+        return False
+    body = re.sub(r"\s*&\s*", " and ", re.sub(r"\s+", " ", _name_body(part)))
+    flat = re.sub(r"\s*&\s*", " and ", re.sub(r"\s+", " ", text))
+    pat = re.escape(body) + r"[^.]{0,90}?(?:a company|a private company|a close corporation|duly incorporated|registration (?:no|number)|incorporated in terms of)"
+    return bool(re.search(pat, flat, re.I))
+
+
 def split_parties(raw):
     """Split the table string into [(party_text, trading_as_text|None)]. A party is cut after a
     legal-form word ('... CC and Jan Smith' -> 2), never inside a name ('Luvuyo Burial and
@@ -124,6 +156,8 @@ def classify(raw, text=None):
     kinds, ents = [], []
     for left, trade in split_parties(raw):
         k = party_kind(left)
+        if k == "entity" and needs_text_confirmation(left) and not confirmed_single_entity(left, text):
+            k = "unclear"       # "<person> and <entity> CC" cannot be told from one entity: withhold
         if trade == "~":
             k = "unclear" if k == "entity" else k
         elif trade is not None and k != "entity":
@@ -175,7 +209,9 @@ if __name__ == "__main__":
         ("Zorbex Capital (PTY) Ltd and Anna Maria Quillfeather", "mixed", ["Zorbex Capital (Pty) Ltd"]),
         ("Zorbex Capital (PTY) LTD, Anna Maria Quillfeather and John Doe", "mixed", ["Zorbex Capital (Pty) Ltd"]),
         ("ACME SOLUTIONS CC & PETER QUILLFEATHER", "mixed", ["Acme Solutions CC"]),
-        ("Northwind Burial and Consulting (PTY) LTD", "juristic", ["Northwind Burial and Consulting (Pty) Ltd"]),
+        ("Northwind Burial and Consulting (PTY) LTD", "unknown", []),           # no text: could be a person + an entity
+        ("Zorbex Quillfeather and Fabrikam Holdings 2000 CC", "unknown", []),   # person + entity, or one entity: withhold
+        ("Sample Life Insurance and Pensions Ltd", "juristic", ["Sample Life Insurance and Pensions Ltd"]),
         ("Example Insurance Brokers PTY (LTD)", "juristic", None),
         ("Samplecorp life limited", "juristic", ["Samplecorp life Limited"]),
         ("EXAMPLE MUTUAL LIFE ASSURANCE COMPANY & SOUTH AFRICA LIMITED (EMLACSA)", "juristic", None),
@@ -195,6 +231,12 @@ if __name__ == "__main__":
         ("Initech Wealth t/a Sample Investments and 3 Others", "natural", []),
     ]
     bad = 0
+    # with the document's own words, the same string is one confirmed company
+    t_, e_ = classify("Northwind Burial and Consulting (PTY) LTD",
+                      "The Respondent is Northwind Burial and Consulting (Pty) Ltd, a company duly incorporated under South African law.")
+    ok_ = t_ == "juristic" and e_ == ["Northwind Burial and Consulting (PTY) LTD"]
+    bad += not ok_
+    print("ok  " if ok_ else "FAIL", "juristic  text-confirmed single entity")
     for raw, want_t, want_e in cases:
         t, e = classify(raw)
         pub, _ = public_name(raw)
