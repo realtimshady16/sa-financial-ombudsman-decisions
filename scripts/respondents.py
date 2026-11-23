@@ -110,7 +110,7 @@ def confirmed_single_entity(part, text):
 
 def split_parties(raw):
     """Split the table string into [(party_text, trading_as_text|None)]. A party is cut after a
-    legal-form word ('... CC and Jan Smith' -> 2), never inside a name ('Luvuyo Burial and
+    legal-form word ('... CC and Jan Smith' -> 2), never inside a name ('Northwind Burial and
     Consulting (PTY) LTD' stays one)."""
     s = re.sub(r"\s+", " ", raw or "").strip()
     s = re.sub(r"\s+and\s+\d+\s+others?$", "", s, flags=re.I)
