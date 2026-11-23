@@ -18,7 +18,10 @@ published.** The repo has no remote.
 | `SHA256SUMS` | yes | `sha256sum -c SHA256SUMS` re-verifies every snapshot |
 | `report.md` | yes | counts, reconciliation against the sitemaps, extraction health, failures, spot reads |
 | `text_manifest.jsonl` | yes | Stage 2: one row per document, giving how its text was made (`native`/`ocr`/`repaired`/`converted`/`none`), word count, quality, and repair map. No names |
-| `notes/` | yes | hand-written inputs to the report: spot reads, the OCR gate sample, the residual text defects |
+| `notes/` | yes | hand-written inputs to the report: spot reads, the OCR gate sample, the residual text defects, the Stage 3 decision-sample gate (`decision-sample.md`) |
+| `schema/decision.schema.json`, `codebook/` | yes | Stage 3: the decision record contract; the `topic` and `outcome` vocabularies with their corpus evidence; the 20-document sample list and the 532-document queue |
+| `decisions.public.jsonl` | yes | Stage 3: one name-free record per determination file (20 so far, the sample) |
+| `decisions.jsonl` | **no** | the same records with restricted fields (FAIS respondent as listed, the anchored outcome quote) |
 | `scripts/` | yes | Stage 1: `census.py` → `harvest.py` → `build.py` → `check.py`. Stage 2: `ocr.py`, `repair.py`, `text_final.py` → `check_text.py` |
 | `sources.jsonl` | **no** | the same census with FAIS restricted fields (party names, real file URLs) |
 | `pdf/`, `html/` | **no** | the snapshots, named `<doc_id>.<ext>` |
@@ -49,6 +52,12 @@ python3 -I scripts/ocr.py [DOC_ID ...]  # tesseract, 300 dpi, sequential, resuma
 python3 -I scripts/repair.py            # per-font ToUnicode patch of NFO cases 56-58 -> text/final/
 python3 -I scripts/text_final.py        # text/final/ for native + converted, text_manifest.jsonl
 python3 -I scripts/check_text.py        # Stage 2 verification + name-leak gate
+
+# Stage 3 (model calls via pi; text is masked first by scripts/redact.py)
+python3 -I scripts/extract_decisions.py --sample                 # resumable; one document per call
+python3 -I scripts/extract_decisions.py --queue codebook/queue-decisions.jsonl   # the full run (not yet launched)
+python3 -I scripts/extract_decisions.py --sample --reprocess     # rules changed: rebuild from saved replies, no calls
+python3 -I scripts/check_decisions.py                            # Stage 3 verification + name-leak gate
 ```
 
 All network access goes through `scripts/polite.py`. It makes one request at a time, at most one

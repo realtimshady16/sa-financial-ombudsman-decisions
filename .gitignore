@@ -7,3 +7,5 @@
 /sources.jsonl
 *.part
 __pycache__/
+/decisions.jsonl
+*.tmp

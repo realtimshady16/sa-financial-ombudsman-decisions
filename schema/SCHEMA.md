@@ -125,25 +125,54 @@ good enough for words and not for digits, which is why the split exists.
 | `converted` | legacy MS Office file converted with LibreOffice |
 | `none` | no text in `text/final` yet. `notes` says why: OCR gated, PDF truncated at the source, or HTML-only page not extracted |
 
-### `decision` — one per ruling (Stage 3, `decisions.jsonl`)
+### `decision` — one per distinct determination file (Stage 3, `decisions.jsonl`)
+
+Machine-checkable half: [`decision.schema.json`](decision.schema.json), validated by
+`scripts/check_decisions.py`. Vocabularies: [`codebook/topics.md`](../codebook/topics.md) and
+[`codebook/outcomes.md`](../codebook/outcomes.md). Built by `scripts/extract_decisions.py`.
+
+**Unit, changed from the v0 stub.** v0 said "FAIS: one per table row (509)". Stage 3 builds one record
+per **distinct file**. A file is the thing that can be cited, anchored to a page and hashed. The
+census has 552 determination files, and they hold 545 distinct byte strings: 3 NFO yearly packages
+duplicate a case page, and 4 FAIS files are each linked from two table rows. A duplicate folds
+into its canonical record's `duplicate_doc_ids`. The 509-row parity is recoverable through
+`sources.jsonl`'s `listing_row_indices`, which stays local because the row order is the live
+page's and is not stable.
 
 | field | type | notes |
 |---|---|---|
-| `decision_id` | string | FAIS: one per **table row** (509), not per file. NFO: `nfo-fd-<case>` |
-| `office` / `division` | enum | |
-| `year` / `date` | int / date | decision date as the source states it |
-| `fiscal_year` | string\|null | FAIS `YYYY/YY` |
-| `kind` | enum | `determination` \| `recommendation` |
-| `topic` | enum\|null | controlled vocabulary, seeded from the FAIS table categories + `complaint-category` taxonomy (Stage 4) |
-| `outcome` | enum\|null | `upheld` · `partly_upheld` · `dismissed` · `settled` · `other` — from the decision text, with page anchor |
-| `amount_awarded` | number\|null | ZAR, as stated |
-| `respondent_id` | string\|null | → `participant`; published only where `party_type = juristic` |
-| `rules_cited` | string[] | |
-| `source_doc_ids` | string[] | → `document` (a FAIS row can link 1–3 files; a file can serve 2 rows) |
-| `page_anchor` | int\|null | page of the outcome statement |
-| `restricted` | object | local only: complainant/respondent as listed |
+| `decision_id` | string | `nfo-fd-<case>` · `fais-d-<12 hex of the canonical doc_id>`. Never a name |
+| `doc_id`, `duplicate_doc_ids` | string, string[] | → `document`. The canonical file (the NFO per-case page, else the lowest doc_id), plus byte-identical copies |
+| `office` / `division` / `kind` | enum | from the census. `kind` is always `determination` in v1 (recommendations are a separate set of 24 files) |
+| `year`, `date`, `fiscal_year` | int, date, `YYYY/YY` | FAIS: from the official table's date. NFO: from the title. A year is read from text only if the census has none **and** the text is native. **Never from OCR or HTML** |
+| `product_line` | string | FAIS table `category` verbatim. NFO: `Long-term` |
+| `topic`, `topics_secondary` | enum, enum[≤2] | codebook/topics.md. The issue the decision turns on. Model-assigned |
+| `outcome` | enum\|null | `upheld` · `partly_upheld` · `dismissed` · `referred` · `settled` · `amendment` · `no_ruling` (codebook/outcomes.md). Model-assigned and cross-checked by a rule. `null` only when there is no usable text |
+| `page_anchor` | int\|null | page of `text/final` on which the model's verbatim outcome quote was **found**. A quote that cannot be found gives `null` and confidence `low` |
+| `outcome_quote` | string\|null | **restricted**: the anchored sentence, from masked text. Kept locally for audit, never published |
+| `respondent_raw`, `respondent_canonical` | string\|null | FAIS: the table's respondent, **restricted in v1** (see below). NFO: the insurer as written, kept only if the string occurs in the text |
+| `respondent_party_type`, `respondent_source` | enum | `juristic` · `natural` · `mixed` · `unknown`. `fais_table` · `text_anchored` |
+| `rules_cited` | string[] | regex over the text, never the model. Normalised to `<instrument> s<section>(<sub>)` or `<instrument> r<rule>`. Instruments: FAIS Act, General Code, FSOS Act, FSR Act, LTIA, STIA, PPR, FAIS Ombud Rules, OLTI Rules, and a few others. Procedural provisions are included (every FAIS caption cites FAIS Act s28(1)). FAIS Act or General Code section numbers outside the real range are dropped as OCR noise |
+| `citation_policy`, `citation_url`, `filename_sha256` | | D1, below. Recomputed independently by the validator |
+| `text_source` | enum | copied from `text_manifest.jsonl`; the validator checks it |
+| `extraction_method`, `extraction_model`, `prompt_sha256`, `extractor_version` | | `model+rules` · `rules` · `none`. The model is `opencode-go/deepseek-v4.1-flash` through `pi -p` |
+| `extraction_confidence`, `extraction_flags` | enum, string[] | `low` if the model and the rule disagree, the quote cannot be anchored, or the model reply is invalid or off-vocabulary. `medium` if the rule is silent, the text is OCR, the model is unsure, or a page is an image not yet OCR'd. Otherwise `high` |
+| `field_sources` | object | which mechanism set each field |
+| `restricted_fields` | string[] | nulled in `decisions.public.jsonl`. FAIS: `respondent_raw`, `respondent_canonical`, `outcome_quote`. NFO: `outcome_quote` |
 
-No prose abstracts in v1.
+**No prose abstracts and no amounts in v1.** An abstract is interpretation. An amount from an
+OCR'd determination is exactly the digit risk the Stage 2 gate measured.
+
+**FAIS respondents are unpublished in v1, deliberately.** The Stage 1/2 privacy gate
+(`check_text.py`) treats *every* FAIS respondent string as restricted. Many respondents are sole
+traders, and "juristic" names can carry a person's name ("X t/a Y", "Z Brokers CC"). The
+participant rule below ("publish only where `party_type = juristic`") needs a party-type register
+that has been checked by hand, which is Stage 6. Until then `respondent_party_type` is published,
+and the name is not.
+
+**Text sent to the model is masked first** (`scripts/redact.py`): party names from the
+restricted table, honorific + name, capitalised words never seen in lower case in the corpus, and
+street addresses. This is best-effort, and it is documented as such in that file.
 
 ### `participant` — firms and respondents (Stage 6, `firms.json`)
 

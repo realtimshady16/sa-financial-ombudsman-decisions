@@ -1,0 +1,936 @@
+"""Stage 3: the decisions index. One structured, name-free, citable record per determination.
+
+    python3 -I scripts/extract_decisions.py --make-sample          # draw the 20-document sample
+    python3 -I scripts/extract_decisions.py --sample               # extract the sample's records
+    python3 -I scripts/extract_decisions.py --queue codebook/queue-decisions.jsonl [--limit N]
+    python3 -I scripts/extract_decisions.py DOC_ID [DOC_ID ...]    # specific documents
+    python3 -I scripts/extract_decisions.py --make-queue           # everything not in the sample
+    python3 -I scripts/extract_decisions.py --publish-only         # rebuild decisions.public.jsonl
+      options: --force (re-extract even if a record exists)  --model PROVIDER/ID  --dry-run
+               --reprocess (rebuild records from the saved model replies in local/extract/:
+                            no model call; for when a rule changes)
+
+Unit of work: one census document (doc_type == determination). Its decision is one record per
+*distinct file*: byte-identical copies (7 pairs: 3 NFO packages that duplicate a case page, 4 FAIS
+files linked from two table rows) resolve to one decision_id, listed in `duplicate_doc_ids`.
+
+Where each field comes from — and the rule that binds them: **no number is ever read from OCR or
+HTML text**. Determinations are read for words.
+
+  office, division, doc_id, text_source, citation_*  census + text_manifest (deterministic)
+  year, date, fiscal_year, product_line             FAIS: the official table; NFO: the title
+  respondent_*                                     FAIS: the official table; NFO: the model, kept
+                                                   only if the string is found in the text
+  rules_cited                                      regex over the text (never the model)
+  outcome                                          model, cross-checked by a rule over the order
+  topic, topics_secondary                          model, constrained to codebook/topics.md
+  page_anchor                                      the page where the model's verbatim outcome
+                                                   quote is actually found
+
+Text goes to the model *masked* (scripts/redact.py): FAIS bodies name complainants.
+
+Resumable and idempotent: a decision_id that already has a record is skipped. A record is
+appended, flushed, then **re-read, parsed and schema-validated** before the document is logged as
+done in local/decisions-progress.jsonl; a write that cannot be read back stops the run with an
+error. Nothing is ever logged as done that is not on disk.
+"""
+import hashlib
+import json
+import os
+import random
+import re
+import statistics
+import subprocess
+import sys
+import time
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+from redact import mask  # noqa: E402
+
+import jsonschema  # noqa: E402
+
+VERSION = "extract_decisions/1.1"
+DEFAULT_MODEL = "opencode-go/deepseek-v4.1-flash"
+LOCAL_OUT = os.path.join(ROOT, "decisions.jsonl")             # gitignored: restricted fields
+PUBLIC_OUT = os.path.join(ROOT, "decisions.public.jsonl")     # committed
+PROGRESS = os.path.join(ROOT, "local", "decisions-progress.jsonl")
+WORK = os.path.join(ROOT, "local", "extract")                 # masked model inputs + raw replies
+SAMPLE = os.path.join(ROOT, "codebook", "sample-decisions.jsonl")
+QUEUE = os.path.join(ROOT, "codebook", "queue-decisions.jsonl")
+SCHEMA = os.path.join(ROOT, "schema", "decision.schema.json")
+FAIS_LIST = "https://www.faisombud.co.za/determinations/"
+MIN_GAP_S = 2.0          # rate limit between model calls (sequential anyway)
+
+TOPICS = {
+    "advice_suitability": "advice not appropriate to the client's needs, circumstances or risk tolerance; no proper needs analysis or explanation of risk; includes replacement advice (cash in A, buy B)",
+    "misappropriation_fraud": "the provider/representative took, diverted or never invested the client's money, or ran a fraudulent or fictitious scheme",
+    "unlicensed_provider": "the respondent operated without a licence/registration (FAIS licence, insurer registration) and the finding turns on that; typically premiums collected, claims never paid",
+    "mandate_breach": "acted without, beyond or contrary to the client's instructions, or failed to carry out instructions in time (unauthorised switches, surrenders, paid-up, cover removed or kept)",
+    "fees_and_charges": "the core complaint is undisclosed, excessive or wrongly levied costs, commission or penalties",
+    "intermediary_cover_failure": "a broker/intermediary failed to arrange, renew, update or correctly specify cover (incl. under-insurance), so a claim failed or was reduced",
+    "sale_disclosure": "the product's nature, terms or conditions were misrepresented or not disclosed at sale; the question is what was agreed (no consensus, accidental cover sold as life cover), not suitability of advice",
+    "claim_not_paid": "a claim was not paid or paid late with no specific contractual defence in dispute (plain non-payment, insurer-binder dispute, unpaid funeral claims)",
+    "non_disclosure": "claim declined or policy avoided because the insured did not disclose or misrepresented information at application",
+    "exclusion_clause": "claim declined under an exclusion: pre-existing condition, suicide, a named exclusion, or risk materialised before cover",
+    "late_notification": "claim or notice lodged outside a contractual time limit; whether the lateness can be condoned",
+    "policy_interpretation": "what the policy wording means: definitions (dependant, cousin, extended family, insurable interest), commencement, waiting period, benefit calculation, overlapping cover",
+    "disability_assessment": "whether the insured meets the disability/incapacity definition (own or alternative occupation); termination, review or level of disability/income benefits",
+    "lapse_and_cancellation": "the policy or cover on a life lapsed, was cancelled or terminated, or reinstatement was refused",
+    "service_and_compensation": "poor service, administrative error or delay; compensation for distress or inconvenience; interest on late payment",
+    "beneficiary_and_cession": "who is entitled to the money: beneficiary nominations, cession, payment to the wrong person",
+    "other": "fits none of the above",
+}
+OUTCOMES = {
+    "upheld": "the complainant gets the relief at issue — an order to pay/compensate/assess the claim/reinstate/refund — even if the word 'upheld' is never used; includes a merits-only finding with quantum left to the parties",
+    "partly_upheld": "some relief granted and some expressly refused, or the award expressly reduced for the complainant's own conduct (not merely capped)",
+    "dismissed": "the complaint fails, including dismissal on prescription or jurisdiction when the order says dismissed",
+    "referred": "the ombud declines to decide the merits and sends the matter to a court or another body without dismissing it",
+    "settled": "the parties settled and the document records the settlement instead of deciding",
+    "amendment": "the document only corrects or amends an earlier determination or recommendation",
+    "no_ruling": "the file contains no ruling at all (a chart, annexure or covering letter)",
+}
+
+SYSTEM = """You index South African financial-ombud determinations for a research dataset. You read
+one determination (its text, with personal names replaced by [X]) and return ONE JSON object, nothing
+else. You classify words only. Never invent text; quote exactly.
+
+Return exactly these keys:
+{"is_ruling": true|false,
+ "outcome": <one outcome value>,
+ "outcome_quote": "<the sentence(s) in the text that state the outcome, copied character for character, at most 300 characters>",
+ "topic": <one topic value>,
+ "topics_secondary": [<0 to 2 further topic values the decision also rules on>],
+ "respondent_name": "<NFO only: the insurer's name exactly as written in the text, or null if it is not named; FAIS: null>",
+ "certainty": "high"|"medium"|"low",
+ "doubt": "<at most 25 words on anything that made this hard, or empty>"}
+
+OUTCOME values (read from the complainant's side, from what the ombud ORDERED):
+""" + "\n".join(f"- {k}: {v}" for k, v in OUTCOMES.items()) + """
+
+Outcome traps:
+- "leave to appeal is granted" is boilerplate, never the outcome.
+- The order is usually just before "DATED AT ..."; OCR'd files often end with annexures (forms, tables) after it.
+- NFO case reports end with an "Outcome"/"Result" paragraph on what the insurer did later; the outcome is what the ombud decided.
+- Read whose appeal it is: the insurer's appeal failing means the complaint is upheld.
+- "The insurer's decision is upheld/confirmed" means the complaint is dismissed.
+
+TOPIC values (the issue the decision turns on, not the product line):
+""" + "\n".join(f"- {k}: {v}" for k, v in TOPICS.items()) + """
+
+Topic precedence when several fit: misappropriation_fraud first, then unlicensed_provider, then the
+issue the ombud's finding actually turns on. If the document has no ruling (outcome amendment or
+no_ruling), topic is null.
+"""
+PROMPT_SHA = hashlib.sha256(SYSTEM.encode()).hexdigest()
+INSTRUCTION = ("The file above is one determination. Page breaks are marked '=== page N ==='. "
+               "Return the JSON object only.")
+
+
+# ----------------------------------------------------------------------------- data
+
+def jl(path):
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def load():
+    census = jl(os.path.join(ROOT, "sources.jsonl"))
+    manifest = {m["doc_id"]: m for m in jl(os.path.join(ROOT, "text_manifest.jsonl"))}
+    rows = {r["row_index"]: r for r in jl(os.path.join(ROOT, "local", "fais-determination-rows.jsonl"))}
+    return census, manifest, rows
+
+
+def plan(census):
+    """Map every determination doc_id to its decision: (decision_id, canonical doc_id, duplicates)."""
+    det = [r for r in census if r["doc_type"] == "determination"]
+    by_sha = defaultdict(list)
+    for r in det:
+        by_sha[r["sha256"]].append(r)
+    out = {}
+    for group in by_sha.values():
+        def rank(r):  # NFO: prefer the per-case doc page over a yearly package; then doc_id
+            has_case = bool(re.search(r"Case\s+\d+", r.get("title") or ""))
+            return (0 if has_case else 1, r["doc_id"])
+        group = sorted(group, key=rank)
+        canon = group[0]
+        if canon["office"] == "NFO":
+            m = re.search(r"Case\s+(\d+)", canon.get("title") or "")
+            if not m:
+                raise SystemExit(f"no case number for NFO determination {canon['doc_id']}")
+            did = f"nfo-fd-{int(m.group(1))}"
+        else:
+            did = "fais-d-" + canon["doc_id"][len("fais-det-"):]
+        dups = [r["doc_id"] for r in group[1:]]
+        for r in group:
+            out[r["doc_id"]] = (did, canon["doc_id"], dups)
+    return out
+
+
+# ----------------------------------------------------------------------------- D1 citation
+
+GENERIC_FILENAME_TOKENS = {
+    "fais", "det", "determination", "determinations", "redacted", "final", "case", "no", "nr",
+    "v", "vs", "and", "en", "pdf", "signed", "amended", "amendment", "recommendation", "ruling",
+    "the", "of", "gp", "wc", "kzn", "ec", "fs", "lp", "mp", "nw", "nc", "kz", "ltd", "pty", "cc"}
+
+
+def filename_is_name_free(filename):
+    """D1: a FAIS filename may be linked directly only if every letter run in it is a generic
+    word (case-numbered files). Conservative by construction: one unknown token means 'hash'."""
+    stem = re.sub(r"\.pdf$", "", filename or "", flags=re.I)
+    toks = re.findall(r"[^\W\d_]+", stem)
+    return bool(toks) and all(t.lower() in GENERIC_FILENAME_TOKENS for t in toks) or not toks
+
+
+def citation(r, rows):
+    if r["office"] == "NFO":
+        return "direct", r["url"]
+    names = [f["filename"] for i in r.get("listing_row_indices") or [] for f in rows[i]["files"]
+             if f["filename_sha256"] == r["filename_sha256"]]
+    if names and all(filename_is_name_free(n) for n in names):
+        return "direct", r["fetch_url"]
+    return "hash", FAIS_LIST
+
+
+# ----------------------------------------------------------------------------- respondent
+
+JURISTIC = re.compile(r"\b(ltd|limited|\(?pty\)?|cc|bk|bpk|inc|npc|soc|corporation|company|co\b|"
+                      r"assurance|insurance|insurers?|bank|underwriters?|holdings|group|trust|"
+                      r"fund|scheme|association|society|brokers?|consultants|services)\b", re.I)
+
+
+def canonical_name(s):
+    if not s:
+        return None
+    s = re.sub(r"\s+", " ", s).strip(" ,.;")
+    s = re.sub(r"\s*&\s*", " and ", s)
+    s = re.sub(r"\(\s*pty\s*\)", "(Pty)", s, flags=re.I)
+    s = re.sub(r"\bltd\b\.?", "Ltd", s, flags=re.I)
+    s = re.sub(r"\blimited\b", "Limited", s, flags=re.I)
+    s = re.sub(r"\bcc\b", "CC", s, flags=re.I)
+    if s.isupper():
+        s = s.title().replace("(Pty)", "(Pty)").replace(" Cc", " CC")
+    return s
+
+
+def party_type(raw, text=None):
+    """Crude and conservative: 'juristic' only when every part joined by and/&/,/; carries a
+    juristic marker, or the text itself calls the whole string a company. A trading-as sole
+    trader is 'natural'. No marker at all is 'unknown', not 'natural': this is a heuristic."""
+    if not raw:
+        return None
+    if re.search(r"\bt/a\b|trading as|h/a\b", raw, re.I):
+        return "natural"
+    if text and len(raw) >= 8 and re.search(
+            re.escape(re.sub(r"\s+", " ", raw).strip()) + r"[^.]{0,60}?(?:a company|duly incorporated|"
+            r"registration number|close corporation)", re.sub(r"\s+", " ", text), re.I):
+        return "juristic"           # "X and Y (Pty) Ltd, a company duly incorporated ..." is one firm
+    parts = [p for p in re.split(r"\s+(?:and|&)\s+|\s*/\s*|;|,\s+", raw) if p.strip()]
+    marked = [bool(JURISTIC.search(p)) for p in parts]
+    if all(marked):
+        return "juristic"
+    if any(marked):
+        return "mixed"
+    return "unknown"
+
+
+# ----------------------------------------------------------------------------- rules cited
+
+INSTRUMENTS = [  # (regex on the instrument name, canonical label); order matters (longest first)
+    (r"general code(?: of conduct)?(?: for authori[sz]ed financial services? providers(?: and representatives)?)?|(?:the )?code\b", "General Code"),
+    (r"financial advisory and intermediary services act|fais act", "FAIS Act"),
+    (r"financial services? ombud schemes act|fsos act", "FSOS Act"),
+    (r"financial sector regulation act|fsr act|fsra\b", "FSR Act"),
+    (r"long[- ]term insurance act|ltia\b", "LTIA"),
+    (r"short[- ]term insurance act|stia\b", "STIA"),
+    (r"policyholder protection rules|\bppr\b", "PPR"),
+    (r"rules on proceedings(?: of (?:this|the) office)?(?: of the ombud(?: for financial services providers)?)?", "FAIS Ombud Rules"),
+    (r"prescription act", "Prescription Act"),
+    (r"consumer protection act|\bcpa\b", "CPA"),
+    (r"national credit act|\bnca\b", "NCA"),
+    (r"pension funds act", "PFA"),
+    (r"collective investment schemes control act|cisca\b", "CISCA"),
+    (r"companies act", "Companies Act"),
+    (r"medical schemes act", "MSA"),
+    (r"insurance act", "Insurance Act"),
+]
+INSTR_RE = "|".join(f"(?:{p})" for p, _ in INSTRUMENTS)
+_PAR = r"\(\s*[0-9a-z]{1,4}\s*\)"
+_ONE = r"\d{1,3}[A-Z]?(?:\s*" + _PAR + r")*(?:\s*(?:,|and|or|to)\s*" + _PAR + r")*"
+# "section 8(1)(c) of the Code"; enumerations "sections 7, 8, 9 and 11 of the General Code";
+# sibling paragraphs "section 8 (1) (a), (b) and (c) of The Code"
+SECTION = re.compile(
+    r"\b(sections?|sec\.|ss?\.?|rules?)\s*(" + _ONE + r"(?:\s*(?:,|and|or|&)\s*" + _ONE + r")*)"
+    r"\s+(?:of|in terms of|under)\s+(?:the\s+)?(" + INSTR_RE + r"|act\b|rules\b)", re.I)
+
+
+def _expand(listing):
+    """'8 (1) (a), (b) and (c)' -> ['8(1)(a)', '8(1)(b)', '8(1)(c)']; '7, 8 and 11' -> ['7','8','11']."""
+    out, cur = [], None
+    rng = False
+    for tok in re.findall(r"\d{1,3}[A-Z]?|\(\s*[0-9a-z]{1,4}\s*\)|,|\band\b|\bor\b|\bto\b|&", listing, re.I):
+        if tok.lower() == "to":
+            rng, sep = True, True
+            continue
+        if re.fullmatch(r"\d{1,3}[A-Z]?", tok):
+            if cur:
+                out.append(cur)
+            cur, sep = [tok.upper(), []], False
+        elif tok.startswith("("):
+            par = "(" + re.sub(r"[\s()]", "", tok).lower() + ")"
+            if cur is None:
+                continue
+            last = cur[1][-1] if cur[1] else None
+            if rng and last and re.fullmatch(r"\([a-z]\)", last) and re.fullmatch(r"\([a-z]\)", par) \
+                    and last < par:       # "(a) to (d)": every letter in between
+                for c in range(ord(last[1]) + 1, ord(par[1]) + 1):
+                    out.append(cur)
+                    cur = [cur[0], cur[1][:-1] + [f"({chr(c)})"]]
+            elif sep and cur[1]:      # a sibling: same depth as the last paragraph
+                out.append(cur)
+                cur = [cur[0], cur[1][:-1] + [par]]
+            else:
+                cur[1].append(par)
+            rng = sep = False
+        else:
+            sep = True
+    if cur:
+        out.append(cur)
+    return [n + "".join(ps) for n, ps in out]
+RULE = re.compile(r"\brules?\s+(\d{1,2}[A-Z]?(?:\.\d{1,3}[A-Z]?){1,4}(?:\s*\(\s*[0-9a-z]{1,4}\s*\))*)", re.I)
+MAX_SECTION = {"FAIS Act": 51, "General Code": 20, "FSOS Act": 20, "LTIA": 80, "STIA": 80,
+               "FSR Act": 300, "Prescription Act": 25}
+
+
+def _label(instr, office):
+    low = instr.lower()
+    for p, lab in INSTRUMENTS:
+        if re.fullmatch(p, low, re.I):
+            return lab
+    if low == "act":
+        return "FAIS Act" if office == "FAIS" else None    # FAIS defines 'the Act' in every caption
+    if low == "rules":
+        return "FAIS Ombud Rules" if office == "FAIS" else "OLTI Rules"
+    return None
+
+
+MONTHS = {m: i for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july",
+                                      "august", "september", "october", "november", "december"], 1)}
+SIGNED = re.compile(r"DATED\s+(?:AT\s+\w+\s+)?(?:ON\s+)?(?:THIS\s+)?(?:THE\s+)?(\d{1,2})\s*(?:st|nd|rd|th)?\s+"
+                    r"(?:DAY\s+)?(?:OF\s+)?([A-Za-z]+),?\s+((?:19|20)\d\d)", re.I)
+
+
+def signed_date(text):
+    """ISO date of the last 'DATED AT ... <day> <Month> <year>' line, or None. Native text only."""
+    t = re.sub(r"\s+", " ", text)
+    for m in reversed(list(SIGNED.finditer(t))):
+        mon = MONTHS.get(m.group(2).lower())
+        if mon:
+            try:
+                return datetime(int(m.group(3)), mon, int(m.group(1))).strftime("%Y-%m-%d")
+            except ValueError:
+                return None
+    return None
+
+
+def _add_days(iso, n):
+    from datetime import timedelta
+    return (datetime.strptime(iso, "%Y-%m-%d") + timedelta(days=n)).strftime("%Y-%m-%d")
+
+
+def rules_cited(text, office):
+    t = re.sub(r"\s+", " ", text)
+    found, flags = [], set()
+    for m in SECTION.finditer(t):
+        lab = _label(m.group(3), office)
+        if not lab:
+            continue
+        kind = "r" if m.group(1).lower().startswith("rule") else "s"
+        if kind == "r" and lab not in ("FAIS Ombud Rules", "OLTI Rules", "PPR"):
+            continue
+        for one in _expand(m.group(2)):
+            n = int(re.match(r"\d+", one).group(0))
+            if lab in MAX_SECTION and not (1 <= n <= MAX_SECTION[lab]):
+                flags.add("rule_out_of_range")
+                continue
+            found.append(f"{lab} {kind}{one}")
+    for m in RULE.finditer(t):
+        after = t[m.end(): m.end() + 60].lower()
+        lab = "PPR" if "policyholder protection" in after or re.match(r"\d+[A-Z]\.", m.group(1)) \
+            else ("OLTI Rules" if office == "NFO" else None)
+        if not lab:
+            continue
+        num = re.sub(r"[ ]+", "", m.group(1))
+        num = re.sub(r"\([0-9a-zA-Z]{1,4}\)", lambda x: x.group(0).lower(), num)
+        found.append(f"{lab} r{num}")
+    seen, out = set(), []
+    for f in found:
+        if f not in seen:
+            seen.add(f)
+            out.append(f)
+    return out, flags
+
+
+# ----------------------------------------------------------------------------- rule outcome
+
+STD = re.compile(r"(?:complaints?|claims?|matter)\s+(?:against [\w ]{1,40}?\s+)?(?:is|are|was|were|must be|"
+                 r"should be|be|is hereby|are hereby|stands? to be|falls? to be)\s+"
+                 r"(?:(partially|partly|in part)\s+|(?:hereby|accordingly|therefore|thus|consequently|only)\s+)?"
+                 r"(upheld|dismissed|rejected|not upheld|succeeds?|referred)", re.I)
+AMEND = re.compile(r"order should read thus|(?:is|are) hereby amended|amended as follows|hereby amend|"
+                   r"corrigendum|should read as follows", re.I)
+PAY = re.compile(r"ordered[^.]{0,160}?to (?:pay|compensate|refund|reimburse)|"
+                 r"(?:respondents?|insurer) (?:is|are) (?:hereby )?(?:ordered|directed|instructed) to", re.I)
+REFER = re.compile(r"not finally determined|be dealt with by a court|referred to (?:a |the )?court", re.I)
+DATED = re.compile(r"\bDATED\s+(?:AT|THIS|ON)\b|\bDated at\b|\bSigned at\b", re.I)
+NFO_UP = re.compile(r"instructed to (?:pay|assess|reinstate|refund|comply|calculate)|directed to (?:pay|assess)|"
+                    r"(?:should|must) (?:now )?(?:assess|pay|admit|reinstate|refund)|"
+                    r"provisional (?:ruling|determination)[^.]{0,80}?(?:confirmed|made final|became final|has become final|upheld)|"
+                    r"(?:complaint|appeal) (?:should be|is|was) upheld|condoned|cannot repudiate|not justified|"
+                    r"failed to discharge the onus|ordered to (?:pay|refund)|has to pay|"
+                    r"compensat\w+ (?:of|amount)|appeal cannot succeed", re.I)
+NFO_DOWN = re.compile(r"(?:complaint|claim) (?:is|was) (?:dismissed|not upheld|rejected)|"
+                      r"insurer'?s? (?:decision|repudiation) (?:is|was) (?:upheld|confirmed|justified|correct)|"
+                      r"unable to (?:assist|uphold)", re.I)
+
+
+def rule_outcome(pages, office):
+    """A deliberately simple cross-check of the model, never the final word.
+    -> (value|None, page|None)"""
+    flat, offs = "", []
+    for i, p in enumerate(pages, 1):
+        offs.append((len(flat), i))
+        flat += re.sub(r"\s+", " ", p) + " "
+
+    def page_of(pos):
+        pg = 1
+        for o, i in offs:
+            if o <= pos:
+                pg = i
+        return pg
+
+    if len(pages) <= 3 and AMEND.search(flat):
+        return "amendment", page_of(AMEND.search(flat).start())
+    if office == "FAIS":
+        ds = [m.start() for m in DATED.finditer(flat)]
+        end = ds[-1] if ds else len(flat)
+        # the determination's own DATED line, not an annexure's: last one in the body
+        start = max(0, end - 3500)
+        win = flat[start:end]
+        o = max(win.rfind("ORDER"), win.rfind("Order"))
+        seg = win[o:] if o >= 0 else win
+        base = start + (o if o >= 0 else 0)
+        segs = [m for m in STD.finditer(seg) if "appeal" not in seg[max(0, m.start() - 30):m.start()].lower()]
+        if segs:
+            m = segs[0]
+            word = m.group(2).lower()
+            val = {"upheld": "upheld", "succeeds": "upheld", "succeed": "upheld", "dismissed": "dismissed",
+                   "rejected": "dismissed", "not upheld": "dismissed", "referred": "referred"}[word]
+            if m.group(1) and val == "upheld":
+                val = "partly_upheld"
+            return val, page_of(base + m.start())
+        if REFER.search(seg):
+            return "referred", page_of(base + REFER.search(seg).start())
+        if PAY.search(seg):
+            return "upheld", page_of(base + PAY.search(seg).start())
+        return None, None
+    tail_start = int(len(flat) * 0.55)
+    tail = flat[tail_start:]
+    up, down = list(NFO_UP.finditer(tail)), list(NFO_DOWN.finditer(tail))
+    if up and not down:
+        return "upheld", page_of(tail_start + up[-1].start())
+    if down and not up:
+        return "dismissed", page_of(tail_start + down[-1].start())
+    return None, None
+
+
+# ----------------------------------------------------------------------------- model
+
+def _norm(s):
+    s = s.replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')
+    s = re.sub(r"[‐‑‒–—]", "-", s)
+    return re.sub(r"\s+", " ", s).strip().lower()
+
+
+def anchor(quote, pages):
+    """1-based page where the quote occurs (whitespace/quote-insensitive). When it occurs on
+    several pages, the LAST one wins: NFO reports restate the provisional ruling before the final
+    one, in the same words. If the whole quote is not found, its first and last 60 characters are
+    tried; if those land on different pages the model stitched two passages together, and the
+    suffix (the later, operative part) is used. -> (page|None, how)"""
+    if not quote:
+        return None, "no_quote"
+    q = _norm(quote).strip(' ."')
+    np_ = [_norm(p) for p in pages]
+    full = [i for i, p in enumerate(np_, 1) if q and q in p]
+    if full:
+        return full[-1], "exact"
+    pre = [i for i, p in enumerate(np_, 1) if len(q) >= 60 and q[:60] in p]
+    suf = [i for i, p in enumerate(np_, 1) if len(q) >= 60 and q[-60:] in p]
+    if pre and suf and pre[-1] != suf[-1]:
+        return suf[-1], "stitched"
+    if suf:
+        return suf[-1], "suffix"
+    if pre:
+        return pre[-1], "prefix"
+    joined = " ".join(np_)          # a quote may straddle a page break
+    if q and q in joined:
+        pos, acc = joined.rfind(q), 0
+        for i, p in enumerate(np_, 1):
+            acc += len(p) + 1
+            if acc > pos:
+                return i, "straddle"
+    return None, "not_found"
+
+
+_last_call = [0.0]
+
+
+def call_model(model, input_path, retries=2):
+    """One document per call, through pi (Tim's harness; provider credentials stay in pi).
+    -> (parsed_json|None, meta)"""
+    pi = os.environ.get("PI_BIN", "pi")
+    cmd = [pi, "-p", "--mode", "json", "--no-tools", "--no-session", "--no-context-files",
+           "--no-skills", "--no-extensions", "--no-mcp", "--no-prompt-templates", "--no-themes",
+           "--model", model, "--system-prompt", SYSTEM, "@" + input_path, INSTRUCTION]
+    meta = {"model": model, "attempts": 0}
+    for attempt in range(retries + 1):
+        gap = time.time() - _last_call[0]
+        if gap < MIN_GAP_S:
+            time.sleep(MIN_GAP_S - gap)
+        _last_call[0] = time.time()
+        meta["attempts"] = attempt + 1
+        try:
+            p = subprocess.run(cmd, capture_output=True, text=True, timeout=600, cwd=WORK)
+        except subprocess.TimeoutExpired:
+            meta["error"] = "timeout"
+            continue
+        reply, usage = None, None
+        for line in p.stdout.splitlines():
+            try:
+                ev = json.loads(line)
+            except ValueError:
+                continue
+            if ev.get("type") == "message_end" and ev.get("message", {}).get("role") == "assistant":
+                msg = ev["message"]
+                reply = "".join(c.get("text", "") for c in msg.get("content", []) if c.get("type") == "text")
+                usage = msg.get("usage")
+                meta["model_reported"] = f"{msg.get('provider')}/{msg.get('model')}"
+                meta["stop"] = msg.get("stopReason")
+        meta["usage"] = usage
+        meta["returncode"] = p.returncode
+        if reply is None:
+            meta["error"] = f"no assistant message (rc={p.returncode}): {p.stderr[-300:]}"
+            continue
+        txt = reply.strip()
+        txt = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt)
+        m = re.search(r"\{.*\}", txt, re.S)
+        try:
+            return json.loads(m.group(0) if m else txt), meta
+        except (ValueError, AttributeError):
+            meta["error"] = "unparseable reply"
+            meta["raw_reply"] = reply[:2000]
+    return None, meta
+
+
+# ----------------------------------------------------------------------------- one document
+
+def read_text(doc_id):
+    p = os.path.join(ROOT, "text", "final", doc_id + ".txt")
+    if not os.path.exists(p):
+        return None
+    with open(p, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def extract(doc_id, census_by_id, manifest, rows, mapping, model, dry_run=False, reprocess=False):
+    r = census_by_id[doc_id]
+    did, canon_id, dups = mapping[doc_id]
+    r = census_by_id[canon_id]
+    m = manifest[canon_id]
+    office = r["office"]
+    flags, fsrc = set(), {}
+    t0 = time.time()
+
+    rec = {"decision_id": did, "schema_version": "decision/1", "office": office,
+           "division": r.get("division"), "kind": "determination", "doc_id": canon_id,
+           "duplicate_doc_ids": dups}
+
+    # ---- deterministic: dates, product line, citation, respondent (FAIS)
+    trows = [rows[i] for i in (r.get("listing_row_indices") or [])]
+    if office == "FAIS":
+        dates = sorted({x["date_raw"] for x in trows if re.fullmatch(r"\d{8}", x.get("date_raw") or "")})
+        rec["date"] = f"{dates[0][:4]}-{dates[0][4:6]}-{dates[0][6:]}" if dates else None
+        rec["year"] = r.get("year") if r.get("year") else (int(dates[0][:4]) if dates else None)
+        fys = sorted({x["fiscal_year"] for x in trows if x.get("fiscal_year")})
+        rec["fiscal_year"] = fys[0] if fys else None
+        cats = sorted({x["category"] for x in trows if x.get("category")})
+        rec["product_line"] = " | ".join(cats) or None
+        fsrc.update(year="fais_table", date="fais_table", product_line="fais_table")
+        if len(trows) > 1:
+            flags.add("file_serves_two_table_rows")
+        resp = " | ".join(dict.fromkeys(x["respondent"].strip() for x in trows if x.get("respondent")))
+        rec["respondent_raw"] = resp or None
+        rec["respondent_canonical"] = canonical_name(resp) if resp else None
+        rec["respondent_party_type"] = party_type(resp)   # refined against the text below
+        rec["respondent_source"] = "fais_table" if resp else None
+        fsrc["respondent"] = "fais_table"
+    else:
+        rec["date"] = None
+        rec["year"] = r.get("year")
+        rec["fiscal_year"] = None
+        rec["product_line"] = "Long-term"
+        fsrc.update(year="census_title", product_line="division")
+    pol, url = citation(r, rows)
+    rec["citation_policy"], rec["citation_url"] = pol, url
+    rec["filename_sha256"] = r.get("filename_sha256")
+    rec["text_source"] = m["text_source"]
+    rec["restricted_fields"] = (["respondent_raw", "respondent_canonical", "outcome_quote"]
+                                if office == "FAIS" else ["outcome_quote"])
+
+    text = read_text(canon_id)
+    cwr = m.get("common_word_rate")
+    usable = bool(text) and m["text_source"] != "none" and (cwr is None or cwr >= 0.10)
+    if m["text_source"] in ("ocr", "html"):
+        flags.add("words_only_text")
+    if m.get("notes") and "page-level OCR" in m["notes"]:
+        flags.add("image_page_not_ocrd")
+
+    if not usable:
+        flags.add("no_usable_text")
+        if office == "FAIS":
+            rec["listed_date"] = rec.get("date")
+        rec.update(topic=None, topics_secondary=[], outcome=None, rules_cited=[], page_anchor=None,
+                   outcome_quote=None, extraction_method="none", extraction_model=None,
+                   extraction_confidence="low", prompt_sha256=None)
+        if office == "NFO":
+            rec.update(respondent_raw=None, respondent_canonical=None, respondent_party_type=None,
+                       respondent_source=None)
+        if rec.get("year") is None and office == "FAIS":
+            flags.add("year_unknown")
+        return finish(rec, flags, fsrc, t0, {"model": None})
+
+    pages = text.split("\f")
+    if pages and not pages[-1].strip():
+        pages = pages[:-1]
+
+    # ---- rules cited: regex over the unmasked text (output is generic, never a name)
+    rc, rflags = rules_cited(text, office)
+    rec["rules_cited"] = rc
+    flags |= rflags
+    fsrc["rules_cited"] = "regex"
+
+    if office == "FAIS" and rec.get("respondent_raw"):
+        rec["respondent_party_type"] = party_type(rec["respondent_raw"], text)
+
+    # ---- FAIS date: the official table's date is the *listing* date. In 301 of 321 native files
+    # it equals the signed date, but a January 2021 bulk listing carries decisions signed in
+    # 2019-2020. For native text, prefer the signed date (last "DATED ... <d> <Month> <yyyy>"),
+    # unless it falls after the listing (then it belongs to an appended document). OCR/HTML text
+    # is never read for digits, so those keep the table date.
+    if office == "FAIS":
+        rec["listed_date"] = rec.get("date")
+        signed = signed_date(text) if m["text_source"] in ("native", "repaired", "converted") else None
+        if signed and rec["listed_date"] and signed > _add_days(rec["listed_date"], 31):
+            flags.add("signed_date_after_listing")
+            signed = None
+        if signed:
+            if rec["listed_date"] and signed != rec["listed_date"]:
+                flags.add("listed_date_differs")
+            rec["date"], rec["year"] = signed, int(signed[:4])
+            fsrc.update(year="native_signed_date", date="native_signed_date")
+        elif m["text_source"] in ("ocr", "html"):
+            flags.add("date_from_table_only")
+        if rec["year"] and rec.get("fiscal_year"):
+            a0 = int(rec["fiscal_year"][:4])
+            if rec["date"] and not (f"{a0}-04-01" <= rec["date"] <= f"{a0 + 1}-03-31"):
+                flags.add("fiscal_year_differs")
+
+    # ---- year fallback: native text only (never OCR/HTML: no numbers from those)
+    if rec.get("year") is None:
+        if m["text_source"] in ("native", "repaired", "converted"):
+            ys = re.findall(r"DATED[^\n]{0,80}?\b((?:19|20)\d\d)\b", text, re.I)
+            if ys:
+                rec["year"] = int(ys[-1])
+                fsrc["year"] = "native_text_dated_line"
+                flags.add("year_from_text")
+        if rec.get("year") is None:
+            flags.add("year_unknown")
+
+    # ---- rule outcome (cross-check)
+    r_out, r_page = rule_outcome(pages, office)
+
+    # ---- model: masked text, one document per call
+    extra = [x.get("complainant") for x in trows] + [x.get("respondent") for x in trows]
+    level = "full" if office == "FAIS" else "light"
+    mpages = [mask(p, extra=extra, level=level) for p in pages]
+    os.makedirs(WORK, exist_ok=True)
+    inp = os.path.join(WORK, canon_id + ".input.txt")
+    with open(inp, "w", encoding="utf-8") as f:
+        for i, p in enumerate(mpages, 1):
+            f.write(f"=== page {i} ===\n{p}\n")
+    if dry_run:
+        return None
+    reply_path = os.path.join(WORK, canon_id + ".reply.json")
+    if reprocess:
+        # deterministic re-run of everything except the model: same saved reply, current rules
+        if not os.path.exists(reply_path):
+            raise RuntimeError(f"{canon_id}: --reprocess needs {reply_path}")
+        saved = json.load(open(reply_path, encoding="utf-8"))
+        ans, meta = saved["answer"], dict(saved["meta"], reprocessed=True)
+    else:
+        ans, meta = call_model(model, inp)
+        with open(reply_path, "w", encoding="utf-8") as f:
+            json.dump({"answer": ans, "meta": meta}, f, ensure_ascii=False, indent=1)
+    rec["extraction_model"] = meta.get("model_reported") or model
+    rec["prompt_sha256"] = PROMPT_SHA
+
+    if not isinstance(ans, dict):
+        flags.add("model_invalid")
+        ans = {}
+    m_out = ans.get("outcome") if ans.get("outcome") in OUTCOMES else None
+    m_top = ans.get("topic") if ans.get("topic") in TOPICS else None
+    if ans and ans.get("outcome") is not None and m_out is None:
+        flags.add("model_outcome_off_vocab")
+    if ans and ans.get("topic") is not None and m_top is None:
+        flags.add("model_topic_off_vocab")
+    sec = [t for t in (ans.get("topics_secondary") or []) if t in TOPICS and t != m_top][:2]
+    if m_out in ("amendment", "no_ruling"):
+        m_top, sec = None, []
+    quote = (ans.get("outcome_quote") or "").strip()[:400] or None
+    page, how = anchor(quote, mpages)
+    if page is None:
+        flags.add("quote_not_anchored")
+    elif how == "stitched":
+        flags.add("quote_stitched")
+    elif how != "exact":
+        flags.add(f"quote_anchored_{how}")
+    if ans.get("certainty") == "low":
+        flags.add("model_unsure")
+
+    # outcome: the model decides; the rule only cross-checks
+    if r_out is None:
+        flags.add("rule_silent")
+    elif m_out is not None and r_out != m_out:
+        flags.add("rule_model_disagree")
+    rec["outcome"] = m_out
+    rec["topic"] = m_top
+    rec["topics_secondary"] = sec
+    rec["outcome_quote"] = quote
+    rec["page_anchor"] = page if page is not None else (r_page if r_out == m_out else None)
+    if page is None and rec["page_anchor"] is not None:
+        flags.add("page_from_rule")
+    fsrc.update(outcome="model+rule_check", topic="model", page_anchor="anchored_quote")
+
+    # ---- NFO respondent: the model's string, kept only if it is in the text
+    if office == "NFO":
+        name = (ans.get("respondent_name") or "").strip() or None
+        if name and _norm(name) in _norm(text):
+            rec["respondent_raw"] = name
+            rec["respondent_canonical"] = canonical_name(name)
+            # the NFO's jurisdiction is over subscribing insurers, so the respondent is juristic
+            rec["respondent_party_type"] = "juristic"
+            rec["respondent_source"] = "text_anchored"
+        else:
+            if name:
+                flags.add("respondent_not_anchored")
+            else:
+                flags.add("respondent_not_named")
+            rec.update(respondent_raw=None, respondent_canonical=None, respondent_party_type=None,
+                       respondent_source=None)
+        fsrc["respondent"] = "model_anchored"
+
+    rec["extraction_method"] = "model+rules" if ans else "rules"
+    low = {"rule_model_disagree", "quote_not_anchored", "model_invalid", "model_outcome_off_vocab",
+           "model_topic_off_vocab", "no_usable_text", "quote_stitched"}
+    med = {"rule_silent", "model_unsure", "words_only_text", "respondent_not_anchored",
+           "image_page_not_ocrd", "quote_anchored_prefix", "quote_anchored_suffix", "year_unknown"}
+    rec["extraction_confidence"] = ("low" if flags & low else "medium" if flags & med else "high")
+    meta["rule_outcome"] = r_out
+    meta["model_doubt"] = ans.get("doubt")
+    meta["model_certainty"] = ans.get("certainty")
+    return finish(rec, flags, fsrc, t0, meta)
+
+
+def finish(rec, flags, fsrc, t0, meta):
+    rec["extraction_flags"] = sorted(flags)
+    rec["field_sources"] = fsrc
+    rec["extractor_version"] = VERSION
+    rec["extracted_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    meta["seconds"] = round(time.time() - t0, 2)
+    return rec, meta
+
+
+# ----------------------------------------------------------------------------- write + verify
+
+def existing():
+    if not os.path.exists(LOCAL_OUT):
+        return {}
+    out = {}
+    for line in open(LOCAL_OUT, encoding="utf-8"):
+        if line.strip():
+            d = json.loads(line)
+            out[d["decision_id"]] = d
+    return out
+
+
+def write_and_verify(rec, validator, replace=False):
+    """Append (or replace) the record, fsync, re-read the file, parse, find the decision_id, and
+    schema-validate what is on disk. Raises on any failure — never reports success it cannot see."""
+    if replace and os.path.exists(LOCAL_OUT):
+        keep = [l for l in open(LOCAL_OUT, encoding="utf-8")
+                if l.strip() and json.loads(l)["decision_id"] != rec["decision_id"]]
+        tmp = LOCAL_OUT + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            f.writelines(keep)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, LOCAL_OUT)
+    line = json.dumps(rec, ensure_ascii=False, sort_keys=False)
+    with open(LOCAL_OUT, "a", encoding="utf-8") as f:
+        f.write(line + "\n")
+        f.flush()
+        os.fsync(f.fileno())
+    hits = [json.loads(l) for l in open(LOCAL_OUT, encoding="utf-8")
+            if l.strip() and f'"decision_id": "{rec["decision_id"]}"' in l]
+    if len(hits) != 1:
+        raise RuntimeError(f"{rec['decision_id']}: expected exactly 1 record on disk, found {len(hits)}")
+    on_disk = hits[0]
+    if on_disk != rec:
+        raise RuntimeError(f"{rec['decision_id']}: record on disk differs from the record written")
+    validator.validate(on_disk)
+
+
+def log_progress(entry):
+    os.makedirs(os.path.dirname(PROGRESS), exist_ok=True)
+    with open(PROGRESS, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def publish():
+    """decisions.public.jsonl: the local records with every restricted field nulled, sorted."""
+    recs = sorted(existing().values(), key=lambda d: d["decision_id"])
+    tmp = PUBLIC_OUT + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        for d in recs:
+            p = dict(d)
+            for k in d.get("restricted_fields", []):
+                p[k] = None
+            f.write(json.dumps(p, ensure_ascii=False) + "\n")
+    os.replace(tmp, PUBLIC_OUT)
+    return len(recs)
+
+
+# ----------------------------------------------------------------------------- sample / queue
+
+def make_sample(census, manifest, mapping, seed=20261123):
+    """Stratified random draw, fixed seed: 9 NFO across 9 year bins, 11 FAIS across 11 year bins;
+    canonical files with text only. Constraints from the brief: >= 8 NFO, >= 10 FAIS, 2009-2025,
+    >= 3 OCR. (>= 1 HTML is unsatisfiable: no determination has HTML text.) The seed is bumped
+    until the constraints hold, and the seed used is recorded."""
+    det = [r for r in census if r["doc_type"] == "determination" and mapping[r["doc_id"]][1] == r["doc_id"]
+           and manifest[r["doc_id"]]["text_source"] != "none" and r.get("year")]
+    nfo_bins = [(2009, 2009), (2010, 2010), (2011, 2012), (2013, 2014), (2015, 2016), (2017, 2018),
+                (2019, 2019), (2020, 2022), (2023, 2024)]
+    fais_bins = [(2009, 2009), (2010, 2010), (2011, 2011), (2012, 2012), (2013, 2014), (2015, 2016),
+                 (2017, 2018), (2019, 2020), (2021, 2021), (2023, 2024), (2025, 2025)]
+    for s in range(seed, seed + 1000):
+        rng = random.Random(s)
+        pick = []
+        for off, bins in (("NFO", nfo_bins), ("FAIS", fais_bins)):
+            for a, b in bins:
+                pool = sorted((r for r in det if r["office"] == off and a <= r["year"] <= b),
+                              key=lambda r: r["doc_id"])
+                pick.append(rng.choice(pool))
+        ocr = sum(manifest[r["doc_id"]]["text_source"] == "ocr" for r in pick)
+        years = {r["year"] for r in pick}
+        if ocr >= 3 and min(years) <= 2009 and max(years) >= 2025:
+            return pick, s
+    raise SystemExit("no seed satisfied the sample constraints")
+
+
+# ----------------------------------------------------------------------------- main
+
+def main(argv):
+    census, manifest, rows = load()
+    by_id = {r["doc_id"]: r for r in census}
+    mapping = plan(census)
+    det_ids = [r["doc_id"] for r in census if r["doc_type"] == "determination"]
+    model = DEFAULT_MODEL
+    if "--model" in argv:
+        model = argv[argv.index("--model") + 1]
+    force, dry, reproc = "--force" in argv or "--reprocess" in argv, "--dry-run" in argv, "--reprocess" in argv
+
+    if "--make-sample" in argv:
+        pick, seed = make_sample(census, manifest, mapping)
+        with open(SAMPLE, "w") as f:
+            for r in pick:
+                f.write(json.dumps({"doc_id": r["doc_id"]}) + "\n")
+        c = Counter((r["office"], manifest[r["doc_id"]]["text_source"]) for r in pick)
+        print(f"sample: {len(pick)} documents, seed {seed}; {dict(c)}; years "
+              f"{sorted(r['year'] for r in pick)}")
+        return 0
+    if "--make-queue" in argv:
+        sample = {d["doc_id"] for d in jl(SAMPLE)}
+        q = [d for d in det_ids if d not in sample]
+        with open(QUEUE, "w") as f:
+            for d in q:
+                f.write(json.dumps({"doc_id": d}) + "\n")
+        print(f"queue: {len(q)} documents ({len(det_ids)} determinations - {len(sample)} sampled)")
+        return 0
+    if "--publish-only" in argv:
+        print("decisions.public.jsonl:", publish(), "records")
+        return 0
+
+    if "--sample" in argv:
+        todo = [d["doc_id"] for d in jl(SAMPLE)]
+    elif "--queue" in argv:
+        todo = [d["doc_id"] for d in jl(argv[argv.index("--queue") + 1])]
+    else:
+        todo = [a for a in argv if a in by_id]
+    if "--limit" in argv:
+        todo = todo[: int(argv[argv.index("--limit") + 1])]
+    bad = [d for d in todo if d not in mapping]
+    if bad:
+        raise SystemExit(f"not determinations: {bad}")
+
+    validator = jsonschema.Draft202012Validator(json.load(open(SCHEMA)),
+                                                format_checker=jsonschema.FormatChecker())
+    have = existing()
+    secs = []
+    for n, doc_id in enumerate(todo, 1):
+        did = mapping[doc_id][0]
+        if did in have and not force:
+            log_progress({"doc_id": doc_id, "decision_id": did, "status": "skipped_existing",
+                          "at": datetime.now(timezone.utc).isoformat()})
+            print(f"[{n}/{len(todo)}] {doc_id} -> {did}: record exists, skipped")
+            continue
+        out = extract(doc_id, by_id, manifest, rows, mapping, model, dry_run=dry, reprocess=reproc)
+        if out is None:
+            print(f"[{n}/{len(todo)}] {doc_id}: dry run, masked input written to local/extract/")
+            continue
+        rec, meta = out
+        write_and_verify(rec, validator, replace=did in have)
+        have[did] = rec
+        log_progress({"doc_id": doc_id, "decision_id": did, "status": "reprocessed" if reproc else "done",
+                      "seconds": meta.get("seconds"), "model": meta.get("model_reported") or meta.get("model"),
+                      "usage": meta.get("usage"), "attempts": meta.get("attempts"),
+                      "rule_outcome": meta.get("rule_outcome"), "error": meta.get("error"),
+                      "at": datetime.now(timezone.utc).isoformat()})
+        secs.append(meta.get("seconds") or 0)
+        print(f"[{n}/{len(todo)}] {doc_id} -> {did}: {rec['outcome']} / {rec['topic']} "
+              f"[{rec['extraction_confidence']}] {meta.get('seconds')}s {','.join(rec['extraction_flags'])}")
+    n_pub = publish()
+    if secs:
+        print(f"extracted {len(secs)}; median {statistics.median(secs):.1f}s/doc; "
+              f"decisions.public.jsonl: {n_pub} records")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
